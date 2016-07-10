@@ -14,4 +14,10 @@ mkdir -p ~/prefix
 mkdir -p ~/ANPL
 
 #create folder for external programs
-mkdir -p ~/programs
+mkdir -p ~/ANPL/programs
+
+mkdir -p ~/ANPL/code
+mkdir -p ~/ANPL/code/3rdparty
+mkdir -p ~/ANPL/data
+mkdir -p ~/ANPL/infrastructure
+mkdir -p ~/ANPL/papers
