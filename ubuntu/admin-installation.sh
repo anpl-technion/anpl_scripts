@@ -19,6 +19,9 @@ install-smartgit.sh # also in user installation
 install-ros.sh
 setup-catkin_ws.sh # also in user installation
 install-pointclouds.sh
+install-octomap.sh
+install-mavros.sh
+install-csm.sh
 
 
 # 3rd party code - also in user installation
@@ -42,3 +45,6 @@ install-tum-ardrone.sh
 clone-anpl-ros-infrastructure.sh
 install-apriltags.sh
 install-multirobot.sh
+
+clone-and-build-cpp-inf.sh
+clone-matlab-inf.sh
