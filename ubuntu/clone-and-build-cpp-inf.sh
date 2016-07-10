@@ -10,9 +10,9 @@ git clone https://bitbucket.org/ANPL/anpl_infrastructur_cpp
 
 mv anpl_infrastructur_cpp cpp
 
-mkdir cpp/build
+mkdir cpp/robots/build
 
-cd cpp/build
+cd cpp/robots/build
 
 cmake ..
 make

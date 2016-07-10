@@ -3,7 +3,6 @@ PROJECT_DIR=~/ANPL/infrastructure/catkin_ws/src
 PROJECT_NAME=tum_ardrone
 SIMULATOR_NAME=tum_simulator
 
-install-ros-ardrone-autonomy.sh
 
 #from https://github.com/tum-vision/tum_ardrone
 #from https://github.com/dougvk/tum_simulator

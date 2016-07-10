@@ -32,3 +32,6 @@ install-tum-ardrone.sh
 clone-anpl-ros-infrastructure.sh
 install-apriltags.sh
 install-multirobot.sh
+
+clone-and-build-cpp-inf.sh
+clone-matlab-inf.sh

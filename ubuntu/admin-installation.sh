@@ -29,6 +29,7 @@ install-gtsam.sh
 install-planar-icp.sh
 install-vlfeat.sh
 install-OMPL.sh
+install-zmq.sh
 
 
 # code projects - also in user installation
@@ -41,8 +42,10 @@ clone-mr-icp-laser.sh
 # infrastructur code - also in user installation
 install-turtlebot-gazebo-simulation.sh # only in admin installation
 install-pioner-gazebo-simulation.sh
+install-ros-ardrone-autonomy.sh
 install-tum-ardrone.sh
 clone-anpl-ros-infrastructure.sh
+install-apriltags-dep.sh
 install-apriltags.sh
 install-multirobot.sh
 
