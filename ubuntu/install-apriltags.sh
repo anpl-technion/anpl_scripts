@@ -9,8 +9,6 @@ cd $CATKIN_SRC_DIR
 
 git clone https://github.com/RIVeR-Lab/apriltags_ros.git
 
-sudo apt-get install subversion cmake libopencv-dev libeigen3-dev libv4l-dev
-
 cd ..
 
 CMAKE_FLAGS="-DCMAKE_MODULE_PATH=$EIGEN_CONFIG_DIR"
