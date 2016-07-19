@@ -26,7 +26,6 @@ clone-mr-icp-laser.sh
 
 
 # infrastructur code - also in user installation
-install-turtlebot-gazebo-simulation.sh # only in admin installation
 install-pioner-gazebo-simulation.sh
 install-tum-ardrone.sh
 clone-anpl-ros-infrastructure.sh
