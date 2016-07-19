@@ -10,7 +10,7 @@ if [ $installation_type == 'a' ]; then
   ./setup-ubuntu-env.sh
   ./install-git.sh
   ./clone-scripts.sh
-  ./setup-scripts-env.sh
+  ./setup-scripts-env-ubuntu.sh
   #gnome-terminal -e "admin-installation.sh"
   echo "Quit and run in a new terminal: \"admin-installation.sh\""
 
@@ -18,7 +18,7 @@ elif [ $installation_type == 'u' ]; then
   echo "starting user installation"
   ./setup-ubuntu-env.sh
   ./clone-scripts.sh
-  ./setup-scripts-env.sh
+  ./setup-scripts-env-ubuntu.sh
   #gnome-terminal -e "user-installation.sh"
   echo "Quit and run in a new terminal: \"user-installation.sh\""
 
