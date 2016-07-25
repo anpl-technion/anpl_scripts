@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROJECT_DIR=~/ANPL
+PROJECT_DIR=~/ANPL/infrastructur
 
 #from http://wiki.ros.org/catkin/Tutorials/create_a_workspace
 

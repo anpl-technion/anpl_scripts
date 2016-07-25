@@ -12,7 +12,7 @@ wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -O - | sudo 
 
 #2.5 Installation
 sudo apt-get update
-sudo apt-get install ros-indigo-desktop -y
+sudo apt-get install ros-indigo-ros-base -y
 
 #2.6 Initialize rosdep
 sudo apt-get install python-rosdep -y
