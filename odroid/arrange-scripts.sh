@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROJECT_DIR=~/ANPL/infrastructureproject/InstallEnvScripts
+PROJECT_DIR=~/ANPL/scripts
 
 cd ${PROJECT_DIR}/ubuntu/
 arrange.sh
