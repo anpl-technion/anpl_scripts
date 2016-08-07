@@ -30,7 +30,7 @@ if [ ! "$FROM_GIT" = True ]; then
     rm -f ~/Downloads/gtsam-$GTSAM_VER.zip
 else
     cd $PROJECT_DIR
-    git clone https://bitbucket.org/ANPL/gtsam-$GTSAM_VER.git   
+    git clone https://bitbucket.org/gtborg/gtsam/ -b fix/boost158gtsam3 gtsam-$GTSAM_VER
 fi
 
 cd $PROJECT_DIR/gtsam-$GTSAM_VER
