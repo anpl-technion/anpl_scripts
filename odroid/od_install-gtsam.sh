@@ -5,13 +5,13 @@
 MATLAB_VER=`matlab -e | grep -E -o R[0-9]+[ab] |uniq`
 CMAKE_FLAGS=""
 PREFIX=~/prefix
-PROJECT_DIR=~/ANPL
+PROJECT_DIR=~/ANPL/code/3rdparty
 GTSAM_VER="3.2.1"
 FROM_GIT=True
 
 install-modules.sh
 
-#if there is no matlab install on the machine
+#if there is matlab install on the machine
 if [ ! -z "$MATLAB_VER" ]; then
 	#flags for matlab
     CMAKE_FLAGS="-DGTSAM_INSTALL_MATLAB_TOOLBOX=ON -DMEX_COMMAND=/usr/local/MATLAB/$MATLAB_VER/bin/mex $CMAKE_FLAGS"
@@ -32,7 +32,7 @@ if [ ! "$FROM_GIT" = True ]; then
     rm -f ~/Downloads/gtsam-$GTSAM_VER.zip
 else
     cd $PROJECT_DIR
-    git clone https://bitbucket.org/ANPL/gtsam-$GTSAM_VER.git   
+    git clone https://bitbucket.org/gtborg/gtsam/ -b fix/boost158gtsam3 gtsam-$GTSAM_VER
 fi
 
 cd $PROJECT_DIR/gtsam-$GTSAM_VER

@@ -36,5 +36,9 @@ mkdir -p build-release
 cd build-release
 cmake $CMAKE_FLAGS ..
 
+install-gcc4.9.sh
+
 #If you want Python bindings or a GUI, type the following two commands:
 sudo make install -j4
+
+install-gcc4.7.sh

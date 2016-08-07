@@ -12,7 +12,7 @@ FROM_GIT=True
 install-modules.sh
 install-gcc4.7.sh
 
-#if there is no matlab install on the machine
+#if there is matlab install on the machine
 if [ ! -z "$MATLAB_VER" ]; then
 	#flags for matlab
     CMAKE_FLAGS="-DGTSAM_INSTALL_MATLAB_TOOLBOX=ON -DMEX_COMMAND=/usr/local/MATLAB/$MATLAB_VER/bin/mex $CMAKE_FLAGS"
