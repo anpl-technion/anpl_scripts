@@ -2,13 +2,10 @@
 #from http://ompl.kavrakilab.org/download.html
 
 PREFIX=~/prefix
-CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX"
-
-rm -rf ~/ANPL/code/3rdparty/omplapp
-cd ~/ANPL/code/3rdparty
-git clone https://github.com/ompl/omplapp.git
-cd omplapp
-git clone https://github.com/ompl/ompl.git
+CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DOMPL_BUILD_DEMOS=OFF -DOMPL_BUILD_PYBINDINGS=OFF -DOMPL_BUILD_PYTESTS=OFF -DOMPL_REGISTRATION=OFF" 
+FROM_GIT=True
+OMPL_VER="1.2.1"
+PROJECT_DIR=~/ANPL/code/3rdparty
 
 #from http://ompl.kavrakilab.org/installation.html
 
@@ -18,11 +15,26 @@ sudo apt-get install libboost-all-dev cmake python-dev python-qt4-dev python-qt4
 #To be able to generate documentation and build the OpenDE extension, the following packages are also needed:
 sudo apt-get install doxygen graphviz libode-dev -y 
 
-mkdir -p build-Release
-cd build-Release
+sudo rm -rf $PROJECT_DIR/ompl-$OMPL_VER
+cd $PROJECT_DIR
+
+if [ "$FROM_GIT" = True ]; then
+	git clone -b $OMPL_VER https://github.com/ompl/ompl ompl-$OMPL_VER
+	cd ompl-$OMPL_VER
+else
+	cd ~/Downloads
+	wget -O omplapp-$OMPL_VER.zip "https://bitbucket.org/ompl/ompl/downloads/ompl-$OMPL_VER-Source.zip"
+	unzip omplapp-$OMPL_VER.zip -d $PROJECT_DIR
+	rm -f ~/Downloads/omplapp-$OMPL_VER.zip
+
+	mv $PROJECT_DIR/ompl-$OMPL_VER-Source $PROJECT_DIR/ompl-$OMPL_VER
+	cd $PROJECT_DIR/ompl-$OMPL_VER
+fi
+
+
+mkdir -p build-release
+cd build-release
 cmake $CMAKE_FLAGS ..
 
 #If you want Python bindings or a GUI, type the following two commands:
-make installpyplusplus -j4 && cmake . # download & install Py++
-make update_bindings -j4
 sudo make install -j4
