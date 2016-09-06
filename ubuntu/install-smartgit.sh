@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VER='7_1_2'
+VER='8_0_0'
 PROGRAMS=~/ANPL/programs
 WORKING_PATH=$PROGRAMS/smartgit/
 install-java-jdk.sh
