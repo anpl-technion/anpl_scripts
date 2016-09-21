@@ -9,6 +9,7 @@ if [ $installation_type == 'a' ]; then
   echo "starting admin installation"
   ./setup-ubuntu-env.sh
   ./install-git.sh
+  ./install-dos2unix.sh
   ./clone-scripts.sh
   ./setup-scripts-env-ubuntu.sh
   #gnome-terminal -e "admin-installation.sh"
