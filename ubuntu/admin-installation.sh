@@ -28,7 +28,9 @@ install-csm.sh
 install-gtsam.sh
 install-planar-icp.sh
 install-vlfeat.sh
-install-OMPL.sh
+install-libccd.sh
+install-libfcl.sh
+install-libompl.sh
 install-zmq.sh
 
 

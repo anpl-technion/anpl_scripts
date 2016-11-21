@@ -15,7 +15,6 @@ setup-catkin_ws.sh
 install-gtsam.sh
 install-planar-icp.sh
 install-vlfeat.sh
-install-OMPL.sh
 
 
 # code projects - also in user installation
