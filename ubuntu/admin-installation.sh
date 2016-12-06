@@ -17,6 +17,7 @@ install-smartgit.sh # also in user installation
 
 # ros and drivers
 install-ros.sh
+bash
 setup-catkin_ws.sh # also in user installation
 install-pointclouds.sh
 install-octomap.sh
@@ -30,7 +31,7 @@ install-planar-icp.sh
 install-vlfeat.sh
 install-libccd.sh
 install-libfcl.sh
-install-libompl.sh
+install-ompl-app.sh
 install-zmq.sh
 
 
