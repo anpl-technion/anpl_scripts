@@ -1,7 +1,7 @@
 #!/bin/bash
 FROM_GIT=True
 PROJECT_DIR=~/ANPL/code/3rdparty
-PCL_VER=1.7.2
+PCL_VER=1.8.0
 FOLDER_NAME=pcl-$PCL_VER
 FILE_NAME=$FOLDER_NAME.zip
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=/usr/ -DCMAKE_CXX_FLAGS=-std=c++11"
@@ -21,6 +21,7 @@ else
     mkdir build
     cd build
     cmake $CMAKE_FLAGS ..
+    make install -j7       
     sudo make install -j7
 fi
 sudo apt-get install ros-indigo-pcl-conversions -y
