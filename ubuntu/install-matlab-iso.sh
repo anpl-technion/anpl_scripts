@@ -2,6 +2,8 @@
 
 #from https://help.ubuntu.com/community/MountIso
 
+sudo apt-get install nfs-common -y
+
 sudo mkdir -p /media/matlab
 sudo mount -o loop ~/iso-matlab/R2014b_glnxa64.iso /media/matlab -o noauto
 sudo mkdir -p /tmp/network
