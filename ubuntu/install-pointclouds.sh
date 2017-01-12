@@ -24,7 +24,7 @@ else
     mkdir build
     cd build
     cmake $CMAKE_FLAGS ..
-    make install -j7       
+    make -j7       
     sudo make install -j7
 fi
 
@@ -46,6 +46,6 @@ else
     mkdir build
     cd build
     cmake $CMAKE_FLAGS ..
-    make install -j7       
+    make -j7       
     sudo make install -j7
 fi
