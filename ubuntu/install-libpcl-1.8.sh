@@ -1,7 +1,7 @@
 #!/bin/bash
 FROM_GIT=True
 PROJECT_DIR=~/ANPL/code/3rdparty
-PCL_VER=1.7.2
+PCL_VER=1.8.0
 FOLDER_NAME=pcl-$PCL_VER
 FILE_NAME=$FOLDER_NAME.zip
 LINK="https://github.com/PointCloudLibrary/pcl/archive/pcl-$PCL_VER.zip"
