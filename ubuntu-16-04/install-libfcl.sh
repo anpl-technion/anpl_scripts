@@ -1,14 +1,12 @@
 PREFIX=~/prefix
 PROJECT_DIR=~/ANPL/code/3rdparty
-LIBFCL_VER=0.4.0
+LIBFCL_VER=0.5.0
 FOLDER_NAME=libfcl-$LIBFCL_VER
 FILE_NAME=$FOLDER_NAME.zip
 
 LINK=https://github.com/flexible-collision-library/fcl/archive/$LIBFCL_VER.zip
 PROJECT_DIR=~/ANPL/code/3rdparty
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release -DFCL_BUILD_TESTS=OFF"
-
-install-gcc4.9.sh 
 
 sudo rm -rf $PROJECT_DIR/$FOLDER_NAME
 cd ~/Downloads
