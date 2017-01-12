@@ -6,11 +6,11 @@ FILE_NAME=$FOLDER_NAME.zip
 
 LINK=https://github.com/flexible-collision-library/fcl/archive/$LIBFCL_VER.zip
 PROJECT_DIR=~/ANPL/code/3rdparty
-CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release"
+CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release -DFCL_BUILD_TESTS=OFF"
 
-install-gcc4.9.sh
+install-gcc4.9.sh 
 
-rm -rf $PROJECT_DIR/$FOLDER_NAME
+sudo rm -rf $PROJECT_DIR/$FOLDER_NAME
 cd ~/Downloads
 wget -O $FILE_NAME $LINK
 mkdir -p $PROJECT_DIR
