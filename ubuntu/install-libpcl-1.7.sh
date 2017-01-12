@@ -3,7 +3,7 @@ FROM_GIT=True
 PROJECT_DIR=~/ANPL/code/3rdparty
 PCL_VER=1.7.2
 FOLDER_NAME=pcl-$PCL_VER
-FILE_NAME1=$FOLDER_NAME1.zip
+FILE_NAME=$FOLDER_NAME.zip
 LINK="https://github.com/PointCloudLibrary/pcl/archive/pcl-$PCL_VER.zip"
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=/usr/ -DCMAKE_CXX_FLAGS=-std=c++11 -DCMAKE_BUILD_TYPE=Release"
 
