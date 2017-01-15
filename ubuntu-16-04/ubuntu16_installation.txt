@@ -1,28 +1,28 @@
 SYSTEM=ubuntu-16-04
+LAB_NAME=ANPL
+WORKING_FOLDER=~/$LAB_NAME/scripts
 
 sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install git
-git clone https://bitbucket.org/ANPL/anpl_scripts
-cd anpl_scripts/$SYSTEM
-sh setup-ubuntu-env.sh
-cd
-mv ~/anpl_scripts ~/ANPL/scripts
-cd ~/ANPL/scripts/$SYSTEM
-sh install-dos2unix.sh
+sudo apt-get upgrade -y
+sudo apt-get install git -y
+mkdir -p $LAB_NAME && cd $LAB_NAME
+git clone https://bitbucket.org/ANPL/anpl_scripts scripts
+cd $WORKING_FOLDER/$SYSTEM
+
+./install-git.sh
+./setup-ubuntu-env.sh
 source ~/.bashrc
-sh setup-scripts-env-ubuntu.sh # TODO: solve permission issue
-cd
+./install-dos2unix.sh
+./setup-scripts-env-ubuntu.sh
 source ~/.bashrc
 
 install-modules.sh # TODO: depart to many scripts
+		   # TODO: add cuda installation
 install-java-jdk.sh
 install-GVim.sh
 install-lyx.sh
 install-openssl-server.sh
 sudo apt install cmake-qt-gui # TODO: make script
-cd
-source ~/.bashrc
 
 install-smartgit.sh
 # install qtcteator (without script)
@@ -31,10 +31,9 @@ install-smartgit.sh
 install-filezila.sh
 install-chrome.sh
 install-matlab-network.sh
-cd
-source ~/.bashrc
 
-install-ros-kinetic.sh
+
+install-ros-kinetic.sh #TODO: Add for user installation the part of ~./bashrc .
 source ~/.bashrc
 setup-catkin_ws.sh
 source ~/.bashrc
