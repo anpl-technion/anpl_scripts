@@ -11,13 +11,16 @@ install-openssl-server.sh
 
 # programs
 install-smartgit.sh # also in user installation
+#install-qtcreator.sh
+#install-clion.sh
+#install-sublime.sh
+install-filezila.sh
 #install-qgroundcontrol.sh
 #install-jsoncpp.sh
 
 
 # ros and drivers
 install-ros.sh
-bash
 setup-catkin_ws.sh # also in user installation
 install-pointclouds.sh
 install-octomap.sh

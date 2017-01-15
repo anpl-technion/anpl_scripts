@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VER='8_0_3'
+VER='8_0_4'
 PROGRAMS=~/ANPL/programs
 WORKING_PATH=$PROGRAMS/smartgit/
 FILE_NAME=smartgit-$VER.tar.gz
