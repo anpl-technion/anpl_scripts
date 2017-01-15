@@ -10,7 +10,7 @@ GTSAM_VER="3.2.1"
 FROM_GIT=True
 
 install-modules.sh
-install-gcc4.7.sh
+install-gcc4.9.sh
 
 #if there is matlab install on the machine
 if [ ! -z "$MATLAB_VER" ]; then
@@ -47,3 +47,5 @@ if [ ! -z "$MATLAB_VER" ]; then
     #save matlab the path for gtsam toolbox
     sudo matlab -nodesktop -nosplash -r "addpath(genpath('$PREFIX/gtsam_toolbox'));savepath;exit;"
 fi
+
+install-gcc5.sh
