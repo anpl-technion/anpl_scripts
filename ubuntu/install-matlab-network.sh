@@ -2,6 +2,8 @@
 
 #from https://help.ubuntu.com/community/MountIso
 
+sudo apt-get install nfs-common -y
+
 sudo mkdir -p /media/matlab
 sudo mount 132.68.1.41:/ccnfs/cccd/matlab /media/matlab
 sudo mkdir -p /tmp/network
