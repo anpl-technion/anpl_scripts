@@ -1,0 +1,50 @@
+SYSTEM=ubuntu-16-04
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install git
+git clone https://bitbucket.org/ANPL/anpl_scripts
+cd anpl_scripts/$SYSTEM
+sh setup-ubuntu-env.sh
+cd
+mv ~/anpl_scripts ~/ANPL/scripts
+cd ~/ANPL/scripts/$SYSTEM
+sh install-dos2unix.sh
+source ~/.bashrc
+sh setup-scripts-env-ubuntu.sh # TODO: solve permission issue
+cd
+source ~/.bashrc
+
+install-modules.sh # TODO: depart to many scripts
+install-java-jdk.sh
+install-GVim.sh
+install-lyx.sh
+install-openssl-server.sh
+sudo apt install cmake-qt-gui # TODO: make script
+cd
+source ~/.bashrc
+
+install-smartgit.sh
+# install qtcteator (without script)
+# install clion (without script)
+# install sublime (without script)
+install-filezila.sh
+install-chrome.sh
+install-matlab-network.sh
+cd
+source ~/.bashrc
+
+install-ros-kinetic.sh
+source ~/.bashrc
+setup-catkin_ws.sh
+source ~/.bashrc
+install-octomap.sh
+install-mavros.sh
+install-turtlebot.sh
+
+install-gtsam.sh # TODO: currently compile only with gcc 5 - without matlab toolbox
+install-libpcl-1.8.sh
+install-libccd.sh
+install-libfcl.sh
+install-ompl-app.sh # TODO: add to CMakeLists: find_package(OCTOMAP REQUIRED), to include dirs: "${OCTOMAP_INCLUDE_DIRS}"
+
