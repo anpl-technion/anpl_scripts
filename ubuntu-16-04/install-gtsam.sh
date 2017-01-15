@@ -38,7 +38,7 @@ cd $PROJECT_DIR/gtsam-$GTSAM_VER
 #from https://collab.cc.gatech.edu/borg/gtsam/#quickstart
 
 mkdir build && cd build
-cmake $CMAKE_FLAGS -DCMAKE_CXX_FLAGS="-DBOOST_ALL_NO_LIB -DBOOST_ALL_DYN_LINK -DBOOST_LOG_DYN_LINK" ..
+cmake $CMAKE_FLAGS ..
 make -j7
 sudo make install -j7
 
