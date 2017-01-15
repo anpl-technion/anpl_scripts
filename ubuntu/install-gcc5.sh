@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GCC_VER=4.7
+GCC_VER=5
 
 #from http://charette.no-ip.com:81/programming/2011-12-24_GCCv47/
 sudo apt-get install gcc-$GCC_VER g++-$GCC_VER -y
