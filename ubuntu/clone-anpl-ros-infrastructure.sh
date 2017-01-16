@@ -1,14 +1,13 @@
 #!/bin/bash
 
 CATKIN_SRC_DIR=~/ANPL/infrastructure/catkin_ws/src
+PROJECT=anpl_inf
 
 cd $CATKIN_SRC_DIR
 
-rm -rf anpl_inf
+rm -rf $PROJECT
 
-git clone https://bitbucket.org/ANPL/anpl_ros_infrastructur
-
-mv anpl_ros_infrastructur anpl_inf
+git clone https://bitbucket.org/ANPL/anpl_ros_infrastructur $PROJECT
 
 cd ..
 
