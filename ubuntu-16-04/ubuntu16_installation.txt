@@ -58,4 +58,5 @@ install-viso2.sh
 # code
 clone-common-computation.sh
 clone-cmakes.sh
+install-planar-icp.sh
 
