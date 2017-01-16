@@ -42,8 +42,11 @@ install-mavros.sh
 install-turtlebot.sh
 
 install-gtsam.sh # TODO: currently compile only with gcc 5 - without matlab toolbox
+install-vlfeat.sh
 install-libpcl-1.8.sh
 install-libccd.sh
 install-libfcl.sh
 install-ompl-app.sh # TODO: add to CMakeLists: find_package(OCTOMAP REQUIRED), to include dirs: "${OCTOMAP_INCLUDE_DIRS}"
+
+install-rotors-simulation.sh
 
