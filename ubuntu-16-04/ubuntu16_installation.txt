@@ -17,13 +17,12 @@ source ~/.bashrc
 source ~/.bashrc
 
 # install modules
-install-modules.sh # TODO: depart to many scripts
-		   # TODO: add cuda installation
 install-java-jdk.sh
 install-GVim.sh
 install-lyx.sh
 install-openssl-server.sh
-sudo apt install cmake-qt-gui # TODO: make script
+sudo apt install cmake-qt-gui cmake # TODO: make script
+sudo apt-get install nvidia-cuda-dev # TODO: add cuda installation
 
 # install programs
 install-smartgit.sh
@@ -49,7 +48,7 @@ install-vlfeat.sh
 install-libpcl-1.8.sh
 install-libccd.sh
 install-libfcl.sh
-install-ompl-app.sh # TODO: add to CMakeLists: find_package(OCTOMAP REQUIRED), to include dirs: "${OCTOMAP_INCLUDE_DIRS}"
+install-ompl-app.sh # TODO: install manually!!, add to CMakeLists: find_package(OCTOMAP REQUIRED), to include dirs: "${OCTOMAP_INCLUDE_DIRS}"
 
 # ros packages (install catkin_ws)
 install-rotors-simulation.sh
@@ -58,5 +57,8 @@ install-viso2.sh
 # code
 clone-common-computation.sh
 clone-cmakes.sh
-install-planar-icp.sh
+install-planar-icp.s
+
+# ANPL infrastructure
+clone-and-build-cpp-inf.sh
 
