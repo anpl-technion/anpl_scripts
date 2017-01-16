@@ -2,13 +2,13 @@ SYSTEM=ubuntu-16-04
 LAB_NAME=ANPL
 WORKING_FOLDER=~/$LAB_NAME/scripts
 
+# initial ubuntu workspace
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get install git -y
 mkdir -p $LAB_NAME && cd $LAB_NAME
 git clone https://bitbucket.org/ANPL/anpl_scripts scripts
 cd $WORKING_FOLDER/$SYSTEM
-
 ./install-git.sh
 ./setup-ubuntu-env.sh
 source ~/.bashrc
@@ -16,6 +16,7 @@ source ~/.bashrc
 ./setup-scripts-env-ubuntu.sh
 source ~/.bashrc
 
+# install modules
 install-modules.sh # TODO: depart to many scripts
 		   # TODO: add cuda installation
 install-java-jdk.sh
@@ -24,6 +25,7 @@ install-lyx.sh
 install-openssl-server.sh
 sudo apt install cmake-qt-gui # TODO: make script
 
+# install programs
 install-smartgit.sh
 # install qtcteator (without script)
 # install clion (without script)
@@ -32,7 +34,7 @@ install-filezila.sh
 install-chrome.sh
 install-matlab-network.sh
 
-
+# ros packages (via apt-get)
 install-ros-kinetic.sh #TODO: Add for user installation the part of ~./bashrc .
 source ~/.bashrc
 setup-catkin_ws.sh
@@ -41,6 +43,7 @@ install-octomap.sh
 install-mavros.sh
 install-turtlebot.sh
 
+# 3rd party code
 install-gtsam.sh # TODO: currently compile only with gcc 5 - without matlab toolbox
 install-vlfeat.sh
 install-libpcl-1.8.sh
@@ -48,5 +51,11 @@ install-libccd.sh
 install-libfcl.sh
 install-ompl-app.sh # TODO: add to CMakeLists: find_package(OCTOMAP REQUIRED), to include dirs: "${OCTOMAP_INCLUDE_DIRS}"
 
+# ros packages (install catkin_ws)
 install-rotors-simulation.sh
+install-viso2.sh
+
+# code
+clone-common-computation.sh
+clone-cmakes.sh
 
