@@ -2,7 +2,6 @@
 
 CATKIN_WS_SRC=~/ANPL/infrastructure/catkin_ws/src
 
-install-gcc5.sh
 cd $CATKIN_WS_SRC
 
 git clone https://github.com/ethz-asl/mav_comm.git
