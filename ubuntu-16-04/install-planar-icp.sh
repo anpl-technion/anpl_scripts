@@ -13,7 +13,7 @@ git clone https://bitbucket.org/ANPL/planar_icp $FOLDER_NAME
 cd $FOLDER_NAME
 
 mkdir build && cd build
-PKG_CONFIG_PATH=~/prefix/lib/pkgconfig/
+PKG_CONFIG_PATH=$PKG_CONFIG_PATH:~/prefix/lib/pkgconfig/
 cmake $CMAKE_FLAGS ..
 make -j7
 sudo make install -j7
