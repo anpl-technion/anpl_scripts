@@ -1,10 +1,6 @@
 #!/bin/bash
 
-
-#check matlab version
-MATLAB_VER=`matlab -e | grep -E -o R[0-9]+[ab] |uniq`
-
-PREFIX=~/prefix
+PREFIX=/usr/ANPLprefix
 PROJECT_DIR=~/ANPL/code/3rdparty
 FROM_GIT=True
 GTSAM_VER="3.2.1"
@@ -15,11 +11,6 @@ GIT_LINK="https://bitbucket.org/gtborg/gtsam/ -b fix/boost158gtsam3"
 
 sudo apt-get install libboost-all-dev libtbb-dev -y
 
-#if there is matlab install on the machine
-if [ ! -z "$MATLAB_VER" ]; then
-	#flags for matlab
-    CMAKE_FLAGS="$CMAKE_FLAGS -DGTSAM_INSTALL_MATLAB_TOOLBOX=ON -DMEX_COMMAND=/usr/local/MATLAB/$MATLAB_VER/bin/mex"
-fi
 
 sudo rm -rf $PROJECT_DIR/gtsam-$GTSAM_VER
 
@@ -42,10 +33,4 @@ mkdir build && cd build
 cmake $CMAKE_FLAGS ..
 make -j7
 sudo make install -j7
-
-echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:~/prefix/lib">>~/.bashrc
-if [ ! -z "$MATLAB_VER" ]; then
-    #save matlab the path for gtsam toolbox
-    sudo matlab -nodesktop -nosplash -r "addpath(genpath('$PREFIX/gtsam_toolbox'));savepath;exit;"
-fi
 
