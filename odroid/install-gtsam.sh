@@ -18,8 +18,6 @@ GIT_LINK="https://bitbucket.org/gtborg/gtsam/ -b fix/boost158gtsam3"
 
 sudo apt-get install libboost-all-dev libtbb-dev -y
 
-install-gcc4.9.sh
-
 #if there is matlab install on the machine
 if [ ! -z "$MATLAB_VER" ]; then
 	#flags for matlab
