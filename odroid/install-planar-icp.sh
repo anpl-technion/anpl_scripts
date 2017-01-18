@@ -19,6 +19,6 @@ cmake $CMAKE_FLAGS ..
 make -j7
 sudo make install -j7
 
-mkdir -p $PREFIX/include/$FOLDER_NAME
+sudo mkdir -p $PREFIX/include/$FOLDER_NAME
 cd $PROJECT_DIR/$FOLDER_NAME/cpp
 sudo cp -f *.h $PREFIX/include/$FOLDER_NAME
