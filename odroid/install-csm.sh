@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo apt-get install ros-indigo-csm
+sudo apt-get install ros-indigo-csm -y
