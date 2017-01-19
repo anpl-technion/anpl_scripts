@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PREFIX=~/prefix
+PREFIX=/usr/ANPLprefix
 PROJECT_DIR=~/ANPL/code/3rdparty
 FROM_GIT=True
 LIBCSM_VER=1.0.2
