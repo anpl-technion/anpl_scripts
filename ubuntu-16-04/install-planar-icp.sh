@@ -1,7 +1,7 @@
 #!/bin/bash
 
-PROJECT_DIR=~/ANPL/code/3rdparty
-PREFIX=~/prefix
+PROJECT_DIR=~/ANPL/code
+PREFIX=/usr/ANPLprefix
 FOLDER_NAME=planar_icp
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release"
 
