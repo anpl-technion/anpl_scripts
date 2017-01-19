@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CATKIN_WS=~/ANPL/catkin_ws
+CATKIN_WS=~/ANPL/infrastructure/catkin_ws
 GIT_DIR=/rosaria
 DEVEL=$CATKIN_WS/devel/setup.bash
 
