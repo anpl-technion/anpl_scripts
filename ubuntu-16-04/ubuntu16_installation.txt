@@ -44,6 +44,7 @@ install-turtlebot.sh
 
 # 3rd party code
 install-gtsam.sh # TODO: currently compile only with gcc 5 - without matlab toolbox
+install-toolbox-gtsam.sh
 install-vlfeat.sh
 install-libpcl-1.8.sh
 install-libccd.sh
