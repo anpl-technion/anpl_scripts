@@ -1,3 +1,5 @@
+#!/bin/bash
+
 PREFIX=/usr/ANPLprefix
 PROJECT_DIR=~/ANPL/code/3rdparty
 LIBFCL_VER=0.5.0
