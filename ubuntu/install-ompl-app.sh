@@ -1,4 +1,6 @@
-PREFIX=~/prefix 
+#!/bin/bash
+
+PREFIX=/usr/ANPLprefix 
 FROM_GIT=False
 OMPL_VER="1.2.1"
 PROJECT_DIR=~/ANPL/code/3rdparty

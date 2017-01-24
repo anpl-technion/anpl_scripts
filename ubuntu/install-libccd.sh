@@ -1,4 +1,6 @@
-PREFIX=~/prefix
+#!/bin/bash
+
+PREFIX=/usr/ANPLprefix
 PROJECT_DIR=~/ANPL/code/3rdparty
 LIBCCD_VER=2.0
 FOLDER_NAME=libccd-$LIBCCD_VER
