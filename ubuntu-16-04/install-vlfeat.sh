@@ -9,7 +9,7 @@ install-gcc4.9.sh
 #check matlab version
 MATLAB_VER=`matlab -e | grep -E -o R[0-9]+[ab] |uniq`
 MAKE_FLAGS=""
-PREFIX=~/prefix
+PREFIX=/usr/ANPLprefix
 PROJECT_DIR=~/ANPL/code/3rdparty
 INSTALL_DIR=$PROJECT_DIR/vlfeat/toolbox
 
