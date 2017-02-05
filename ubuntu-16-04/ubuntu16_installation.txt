@@ -32,6 +32,8 @@ install-smartgit.sh
 install-filezila.sh
 install-chrome.sh
 install-matlab-network.sh
+# install gimp (without script)
+# install inkspace (without script)
 
 # ros packages (via apt-get)
 install-ros-kinetic.sh #TODO: Add for user installation the part of ~./bashrc .
@@ -43,7 +45,7 @@ install-mavros.sh
 install-turtlebot.sh
 
 # 3rd party code
-install-gtsam.sh # TODO: currently compile only with gcc 5 - without matlab toolbox
+install-gtsam.sh # without matlab toolbox
 install-toolbox-gtsam.sh
 install-vlfeat.sh
 install-libpcl-1.8.sh
