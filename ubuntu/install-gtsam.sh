@@ -7,7 +7,7 @@ PREFIX=/usr/ANPLprefix
 PROJECT_DIR=~/ANPL/code/3rdparty
 FROM_GIT=True
 GTSAM_VER="3.2.1"
-CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release"
+CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DGTSAM_BUILD_TESTS=OFF -DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF -DCMAKE_BUILD_TYPE=Release"
 LINK="https://research.cc.gatech.edu/borg/sites/edu.borg/files/downloads/gtsam-$GTSAM_VER.zip"
 GIT_LINK="https://bitbucket.org/gtborg/gtsam/ -b fix/boost158gtsam3"
 
@@ -15,10 +15,10 @@ GIT_LINK="https://bitbucket.org/gtborg/gtsam/ -b fix/boost158gtsam3"
 sudo apt-get install libboost-all-dev libtbb-dev -y
 
 #if there is matlab install on the machine
-if [ ! -z "$MATLAB_VER" ]; then
-	#flags for matlab
-    CMAKE_FLAGS="$CMAKE_FLAGS -DGTSAM_INSTALL_MATLAB_TOOLBOX=ON -DMEX_COMMAND=/usr/local/MATLAB/$MATLAB_VER/bin/mex"
-fi
+#if [ ! -z "$MATLAB_VER" ]; then
+#	#flags for matlab
+#    CMAKE_FLAGS="$CMAKE_FLAGS -DGTSAM_INSTALL_MATLAB_TOOLBOX=ON -DMEX_COMMAND=/usr/local/MATLAB/$MATLAB_VER/bin/mex"
+#fi
 
 sudo rm -rf $PROJECT_DIR/gtsam-$GTSAM_VER
 
