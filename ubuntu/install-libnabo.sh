@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PREFIX=/usr/ANPLprefix
+PREFIX=/usr/
 PROJECT_DIR=~/ANPL/code/3rdparty
 LIBNABO_VER=1.0.6
 FOLDER_NAME=libnabo-$LIBNABO_VER
