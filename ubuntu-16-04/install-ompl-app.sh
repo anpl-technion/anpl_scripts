@@ -38,10 +38,10 @@ wget https://raw.githubusercontent.com/dartsim/dart/master/cmake/FindCCD.cmake
 wget https://raw.githubusercontent.com/dartsim/dart/master/cmake/FindFCL.cmake
 mv FindCCD.cmake FindFCL.cmake $PROJECT_DIR/$FOLDER_NAME/CMakeModules
 
-cd $PROJECT_DIR/$FOLDER_NAME
-mkdir build && cd build
-cmake $CMAKE_FLAGS ..
-make -j7       
-sudo make install -j7
+#cd $PROJECT_DIR/$FOLDER_NAME
+#mkdir build && cd build
+#cmake $CMAKE_FLAGS ..
+#make -j7       
+#sudo make install -j7
 
 
