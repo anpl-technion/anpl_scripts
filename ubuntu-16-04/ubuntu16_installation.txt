@@ -46,6 +46,7 @@ install-turtlebot.sh
 
 # 3rd party code
 install-gtsam.sh # without matlab toolbox
+install-boost.sh # for compile matlab toolbox
 install-toolbox-gtsam.sh
 install-vlfeat.sh
 install-libpcl-1.8.sh
@@ -53,6 +54,7 @@ install-libccd.sh
 install-libfcl.sh
 install-ompl-app.sh # TODO: install manually!!, add to CMakeLists: find_package(OCTOMAP REQUIRED), to include dirs: "${OCTOMAP_INCLUDE_DIRS}"
 install-csm.sh
+install-planar-icp.sh
 
 # ros packages (install catkin_ws)
 install-rotors-simulation.sh
@@ -61,7 +63,7 @@ install-viso2.sh
 # code
 clone-common-computation.sh
 clone-cmakes.sh
-install-planar-icp.sh
+
 
 # ANPL infrastructure
 clone-and-build-cpp-inf.sh
