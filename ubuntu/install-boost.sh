@@ -12,8 +12,6 @@ PROJECT_DIR=~/ANPL/code/3rdparty
 BOOST_FLAGS="--prefix=$PREFIX"
 B2_FLAGS="link=static threading=multi cxxflags=-fPIC cflags=-fPIC --disable-icu -j8"
 
-install-gcc4.9.sh
-
 sudo mkdir -p $PREFIX
 sudo rm -rf $PROJECT_DIR/$FOLDER_NAME
 cd ~/Downloads
@@ -26,5 +24,3 @@ cd $PROJECT_DIR/$FOLDER_NAME
 ./bootstrap.sh $BOOST_FLAGS
 ./b2 $B2_FLAGS
 sudo ./b2 install -j8
-
-install-gcc5.sh

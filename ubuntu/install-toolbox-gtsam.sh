@@ -20,7 +20,6 @@ if [ -z "$MATLAB_VER" ]; then
     exit
 fi
 
-install-gcc4.9.sh
 
 sudo rm -rf $PREFIX/$FOLDER_NAME
 sudo rm -rf $PROJECT_DIR/gtsam-toolbox-$GTSAM_VER
@@ -40,4 +39,3 @@ sudo make install -j8
 #save matlab the path for gtsam toolbox
 sudo matlab -nodesktop -nosplash -r "addpath(genpath('$PREFIX/$FOLDER_NAME'));savepath;exit;"
 
-install-gcc5.sh
