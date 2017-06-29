@@ -55,6 +55,9 @@ install-libfcl.sh
 install-ompl-app.sh # TODO: install manually!!, add to CMakeLists: find_package(OCTOMAP REQUIRED), to include dirs: "${OCTOMAP_INCLUDE_DIRS}"
 install-csm.sh
 install-planar-icp.sh
+install-libnabo.sh
+install-libpointmatcher.sh
+install-libpointmatcher-ros.sh
 
 # ros packages (install catkin_ws)
 install-rotors-simulation.sh
