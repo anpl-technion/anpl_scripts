@@ -11,6 +11,7 @@ CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DGTSAM_BUILD_TESTS=OFF -DGTSAM_BUIL
 CMAKE_FLAGS="$CMAKE_FLAGS -DGTSAM_INSTALL_MATLAB_TOOLBOX=ON -DMEX_COMMAND=/usr/local/MATLAB/$MATLAB_VER/bin/mex -DGTSAM_MEX_BUILD_STATIC_MODULE=ON -DBoost_USE_STATIC_LIBS=ON"
 LINK="https://research.cc.gatech.edu/borg/sites/edu.borg/files/downloads/gtsam-$GTSAM_VER.zip"
 GIT_LINK="https://bitbucket.org/ANPL/gtsam-3.2.1-anpl/ -b fix/boost158gtsam3"
+GIT_LINK_4="https://bitbucket.org/gtborg/gtsam/"
 FOLDER_NAME=gtsam_toolbox
 
 #check if matlab available (if not then...)

@@ -45,9 +45,10 @@ install-mavros.sh
 install-turtlebot.sh
 
 # 3rd party code
-install-gtsam.sh # without matlab toolbox
-install-boost.sh # for compile matlab toolbox
+install-toolbox-boost.sh
 install-toolbox-gtsam.sh
+install-boost.sh
+install-gtsam.sh
 install-vlfeat.sh
 install-libpcl-1.8.sh
 install-libccd.sh
