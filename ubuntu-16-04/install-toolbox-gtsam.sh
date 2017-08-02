@@ -35,8 +35,8 @@ cd $PROJECT_DIR/gtsam-toolbox-$GTSAM_VER
 
 mkdir build && cd build
 cmake $CMAKE_FLAGS ..
-make -j8
-sudo make install -j8
+make -j6
+sudo make install -j6
 
 #save matlab the path for gtsam toolbox
 sudo matlab -nodesktop -nosplash -r "addpath(genpath('$PREFIX/$FOLDER_NAME'));savepath;exit;"
