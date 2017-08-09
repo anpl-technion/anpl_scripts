@@ -1,13 +1,11 @@
 #!/bin/bash
 
-#check matlab version
-MATLAB_VER=`matlab -e | grep -E -o R[0-9]+[ab] |uniq`
-
 PREFIX=/usr/ANPLprefix
+BOOST_PREFIX=/usr/ANPL/boost_prefix
 PROJECT_DIR=~/ANPL/code/3rdparty
 FROM_GIT=True
 GTSAM_VER="3.2.1"
-CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DGTSAM_BUILD_TESTS=OFF -DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF -DGTSAM_BUILD_UNSTABLE=OFF -DCMAKE_BUILD_TYPE=Release"
+CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DGTSAM_BUILD_TESTS=OFF -DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF -DGTSAM_BUILD_UNSTABLE=OFF -DCMAKE_BUILD_TYPE=Release -DBOOST_ROOT=$BOOST_PREFIX -DBoost_USE_STATIC_LIBS=ON"
 LINK="https://research.cc.gatech.edu/borg/sites/edu.borg/files/downloads/gtsam-$GTSAM_VER.zip"
 GIT_LINK="https://bitbucket.org/ANPL/gtsam-3.2.1-anpl/ -b fix/boost158gtsam3"
 
