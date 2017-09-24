@@ -28,7 +28,7 @@ sudo apt-get install nvidia-cuda-dev # TODO: add cuda installation
 install-smartgit.sh
 # install qtcteator (without script)
 # install clion (without script)
-# install sublime (without script)
+install-sublime.sh
 install-filezila.sh
 install-chrome.sh
 install-matlab-network.sh
