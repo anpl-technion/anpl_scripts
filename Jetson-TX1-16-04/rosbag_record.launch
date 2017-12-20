@@ -1,0 +1,23 @@
+<launch>
+  <!-- Topics to record -->
+  <arg name="camera_info" default="/zed/left/camera_info" />
+  <arg name="camera_left" default="/zed/left/image_rect_color" />
+  <arg name="camera_right" default="/zed/right/image_rect_color" />
+  <arg name="odom_1" default="/zed/odom" />
+  <arg name="odom_2" default="" />
+  <arg name="scan" default="/scan" />
+  <arg name="pointcloud" defaults="/zed/point_cloud/cloud_registered" />
+  <arg name="tf" default="/tf" />
+  <arg name="tf_static" default="/tf_static" />
+  <arg name="ground_truth" default="" />
+
+ <!-- Putting the time back to real time-->
+ <rosparam>
+   /use_sim_time : false
+ </rosparam>
+
+ <node pkg="rosbag" type="record" name="record_data" respawn="true" output="screen"
+    args="$(arg camera_info) $(arg camera_left) $(arg camera_right) $(arg odom_1) $(arg odom_2)
+          $(arg scan) $(arg pointcloud) $(arg tf) $(arg tf_static) $(arg ground_truth)"/> 
+
+</launch>
