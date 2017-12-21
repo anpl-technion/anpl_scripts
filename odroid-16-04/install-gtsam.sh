@@ -11,7 +11,7 @@ GTSAM_VER="3.2.1"
 #from https://wiki.ubuntu.com/ARM/Thumb2
 #from http://stackoverflow.com/questions/10085945/cmake-cflags-cxxflags-modification
 #from http://stackoverflow.com/questions/21047399/cmake-set-environment-variables-from-a-script
-CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS=-Wa,-mimplicit-it=thumb"
+CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS_RELEASE=-Wa,-mimplicit-it=thumb"
 LINK="https://research.cc.gatech.edu/borg/sites/edu.borg/files/downloads/gtsam-$GTSAM_VER.zip"
 GIT_LINK="https://bitbucket.org/gtborg/gtsam/ -b fix/boost158gtsam3"
 
