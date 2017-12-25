@@ -2,7 +2,7 @@
 
 PREFIX=/usr/ANPL/gtsam_toolbox_prefix
 PROJECT_DIR=~/ANPL/code/3rdparty
-BOOST_VER=1.57.0
+BOOST_VER=1.58.0
 BOOST_VER_STR=`echo $BOOST_VER | tr . _`
 BOOST_FOLDER_NAME=boost_$BOOST_VER_STR
 FOLDER_NAME=boost_toolbox_$BOOST_VER_STR
