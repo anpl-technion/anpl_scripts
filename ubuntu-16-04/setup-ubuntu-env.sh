@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set-tile.sh
+
 echo "export PATH=\$PATH:." >> ~/.bashrc
 export PATH=$PATH:.
 
