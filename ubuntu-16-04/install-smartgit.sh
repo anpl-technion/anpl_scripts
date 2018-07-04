@@ -1,14 +1,24 @@
 #!/bin/bash
 
-VER='18_1_3'
+LINK_VER="https://www.syntevo.com/smartgit/changelog.txt"
+VER=`curl -s $LINK_VER | grep -E -o -m1 "SmartGit [0-9.]+" | grep -E -o [0-9.]+ | tr . _`
 FILE_NAME=smartgit-$VER.dep
 LINK="https://www.syntevo.com/downloads/smartgit/smartgit-$VER.deb"
+SMARTGIT_OLD_DIR=/opt/ANPL/smartgit
 
 #install java
 install-java-jdk.sh
 
-# download file to Download folder
+#remove smartgit
+sudo apt-get remove smartgit
 
+if [ -d "$SMARTGIT_OLD_DIR" ]; then
+  cd $SMARTGIT_OLD_DIR
+  ./remove-menuitem.sh
+  rm -rf $SMARTGIT_OLD_DIR
+fi
+
+# install smartgit
 cd ~/Downloads
 wget -O $FILE_NAME $LINK
 sudo dpkg -i $FILE_NAME
