@@ -11,5 +11,5 @@ install-java-jdk.sh
 
 cd ~/Downloads
 wget -O $FILE_NAME $LINK
-sudo apt install $FILE_NAME
+sudo dpkg -i $FILE_NAME
 rm -f ~/Downloads/$FILE_NAME
