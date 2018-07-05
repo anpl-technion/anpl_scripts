@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set-tile.sh
+./set-title.sh
 
 echo "export PATH=\$PATH:." >> ~/.bashrc
 export PATH=$PATH:.
