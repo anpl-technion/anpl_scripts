@@ -36,10 +36,11 @@ install-matlab-network.sh
 # install inkspace (without script)
 
 # ros packages (via apt-get)
-install-ros-kinetic.sh #TODO: Add for user installation the part of ~./bashrc .
+install-ros-kinetic.sh
 source ~/.bashrc
-setup-catkin_ws.sh
-source ~/.bashrc
+install-ros-tools.sh
+#setup-catkin_ws.sh
+
 install-octomap.sh
 install-mavros.sh
 install-turtlebot.sh
@@ -49,6 +50,7 @@ install-toolbox-boost.sh
 install-toolbox-gtsam.sh
 install-boost.sh
 install-gtsam.sh
+install-diverce-short-path.sh
 install-vlfeat.sh
 install-libpcl-1.8.sh
 install-libccd.sh
