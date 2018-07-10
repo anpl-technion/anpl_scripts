@@ -10,12 +10,12 @@ SMARTGIT_OLD_DIR=/opt/ANPL/smartgit
 install-java-jdk.sh
 
 #remove smartgit
-sudo apt-get remove smartgit
+sudo apt-get remove smartgit -y
 
 if [ -d "$SMARTGIT_OLD_DIR" ]; then
   cd $SMARTGIT_OLD_DIR
-  ./remove-menuitem.sh
-  rm -rf $SMARTGIT_OLD_DIR
+  sudo sh remove-menuitem.sh
+  sudo rm -rf $SMARTGIT_OLD_DIR
 fi
 
 # install smartgit
