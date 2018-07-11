@@ -6,7 +6,7 @@ PROJECT_NAME=diverse_short_paths
 MAKE_FLAGS="CXXFLAGS=-Wall CXXFLAGS+=-Wextra CXXFLAGS+=-std=c++0x CXXFLAGS+=-O3 CXXFLAGS+=-march=native LOCALINC=-I/usr/ANPLprefix/include LOCALINC+=-Iinclude LOCALLIB=-L/usr/ANPLprefix/lib -j4"
 OBJ_REMOVE="Main.o"
 
-LINK=https://bitbucket.org/caleb_voss/diverse_short_paths
+LINK=https://bitbucket.org/ANPL/diverse_short_paths
 PROJECT_NAME=diverse_short_paths
 PROJECT_DIR=~/ANPL/code/3rdparty
 
@@ -14,7 +14,7 @@ PROJECT_DIR=~/ANPL/code/3rdparty
 rm -rf $PROJECT_DIR/$PROJECT_NAME
 
 cd $PROJECT_DIR
-hg clone $LINK
+git clone $LINK
 cd $PROJECT_DIR/$PROJECT_NAME
 make $MAKE_FLAGS
 cd $PROJECT_DIR/$PROJECT_NAME/build/src
