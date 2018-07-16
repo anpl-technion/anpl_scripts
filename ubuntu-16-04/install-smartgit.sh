@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#install crul
+sudo apt install curl -y
+
 LINK_VER="https://www.syntevo.com/smartgit/changelog.txt"
 VER=`curl -s $LINK_VER | grep -E -o -m1 "SmartGit [0-9.]+" | grep -E -o [0-9.]+ | tr . _`
 FILE_NAME=smartgit-$VER.dep

@@ -18,16 +18,17 @@ source ~/.bashrc
 
 # install modules
 install-java-jdk.sh
-install-GVim.sh
-install-lyx.sh
 install-openssl-server.sh
-sudo apt install cmake-qt-gui cmake # TODO: make script
-sudo apt-get install nvidia-cuda-dev # TODO: add cuda installation
+sudo apt install crul -y
+sudo apt install cmake-qt-gui cmake -y # TODO: make script
+#sudo apt-get install nvidia-cuda-dev # TODO: add cuda installation
 
 # install programs
+install-GVim.sh
+install-lyx.sh
 install-smartgit.sh
 # install qtcteator (without script)
-# install clion (without script)
+install-clion.sh
 install-sublime.sh
 install-filezila.sh
 install-chrome.sh
@@ -46,21 +47,19 @@ install-mavros.sh
 install-turtlebot.sh
 
 # 3rd party code
-install-toolbox-boost.sh
 install-toolbox-gtsam.sh
-install-boost.sh
 install-gtsam.sh
-install-diverce-short-path.sh
 install-vlfeat.sh
 install-libpcl-1.8.sh
 install-libccd.sh
 install-libfcl.sh
-install-ompl-app.sh # TODO: install manually!!, add to CMakeLists: find_package(OCTOMAP REQUIRED), to include dirs: "${OCTOMAP_INCLUDE_DIRS}"
+install-ompl-app.sh
+install-diverse-short-path.sh
 install-csm.sh
 install-planar-icp.sh
-install-libnabo.sh
-install-libpointmatcher.sh
-install-libpointmatcher-ros.sh
+#install-libnabo.sh
+#install-libpointmatcher.sh
+#install-libpointmatcher-ros.sh
 
 # ros packages (install catkin_ws)
 install-pioneer-simulation.sh

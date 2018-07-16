@@ -1,6 +1,6 @@
 PREFIX=/usr/ANPLprefix
 FROM_GIT=False
-OMPL_VER="1.2.1"
+OMPL_VER="1.4.0"
 PROJECT_DIR=~/ANPL/code/3rdparty
 PROJECT_NAME=omplapp
 SUB_PROJECT_NAME=ompl
@@ -38,10 +38,10 @@ wget https://raw.githubusercontent.com/dartsim/dart/master/cmake/FindCCD.cmake
 wget https://raw.githubusercontent.com/dartsim/dart/master/cmake/FindFCL.cmake
 mv FindCCD.cmake FindFCL.cmake $PROJECT_DIR/$FOLDER_NAME/CMakeModules
 
-#cd $PROJECT_DIR/$FOLDER_NAME
-#mkdir build && cd build
-#cmake $CMAKE_FLAGS ..
-#make -j7       
-#sudo make install -j7
+cd $PROJECT_DIR/$FOLDER_NAME
+mkdir build && cd build
+cmake $CMAKE_FLAGS ..
+make -j7       
+sudo make install -j7
 
 
