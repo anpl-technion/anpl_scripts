@@ -19,3 +19,19 @@ mv clion-$CLION_VER clion
 sudo mv clion $ANPL_OPT
 rm -rf clion.tar.gz
 /opt/ANPL/clion/bin/clion.sh
+
+cd ~/Downloads
+cat << EOF > jetbrains-clion.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CLion
+Icon=/opt/ANPL/clion/bin/clion.svg
+Exec=bash -i -c "/opt/ANPL/clion/bin/clion.sh" %f
+Comment=The Drive to Develop
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-clion
+EOF
+
+sudo mv jetbrains-clion.desktop /usr/share/applications
