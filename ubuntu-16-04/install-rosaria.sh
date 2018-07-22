@@ -1,7 +1,7 @@
 #!/bin/bash
 
-CATKIN_WS=~/ANPL/infrastructure/catkin_ws
-GIT_DIR=/rosaria
+CATKIN_WS=~/ANPL/infrastructure/mrbsp_ws
+GIT_DIR=rosaria
 DEVEL=$CATKIN_WS/devel/setup.bash
 
 #from http://wiki.ros.org/ROSARIA
@@ -17,4 +17,4 @@ rosdep update
 rosdep install rosaria -y
 
 cd $CATKIN_WS
-catkin_make
+catkin build
