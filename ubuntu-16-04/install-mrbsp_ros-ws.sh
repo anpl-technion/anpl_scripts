@@ -24,7 +24,9 @@ git clone https://github.com/MobileRobots/amr-ros-config
 #copy cmake files that node will find anpl libs.
 cd $WS_PATH/src/mrbsp_ros/mrbsp_ros_utils/scripts/
 sudo sh install-find-cmakes.sh
+
 install-rosaria.sh
+install-rotors-simulation.sh
 
 cd $WS_PATH
 catkin build
