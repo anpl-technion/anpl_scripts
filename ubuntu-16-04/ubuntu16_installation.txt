@@ -29,6 +29,8 @@ install-lyx.sh
 install-smartgit.sh
 # install qtcteator (without script)
 install-clion.sh
+install-qgroundcontrol.sh
+install-BCN3D-Cura.sh
 install-sublime.sh
 install-filezila.sh
 install-chrome.sh
