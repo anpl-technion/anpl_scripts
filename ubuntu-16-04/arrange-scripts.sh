@@ -8,3 +8,5 @@ cd ${PROJECT_DIR}/odroid/
 ./arrange.sh
 cd ${PROJECT_DIR}/ubuntu-16-04/
 ./arrange.sh
+cd ${PROJECT_DIR}/Jetson-TX1-16-04/
+./arrange.sh

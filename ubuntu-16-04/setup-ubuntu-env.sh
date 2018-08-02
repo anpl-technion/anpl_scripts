@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ./set-title.sh
+LAB=ANPL
 
 echo "export PATH=\$PATH:." >> ~/.bashrc
 export PATH=$PATH:.
@@ -10,17 +11,11 @@ if [ -f ~/.gvfs/ ]; then
 	sudo umount ~/.gvfs/
 fi
 
-#create prefix folder for all installations 
-mkdir -p ~/prefix
-
-#create ANPL folder for all project
-mkdir -p ~/ANPL
-
 #create folder for external programs
-mkdir -p ~/ANPL/programs
+mkdir -p ~/$LAB/programs
 
-mkdir -p ~/ANPL/code
-mkdir -p ~/ANPL/code/3rdparty
-mkdir -p ~/ANPL/data
-mkdir -p ~/ANPL/infrastructure
-mkdir -p ~/ANPL/papers
+mkdir -p ~/$LAB/code
+mkdir -p ~/$LAB/code/3rdparty
+mkdir -p ~/$LAB/data
+mkdir -p ~/$LAB/infrastructure
+mkdir -p ~/$LAB/papers
