@@ -24,3 +24,6 @@ source /opt/ros/kinetic/setup.bash
 
 # 1.7 Getting rosinstall (python)
 sudo apt-get install python-rosinstall -y
+
+sudo apt-get install ros-kinetic-gazebo-ros-pkgs ros-kinetic-gazebo-ros-control -y
+sudo apt-get install ros-kinetic-ecl -y
