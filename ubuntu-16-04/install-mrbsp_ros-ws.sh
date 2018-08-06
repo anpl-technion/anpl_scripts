@@ -27,6 +27,7 @@ sudo sh install-find-cmakes.sh
 
 install-rosaria.sh
 install-rotors-simulation.sh
+install-mocap-optitrack-ros-package.sh
 
 cd $WS_PATH
 catkin build
