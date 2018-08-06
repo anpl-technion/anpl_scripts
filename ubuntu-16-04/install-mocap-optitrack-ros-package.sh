@@ -15,6 +15,7 @@ sed -i '155i\    seek(2);' mocap_optitrack/src/mocap_datapackets.cpp
 
 # set multicast address
 # https://unix.stackexchange.com/questions/75803/writing-starting-from-a-certain-line-number-in-a-text-file
+#https://stackoverflow.com/questions/11145270/how-to-replace-an-entire-line-in-a-text-file-by-line-number/11145362
 sed -i '17s/.*/        multicast_address: 239.255.42.99/' mocap_optitrack/config/mocap.yaml
 
 catkin build mocap_optitrack
