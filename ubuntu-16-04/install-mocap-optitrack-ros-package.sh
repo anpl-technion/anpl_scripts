@@ -11,10 +11,11 @@ git clone https://github.com/ros-drivers/mocap_optitrack
 
 # add line to fix multirobot issue
 # from https://stackoverflow.com/questions/15157659/add-text-to-file-at-certain-line-in-linux?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
-sed -i '155i 	seek(2);' mocap_optitrack/src/mocap_datapackets.cpp
+sed -i '155i\    seek(2);' mocap_optitrack/src/mocap_datapackets.cpp
 
 # set multicast address
-sed -i '17i multicast_address: 239.255.42.99' mocap_optitrack/config/mocap.yaml
+# https://unix.stackexchange.com/questions/75803/writing-starting-from-a-certain-line-number-in-a-text-file
+sed -i '17i\        multicast_address: 239.255.42.99' mocap_optitrack/config/mocap.yaml
 sed -i '18d' mocap_optitrack/config/mocap.yaml
 
 catkin build mocap_optitrack
