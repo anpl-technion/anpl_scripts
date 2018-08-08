@@ -3,7 +3,7 @@
 ANPL_OPT=/opt/ANPL
 QGC_VER=3.3.2
 QGC_DIR=$ANPL_OPT/qgroundcontrol
-LINK=https://s3-us-west-2.amazonaws.com/qgroundcontrol/builds/master/QGroundControl.AppImage
+LINK=https://github.com/mavlink/qgroundcontrol/releases/download/v$QGC_VER/QGroundControl.AppImage
 LINK_ICON=https://github.com/mavlink/qgroundcontrol/raw/master/resources/icons/android_512x512.png
 
 
