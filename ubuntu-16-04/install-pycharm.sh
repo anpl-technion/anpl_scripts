@@ -1,11 +1,9 @@
 #!/bin/bash
 
-#from http://www.sysads.co.uk/2014/06/install-pycharm-3-4-ubuntu-14-04/
-wget -q -O - http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -
-
-sudo sh -c 'echo "deb http://archive.getdeb.net/ubuntu trusty-getdeb apps" >> /etc/apt/sources.list.d/getdeb.list'
+#from http://ubuntuhandbook.org/index.php/2016/07/latest-pycharm-ubuntu-16-04-ppa/
+sudo add-apt-repository ppa:mystic-mirage/pycharm
 
 sudo apt-get update
-sudo apt-get install pycharm -y
+sudo apt install pycharm-community -y
 
 
