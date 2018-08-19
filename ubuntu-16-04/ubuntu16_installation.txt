@@ -41,7 +41,7 @@ install-matlab-network.sh
 # ros packages (via apt-get)
 install-ros-kinetic.sh
 source ~/.bashrc
-install-ros-tools.sh
+install-ros-packages.sh
 #setup-catkin_ws.sh
 
 install-octomap.sh
@@ -59,6 +59,7 @@ install-ompl-app.sh
 install-diverse-short-path.sh
 install-csm.sh
 install-planar-icp.sh
+install-orbslam2.sh
 #install-libnabo.sh
 #install-libpointmatcher.sh
 #install-libpointmatcher-ros.sh
