@@ -32,7 +32,3 @@ install-mocap-optitrack-ros-package.sh
 cd $WS_PATH
 catkin build
 
-
-
-
-

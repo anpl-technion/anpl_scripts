@@ -25,14 +25,10 @@ git clone https://github.com/MobileRobots/amr-ros-config
 cd $WS_PATH/src/mrbsp_ros/mrbsp_ros_utils/scripts/
 sudo sh install-find-cmakes.sh
 
-#install-rosaria.sh
+install-rosaria.sh
 #install-rotors-simulation.sh
 install-mocap-optitrack-ros-package.sh
 
 cd $WS_PATH
 catkin build -j1
-
-
-
-
 
