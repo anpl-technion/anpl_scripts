@@ -21,10 +21,6 @@ git clone https://bitbucket.org/ANPL/anpl_ros_infrastructur anpl_inf
 git clone https://bitbucket.org/ANPL/mrbsp_ros
 git clone https://github.com/MobileRobots/amr-ros-config
 
-cd mrbsp_ros/odometry_node
-mkdir 3rd_party
-git clone https://github.com/RTIMULib/RTIMULib2
-
 #copy cmake files that node will find anpl libs.
 cd $WS_PATH/src/mrbsp_ros/mrbsp_ros_utils/scripts/
 sudo sh install-find-cmakes.sh
