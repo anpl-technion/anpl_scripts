@@ -5,9 +5,7 @@ PROJECT_DIR=~/ANPL/code/3rdparty
 LIBCCD_VER=2.0
 FOLDER_NAME=libccd-$LIBCCD_VER
 FILE_NAME=$FOLDER_NAME.zip
-
 LINK=https://github.com/danfis/libccd/archive/v$LIBCCD_VER.zip
-PROJECT_DIR=~/ANPL/code/3rdparty
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release"
 
 sudo rm -rf $PROJECT_DIR/$FOLDER_NAME
