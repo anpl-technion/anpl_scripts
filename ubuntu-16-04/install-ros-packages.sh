@@ -6,6 +6,10 @@ sudo apt-get install python-catkin-tools -y
 sudo apt-get install ros-$ROS_DISTRO-ecl -y
 sudo apt-get install ros-$ROS_DISTRO-rviz-visual-tools -y
 
+# install ROS master discovery and sync
+sudo apt-get install ros-$ROS_DISTRO-master-discovery-fkie -y
+sudo apt-get install ros-$ROS_DISTRO-master-sync-fkie -y
+
 #install ROS hokuyo laser
 sudo apt-get install ros-$ROS_DISTRO-urg-node -y
 
