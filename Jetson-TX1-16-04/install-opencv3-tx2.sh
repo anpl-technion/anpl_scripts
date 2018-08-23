@@ -5,7 +5,7 @@ OPENCV_VER=3.4.2
 OPEN_CV_FOLDER_NAME=opencv-$OPENCV_VER
 OPEN_CV_LINK=https://github.com/opencv/opencv/archive/$OPENCV_VER.zip
 OPEN_CV_FILE_NAME=opencv-$OPENCV_VER.zip
-CMAKE_FLAGS="cmake -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=/usr/local -DWITH_CUDA=ON -DENABLE_FAST_MATH=1 -DCUDA_FAST_MATH=1 -DWITH_CUBLAS=1 -DWITH_GTK=ON -DWITH_TBB=ON -DBUILD_PYTHON_SUPPORT=ON -DWITH_LIBV4L=ON -DWITH_GSTREAMER=ON -DWITH_GSTREAMER_0_10=OFF -DWITH_QT=ON -DCUDA_ARCH_BIN=6.2 CUDA_ARCH_PTX=''"
+CMAKE_FLAGS="cmake -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=/usr/local -DWITH_CUDA=ON -DENABLE_FAST_MATH=1 -DCUDA_FAST_MATH=1 -DWITH_CUBLAS=1 -DWITH_GTK=ON -DWITH_TBB=ON -DBUILD_PYTHON_SUPPORT=ON -DWITH_LIBV4L=ON -DWITH_GSTREAMER=ON -DWITH_GSTREAMER_0_10=OFF -DWITH_QT=ON  -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DCUDA_ARCH_BIN=6.2 CUDA_ARCH_PTX=''"
 
 MAKE_FLAGS=""
 
@@ -30,14 +30,17 @@ sudo apt-get install -y \
     libxvidcore-dev \
     libx264-dev \
     libdc1394-22-dev \
+    libgphoto2-dev \
+    libavresample-dev \
     libgstreamer1.0-dev \
     libgstreamer-plugins-base1.0-dev \
     qt5-default \
     zlib1g-dev \
     python-dev \
     python-numpy \
-    libprotobuf-dev \
     libopenexr-dev \
+    libopenblas-dev \
+    libatlas-dev
 
 sudo rm -rf $PROJECT_DIR/$OPEN_CV_FOLDER_NAME
 
