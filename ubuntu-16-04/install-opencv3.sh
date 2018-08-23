@@ -39,7 +39,8 @@ sudo apt-get install -y \
     python-dev \
     python-numpy \
     libopenexr-dev \
-    libopenblas-dev 
+    libopenblas-dev \
+    liblapacke-dev 
 
 sudo rm -rf $PROJECT_DIR/$OPEN_CV_FOLDER_NAME
 
