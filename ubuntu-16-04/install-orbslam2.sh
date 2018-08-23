@@ -33,13 +33,13 @@ git clone $LINK_ORB_SLAM_2 $FOLDER_NAME_ORB_SLAM_2
 cd $FOLDER_NAME_ORB_SLAM_2
 cd Thirdparty/DBoW2
 mkdir build && cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release
+cmake $CMAKE_FLAGS ..
 make $MAKE_FLAGS
 
 echo "Configuring and building Thirdparty/g2o ..."
 cd ../../g2o
 mkdir build && cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release
+cmake $CMAKE_FLAGS ..
 make $MAKE_FLAGS
 
 

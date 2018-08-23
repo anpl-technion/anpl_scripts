@@ -4,9 +4,9 @@ PREFIX=/usr/ANPLprefix
 PROJECT_DIR=~/ANPL/code/3rdparty
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release"
 FOLDER_NAME_PANGOLIN=pangolin
-FOLDER_NAME_ORB_SLAM_2=orb-slam2
+FOLDER_NAME_ORB_SLAM_2=orb-slam2-gpu
 LINK_PANGOLIN=https://github.com/stevenlovegrove/Pangolin
-LINK_ORB_SLAM_2=https://github.com/raulmur/ORB_SLAM2
+LINK_ORB_SLAM_2=https://github.com/yunchih/ORB-SLAM2-GPU2016-final
 MAKE_FLAGS=-j7
 
 # Install ORB SLAM2 and it's dependencies
