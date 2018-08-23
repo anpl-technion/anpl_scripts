@@ -11,14 +11,15 @@ MAKE_FLAGS=""
 
 # pre-requierments
 # compiler
-#    libgtk-3-dev \ libpostproc-dev \
 sudo apt-get install -y \
     libavcodec-dev \
+    libpostproc-dev \
     libavformat-dev \
     libavutil-dev \
     libeigen3-dev \
     libglew-dev \
     libgtk2.0-dev \
+    libgtk-3-dev \
     libjasper-dev \
     libjpeg-dev \
     libpng12-dev \
@@ -28,10 +29,15 @@ sudo apt-get install -y \
     libv4l-dev \
     libxvidcore-dev \
     libx264-dev \
+    libdc1394-22-dev \
+    libgstreamer1.0-dev \
+    libgstreamer-plugins-base1.0-dev \
     qt5-default \
     zlib1g-dev \
     python-dev \
-    python-numpy 
+    python-numpy \
+    libprotobuf-dev \
+    libopenexr-dev \
 
 sudo rm -rf $PROJECT_DIR/$OPEN_CV_FOLDER_NAME
 
