@@ -56,5 +56,5 @@ cd $OPEN_CV_FOLDER_NAME
 mkdir build && cd build
 cmake $CMAKE_FLAGS ..
 make $MAKE_FLAGS      
-#sudo make install $MAKE_FLAGS
+sudo make install $MAKE_FLAGS
 

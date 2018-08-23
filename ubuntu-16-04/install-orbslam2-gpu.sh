@@ -30,26 +30,32 @@ sudo rm -rf $PROJECT_DIR/$FOLDER_NAME_ORB_SLAM_2
 
 cd $PROJECT_DIR
 git clone $LINK_ORB_SLAM_2 $FOLDER_NAME_ORB_SLAM_2
-cd $FOLDER_NAME_ORB_SLAM_2
-cd Thirdparty/DBoW2
+cd $FOLDER_NAME_ORB_SLAM_2/Thirdparty/DBoW2
 mkdir build && cd build
 cmake $CMAKE_FLAGS ..
 make $MAKE_FLAGS
 
 echo "Configuring and building Thirdparty/g2o ..."
-cd ../../g2o
+cd $PROJECT_DIR/$FOLDER_NAME_ORB_SLAM_2/Thirdparty/g2o
 mkdir build && cd build
 cmake $CMAKE_FLAGS ..
 make $MAKE_FLAGS
 
 
 echo "Uncompress vocabulary ..."
-cd ../../../Vocabulary
+cd $PROJECT_DIR/$FOLDER_NAME_ORB_SLAM_2/Vocabulary
 tar -xf ORBvoc.txt.tar.gz
 cd ..
 
 echo "Configuring and building ORB_SLAM2 ..."
 
+cd $PROJECT_DIR/$FOLDER_NAME_ORB_SLAM_2/Thirdparty/g2o/g2o/solvers
+sed -i '56s/SparseMatrix::Index/int/' linear_solver_eigen.h
+
+cd $PROJECT_DIR/$FOLDER_NAME_ORB_SLAM_2
+sed -i '44s/find_package(OpenCV 3.1.0/find_package(OpenCV 3.4.2/' CMakeLists.txt
+
+cd $PROJECT_DIR/$FOLDER_NAME_ORB_SLAM_2
 mkdir build && cd build
 cmake $CMAKE_FLAGS ..
 make $MAKE_FLAGS
