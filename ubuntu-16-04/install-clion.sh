@@ -12,6 +12,7 @@ LINK=https://download-cf.jetbrains.com/cpp/CLion-$CLION_VER.tar.gz
 sudo rm -rf $CLION_DIR
 
 #download clion file.
+sudo mkdir -p $ANPL_OPT
 cd ~/Downloads
 wget -O clion.tar.gz $LINK
 tar -xvzf clion.tar.gz
