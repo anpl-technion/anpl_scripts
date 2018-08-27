@@ -19,9 +19,9 @@ source ~/.bashrc
 # install modules
 install-java-jdk.sh
 install-openssl-server.sh
-sudo apt install crul -y
+sudo apt install curl -y
 sudo apt install cmake-qt-gui cmake -y # TODO: make script
-#sudo apt-get install nvidia-cuda-dev # TODO: add cuda installation
+#sudo apt install nvidia-cuda-toolkit  # TODO: add cuda installation
 
 # install programs
 install-GVim.sh
