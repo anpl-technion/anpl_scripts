@@ -21,7 +21,7 @@ install-java-jdk.sh
 install-openssl-server.sh
 sudo apt install curl -y
 sudo apt install cmake-qt-gui cmake -y # TODO: make script
-#sudo apt install nvidia-cuda-toolkit  # TODO: add cuda installation
+install-cuda9.sh
 
 # install programs
 install-GVim.sh
@@ -60,6 +60,7 @@ install-diverse-short-path.sh
 install-csm.sh
 install-planar-icp.sh
 install-orbslam2.sh
+install-zed-sdk.sh
 #install-libnabo.sh
 #install-libpointmatcher.sh
 #install-libpointmatcher-ros.sh
