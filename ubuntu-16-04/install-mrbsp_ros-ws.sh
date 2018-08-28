@@ -3,6 +3,7 @@
 PROJECT_NAME=mrbsp_ros
 WS_NAME=mrbsp_ws
 WS_PATH=~/ANPL/infrastructure/$WS_NAME
+WS_SRC=$WS_PATH/src
 PREFIX=/usr/ANPLprefix
 
 #remove old mrbsp_ros workspace
@@ -16,9 +17,17 @@ source $WS_PATH/devel/setup.bash
 echo "source $WS_PATH/devel/setup.bash" >> ~/.bashrc
 
 cd $WS_PATH/src
-git clone https://bitbucket.org/ANPL/pioneer_keyop
-git clone https://bitbucket.org/ANPL/anpl_ros_infrastructur anpl_inf
-git clone https://bitbucket.org/ANPL/mrbsp_ros
+
+while [ ! -d "$WS_SRC/pioneer_keyop" ]; do
+  git clone https://bitbucket.org/ANPL/pioneer_keyop
+done
+while [ ! -d "$WS_SRC/anpl_inf" ]; do
+  git clone https://bitbucket.org/ANPL/anpl_ros_infrastructur anpl_inf
+done
+while [ ! -d "$WS_SRC/mrbsp_ros" ]; do
+  git clone https://bitbucket.org/ANPL/mrbsp_ros
+done
+
 git clone https://github.com/MobileRobots/amr-ros-config
 
 #copy cmake files that node will find anpl libs.
