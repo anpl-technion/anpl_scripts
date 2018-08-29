@@ -59,4 +59,5 @@ cd $PROJECT_DIR/$FOLDER_NAME_ORB_SLAM_2
 mkdir build && cd build
 cmake $CMAKE_FLAGS ..
 make $MAKE_FLAGS
-
+mkdir -p ../lib/
+cp lib/libORB_SLAM2.so ../lib/
