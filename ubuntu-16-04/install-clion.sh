@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ANPL_OPT=/opt/ANPL
-CLION_VER=2018.1.6
+CLION_VER=2018.2.3
 CLION_DIR=$ANPL_OPT/clion
 LINK=https://download-cf.jetbrains.com/cpp/CLion-$CLION_VER.tar.gz
 
