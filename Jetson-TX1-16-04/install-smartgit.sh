@@ -1,22 +1,16 @@
 #!/bin/bash
 
-VER='17_1_1'
-PROGRAMS=~/ANPL/programs
-WORKING_PATH=$PROGRAMS/smartgit/
-FILE_NAME=smartgit-linux-$VER.tar.gz
-LINK="http://www.syntevo.com/static/smart/download/smartgit/smartgit-linux-$VER.tar.gz"
+LINK=https://rpmfind.net/linux/fedora/linux/updates/28/Everything/aarch64/Packages/e/eclipse-swt-4.7.3a-5.fc28.aarch64.rpm
+FILE_NAME=swt.rpm
 
-#install java
-install-java-jdk.sh
+sudo add-apt-repository ppa:eugenesan/ppa
+sudo apt-get update
 
-# download file to Download folder
-rm -rf $WORKING_PATH
+sudo apt-get install smartgit -y
+
+
 cd ~/Downloads
-wget -O $FILE_NAME $LINK
-sudo mkdir -p $PROGRAMS
-sudo tar zxf $FILE_NAME -C $PROGRAMS
-cd $WORKING_PATH/bin
-./remove-menuitem.sh
-./add-menuitem.sh
-
-rm -f ~/Downloads/$FILE_NAME
+wget -O $LINK
+file-roller -h $FILE_NAME
+sudo cp usr/lib/java/swt.jar /usr/share/smartgit/lib/org.eclipse.swt.gtk.linux.x86_64.jar
+rm -rf usr $FILE_NAME 
