@@ -16,12 +16,15 @@ source ~/.bashrc
 ./setup-scripts-env-ubuntu.sh
 source ~/.bashrc
 
+#install cuda
+install-cuda9.2.sh
+
 # install modules
 install-java-jdk.sh
 install-openssl-server.sh
 sudo apt install curl -y
 sudo apt install cmake-qt-gui cmake -y # TODO: make script
-install-cuda9.sh
+
 
 # install programs
 install-GVim.sh
