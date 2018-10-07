@@ -16,6 +16,8 @@ catkin build
 source $WS_PATH/devel/setup.bash
 echo "source $WS_PATH/devel/setup.bash" >> ~/.bashrc
 
+install-rosaria.sh
+
 cd $WS_PATH/src
 
 while [ ! -d "$WS_SRC/pioneer_keyop" ]; do
@@ -34,7 +36,6 @@ git clone https://github.com/MobileRobots/amr-ros-config
 cd $WS_PATH/src/mrbsp_ros/mrbsp_ros_utils/scripts/
 sudo sh install-find-cmakes.sh
 
-install-rosaria.sh
 install-rotors-simulation.sh
 install-mocap-optitrack-ros-package.sh
 
