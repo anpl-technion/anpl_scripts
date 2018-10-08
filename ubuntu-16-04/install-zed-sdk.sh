@@ -26,3 +26,7 @@ fi
 chmod +x $FILE_NAME
 $FILE_NAME
 rm -rf $FILE_NAME
+find /usr/local/zed/ -type d -exec sudo chmod 755 {} \;
+find /usr/local/zed/ -type f -exec chmod a+r {} \;
+
+ 
