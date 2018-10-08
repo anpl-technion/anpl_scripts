@@ -27,7 +27,10 @@ install-gcc5.sh
 sudo rm -rf $PROJECT_DIR/gtsam-toolbox-*
 
 cd $PROJECT_DIR
-git clone $GIT_LINK $GTSM_TOOLBOX_PROJECT_NAME
+
+while [ ! -d "$PROJECT_DIR/$GTSM_TOOLBOX_PROJECT_NAME" ]; do
+  git clone $GIT_LINK $GTSM_TOOLBOX_PROJECT_NAME
+done
 
 cd $PROJECT_DIR/$GTSM_TOOLBOX_PROJECT_NAME
 

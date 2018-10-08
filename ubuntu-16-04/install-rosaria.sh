@@ -9,6 +9,8 @@ LINK=https://github.com/amor-ros-pkg/rosaria.git
 #from http://wiki.ros.org/ROSARIA/Tutorials/How%20to%20use%20ROSARIA
 #from https://github.com/amor-ros-pkg/rosaria
 
+source ~/.bashrc
+
 rm -rf $CATKIN_WS/src/$FOLDER_NAME
 cd $CATKIN_WS/src
 git clone $LINK $FOLDER_NAME

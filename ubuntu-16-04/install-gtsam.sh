@@ -17,7 +17,10 @@ sudo rm -rf $PROJECT_DIR/gtsam-*
 
 if [ "$FROM_GIT" = True ]; then
     cd $PROJECT_DIR
-    git clone $GIT_LINK $PROJECT_NAME
+
+    while [ ! -d "$PROJECT_DIR/$PROJECT_NAME" ]; do
+      git clone $GIT_LINK $PROJECT_NAME
+    done
 else
     # download file to Download folder
     cd ~/Downloads

@@ -14,7 +14,11 @@ PROJECT_DIR=~/ANPL/code/3rdparty
 rm -rf $PROJECT_DIR/$PROJECT_NAME
 
 cd $PROJECT_DIR
-git clone $LINK
+
+while [ ! -d "$PROJECT_DIR/$PROJECT_NAME" ]; do
+git clone $LINK $PROJECT_NAME
+done
+
 cd $PROJECT_DIR/$PROJECT_NAME
 make $MAKE_FLAGS
 cd $PROJECT_DIR/$PROJECT_NAME/build/src
