@@ -5,7 +5,7 @@
 #from https://github.com/vlfeat/vlfeat
 
 VLFEAT_VER=0.9.21
-PROJECT_DIR=~/ANPL/code/3rdparty
+PROJECT_DIR=/usr/ANPL/prefix
 FILE_NAME=vlfeat-$VLFEAT_VER.tar.gz
 LINK=http://www.vlfeat.org/download/vlfeat-$VLFEAT_VER-bin.tar.gz
 INSTALL_DIR=$PROJECT_DIR/vlfeat-$VLFEAT_VER/toolbox
@@ -14,7 +14,7 @@ sudo rm -rf $PROJECT_DIR/vlfeat-*
 cd ~/Downloads
 wget -O $FILE_NAME $LINK
 tar -xvzf $FILE_NAME
-mv vlfeat-$VLFEAT_VER $PROJECT_DIR
+sudo mv vlfeat-$VLFEAT_VER $PROJECT_DIR
 rm -rf $FILE_NAME
 
 sudo matlab -nodesktop -nosplash -r "run('$INSTALL_DIR/vl_setup');savepath;exit;"
