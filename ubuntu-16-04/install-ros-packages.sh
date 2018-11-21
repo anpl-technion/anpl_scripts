@@ -42,3 +42,10 @@ sudo apt-get install ros-$ROS_DISTRO-opencv3 -y
 
 # Install ROS cv-bridge
 sudo apt-get install ros-$ROS_DISTRO-cv-bridge -y
+
+#for astra camera
+cd ~/Downloads
+wget https://raw.githubusercontent.com/orbbec/ros_astra_camera/master/56-orbbec-usb.rules
+sudo mv 56-orbbec-usb.rules /etc/udev/rules.d/
+sudo service udev reload
+sudo service udev restart
