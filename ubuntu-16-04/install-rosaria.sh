@@ -19,5 +19,6 @@ source $DEVEL
 rosdep update
 rosdep install rosaria -y
 
+sudo apt-get install libaria-dev
 cd $CATKIN_WS
 catkin build rosaria
