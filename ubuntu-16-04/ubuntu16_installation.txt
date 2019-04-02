@@ -1,6 +1,12 @@
+#---Variables(For folders and dirs paths)---#
 SYSTEM=ubuntu-16-04
 LAB_NAME=ANPL
 WORKING_FOLDER=~/$LAB_NAME/scripts
+PREFIX=/usr/ANPLprefix
+
+mkdir -p $PREFIX
+echo "export PATH=\$PATH:.:/home/$USER/$LAB_NAME/scripts/$SYSTEM" >> ~/.bashrc
+source ~/.bashrc
 
 # initial ubuntu workspace
 sudo apt-get update
@@ -17,7 +23,7 @@ source ~/.bashrc
 source ~/.bashrc
 
 #install cuda
-install-cuda9.2.sh
+ install-cuda9.2.sh
 
 # install modules
 install-java-jdk.sh
@@ -47,8 +53,8 @@ source ~/.bashrc
 install-ros-packages.sh
 #setup-catkin_ws.sh
 
-install-octomap.sh
-install-mavros.sh
+install-octomap.s
+hinstall-mavros.sh
 install-turtlebot.sh
 
 # 3rd party code
@@ -58,7 +64,7 @@ install-vlfeat.sh
 install-libpcl-1.8.sh
 install-libccd.sh
 install-libfcl.sh
-install-ompl-app.sh
+install-ompl.sh #(maybe opl_app)
 install-diverse-short-path.sh
 install-csm.sh
 install-planar-icp.sh
@@ -69,7 +75,7 @@ install-zed-sdk.sh
 #install-libpointmatcher-ros.sh
 
 # ros packages (install catkin_ws)
-install-pioneer-simulation.sh
+#install-pioneer-simulation.sh
 install-rotors-simulation.sh
 install-viso2.sh
 

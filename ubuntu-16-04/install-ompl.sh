@@ -2,7 +2,7 @@ PREFIX=/usr/ANPLprefix
 FROM_GIT=False
 OMPL_VER="1.4.2"
 PROJECT_DIR=~/ANPL/code/3rdparty
-PROJECT_NAME=omplapp
+PROJECT_NAME=ompl
 SUB_PROJECT_NAME=ompl
 FOLDER_NAME=$PROJECT_NAME-$OMPL_VER
 FILE_NAME=$FOLDER_NAME.zip
@@ -10,7 +10,6 @@ CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release -DOMPL_BU
 
 GIT_LINK=https://github.com/ompl/omplapp.git
 SUB_GIT_LINK=https://github.com/ompl/ompl.git
-#FILE_LINK=https://bitbucket.org/ompl/ompl/downloads/omplapp-$OMPL_VER-Source.zip
 FILE_LINK=https://bitbucket.org/ompl/ompl/downloads/ompl-$OMPL_VER-Source.zip
 
 #from: http://ompl.kavrakilab.org/download.html
