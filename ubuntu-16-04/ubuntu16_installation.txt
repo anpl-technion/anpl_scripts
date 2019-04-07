@@ -53,8 +53,8 @@ source ~/.bashrc
 install-ros-packages.sh
 #setup-catkin_ws.sh
 
-install-octomap.s
-hinstall-mavros.sh
+install-octomap.sh
+install-mavros.sh
 install-turtlebot.sh
 
 # 3rd party code
