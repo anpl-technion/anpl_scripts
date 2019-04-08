@@ -12,7 +12,7 @@ MAKE_FLAGS=-j7
 
 # Install ORB SLAM2 and it's dependencies
 # install opencv 3
-install-opencv3.sh
+# install-opencv3.sh
 
 # install libglew (for pangolin)
 sudo apt-get install libglew-dev -y

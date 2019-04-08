@@ -43,7 +43,8 @@ install-BCN3D-Cura.sh
 install-sublime.sh
 install-filezila.sh
 install-chrome.sh
-install-matlab-network.sh
+##install-matlab-network.sh
+instal-matlab-jen01
 # install gimp (without script)
 # install inkspace (without script)
 
