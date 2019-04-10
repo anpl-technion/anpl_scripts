@@ -1,9 +1,11 @@
+#!/bin/bash
 #---Variables(For folders and dirs paths)---#
 SYSTEM=ubuntu-16-04
 LAB_NAME=ANPL
 WORKING_FOLDER=~/$LAB_NAME/scripts
 PREFIX=/usr/ANPLprefix
 
+cd
 mkdir -p $PREFIX
 echo "export PATH=\$PATH:.:/home/$USER/$LAB_NAME/scripts/$SYSTEM" >> ~/.bashrc
 source ~/.bashrc
@@ -44,7 +46,7 @@ install-sublime.sh
 install-filezila.sh
 install-chrome.sh
 ##install-matlab-network.sh
-install-matlab-jen01.sh
+instal-matlab-jen01.sh
 # install gimp (without script)
 # install inkspace (without script)
 
