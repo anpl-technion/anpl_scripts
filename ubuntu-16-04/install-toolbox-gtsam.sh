@@ -3,7 +3,7 @@
 #check matlab version
 MATLAB_VER=`matlab -e | grep -E -o R[0-9]+[ab] |uniq`
 
-PREFIX=/usr/ANPL/prefix
+PREFIX=/usr/ANPLprefix
 PROJECT_DIR=~/ANPL/code/3rdparty
 FROM_GIT=True
 GTSAM_VER="3.2.1"
