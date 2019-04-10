@@ -62,4 +62,4 @@ mkdir build && cd build
 cmake $CMAKE_FLAGS ..
 make $MAKE_FLAGS
 cd .. && rm -rf build
-cd .. && sudo mv FOLDER_NAME_ORB_SLAM_2 $PREFIX
+cd .. && sudo mv $FOLDER_NAME_ORB_SLAM_2 $PREFIX
