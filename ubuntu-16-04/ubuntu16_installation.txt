@@ -44,7 +44,11 @@ install-sublime.sh
 install-filezila.sh
 install-chrome.sh
 ##install-matlab-network.sh
+<<<<<<< HEAD
 install-matlab-jen01
+=======
+install-matlab-jen01.sh
+>>>>>>> a93970ab638a71ad9a708af291d158ef9b54b4c4
 # install gimp (without script)
 # install inkspace (without script)
 

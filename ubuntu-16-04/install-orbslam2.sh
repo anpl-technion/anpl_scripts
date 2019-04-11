@@ -62,4 +62,8 @@ mkdir build && cd build
 cmake $CMAKE_FLAGS ..
 make $MAKE_FLAGS
 cd .. && rm -rf build
+<<<<<<< HEAD
 cd .. && sudo mv FOLDER_NAME_ORB_SLAM_2 $ANPL_PREFIX
+=======
+cd .. && sudo mv $FOLDER_NAME_ORB_SLAM_2 $PREFIX
+>>>>>>> a93970ab638a71ad9a708af291d158ef9b54b4c4

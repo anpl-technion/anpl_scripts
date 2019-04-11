@@ -32,16 +32,25 @@ echo license dir: /tmp/network.lic
 
 # 4) Run the install script and follow the on-screen instructions:
 
+echo 00005-16835-26635-50915-34103-49806-00691-03238-60527-20825-20994-49122-40985-07857-10083-41606-05732-42425-22343-15209-09635-36130
+echo /tmp/network.lic
 sudo /mnt/install
 
 #    - When prompted to "Select installation method", please choose the "File Installation Key" option.
 
 #    - When prompted to "Provide File Installation Key", please enter:
 
+<<<<<<< HEAD:ubuntu-16-04/install-matlab-jen01.sh
 # 00005-16835-26635-50915-34103-49806-00691-03238-60527-20825-20994-49122-40985-07857-10083-41606-05732-42425-22343-15209-09635-36130
 
 #    - When prompted to "Provide license file location", please enter:
    
+=======
+#  00005-16835-26635-50915-34103-49806-00691-03238-60527-20825-20994-49122-40985-07857-10083-41606-05732-42425-22343-15209-09635-36130
+
+#    - When prompted to "Provide license file location", please enter:
+
+>>>>>>> a93970ab638a71ad9a708af291d158ef9b54b4c4:ubuntu-16-04/install-matlab-jen01.sh
 # /tmp/network.lic
 
 # 5) Unmount the CD:
