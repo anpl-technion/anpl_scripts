@@ -8,7 +8,9 @@ rm -rf  $CATKIN_WS/src/mocap_optitrack
 #install new optitrack
 cd $CATKIN_WS/src
 git clone https://github.com/ros-drivers/mocap_optitrack
-
+cd mocap_optitrack
+git checkout 9724d0e2cf124ee45c80403b7e6285ad52aa7c80 -f
+cd ..
 # add line to fix multirobot issue
 # from https://stackoverflow.com/questions/15157659/add-text-to-file-at-certain-line-in-linux?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 sed -i '155i\    seek(2);' mocap_optitrack/src/mocap_datapackets.cpp

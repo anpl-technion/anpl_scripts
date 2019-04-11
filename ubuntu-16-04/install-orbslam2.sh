@@ -1,9 +1,9 @@
 #!/bin/bash
 
-PREFIX=/usr/ANPLprefix
+
 PROJECT_DIR=~/ANPL/code/3rdparty
 ANPL_PREFIX=/usr/ANPLprefix
-CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release"
+CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$ANPL_PREFIX -DCMAKE_BUILD_TYPE=Release"
 FOLDER_NAME_PANGOLIN=pangolin
 FOLDER_NAME_ORB_SLAM_2=orb-slam2
 LINK_PANGOLIN=https://github.com/stevenlovegrove/Pangolin
@@ -24,7 +24,7 @@ sudo apt-get install libspdlog-dev
 #delete old pangolin library
 sudo rm -rf $PROJECT_DIR/$FOLDER_NAME_PANGOLIN
 
- cd $PROJECT_DIR
+cd $PROJECT_DIR
 git clone $LINK_PANGOLIN $FOLDER_NAME_PANGOLIN
 cd $FOLDER_NAME_PANGOLIN
 mkdir build && cd build
@@ -36,7 +36,7 @@ sudo make install $MAKE_FLAGS
 #delete old orb-slam2 library
 sudo rm -rf $ANPL_PREFIX/$FOLDER_NAME_ORB_SLAM_2
 
-cd $PROJECT_DIR
+cd $ANPL_PREFIX
 git clone $LINK_ORB_SLAM_2 $FOLDER_NAME_ORB_SLAM_2
 cd $FOLDER_NAME_ORB_SLAM_2
 cd Thirdparty/DBoW2
@@ -62,4 +62,4 @@ mkdir build && cd build
 cmake $CMAKE_FLAGS ..
 make $MAKE_FLAGS
 cd .. && rm -rf build
-cd .. && sudo mv FOLDER_NAME_ORB_SLAM_2 $PREFIX
+cd .. && sudo mv FOLDER_NAME_ORB_SLAM_2 $ANPL_PREFIX
