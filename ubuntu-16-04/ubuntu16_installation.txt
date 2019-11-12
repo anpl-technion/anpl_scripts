@@ -63,6 +63,7 @@ install-mavros.sh
 install-turtlebot.sh
 
 # 3rd party code
+install-opencv3.sh
 install-toolbox-gtsam.sh
 install-gtsam.sh
 install-vlfeat.sh
