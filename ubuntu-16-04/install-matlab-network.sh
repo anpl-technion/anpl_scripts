@@ -28,7 +28,6 @@ Terminal=false
 StartupWMClass=matlab
 EOF
 sudo mv matlab.desktop /usr/share/applications
-cd /media/matlab
-sudo ./install
+sudo /media/matlab/install
 sleep 2
 sudo umount /media/matlab
