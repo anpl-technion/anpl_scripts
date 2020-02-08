@@ -13,7 +13,7 @@ LINK=https://sourceforge.net/projects/boost/files/boost/$BOOST_VER/$FILE_NAME/do
 BOOTSTRAP_FLAGS="--prefix=$PREFIX"
 #B2_FLAGS="link=static,shared threading=multi cxxflags=-fPIC cflags=-fPIC --disable-icu -j8"
 
-install-gcc5.sh
+install-gcc6.sh
 
 sudo mkdir -p $PREFIX
 sudo rm -rf $PROJECT_DIR/$FOLDER_NAME
