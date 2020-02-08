@@ -11,9 +11,9 @@ FILE_NAME=$FOLDER_NAME.tar.bz2
 LINK=https://sourceforge.net/projects/boost/files/boost/$BOOST_VER/$FILE_NAME/download
 #BOOTSTRAP_FLAGS="--prefix=$PREFIX --with-python=python"
 BOOTSTRAP_FLAGS="--prefix=$PREFIX"
-B2_FLAGS="link=static,shared threading=multi cxxflags=-fPIC cflags=-fPIC --disable-icu -j8"
+#B2_FLAGS="link=static,shared threading=multi cxxflags=-fPIC cflags=-fPIC --disable-icu -j8"
 
-install-gcc7.sh
+install-gcc5.sh
 
 sudo mkdir -p $PREFIX
 sudo rm -rf $PROJECT_DIR/$FOLDER_NAME
