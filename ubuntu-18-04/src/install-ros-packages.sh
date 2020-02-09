@@ -1,5 +1,5 @@
 #!/bin/bash
-#ROS_DISTRO="kinetic"
+#ROS_DISTRO="melodic"
 
 sudo apt-get update
 . ~/.profile

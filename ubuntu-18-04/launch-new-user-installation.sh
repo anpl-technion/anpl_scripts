@@ -1,6 +1,6 @@
 #!/bin/bash/
 
-echo "export PATH=\$PATH:.:$(pwd)/src" >> ~/.bashrc
+echo "export PATH=$PATH:$(pwd):$(pwd)/src" >> ~/.bashrc
 source ~/.bashrc
 
 echo -e "\033[0;42mWelcome to ANPL's Multi-Robot Belief Space Planner open source installator!"
@@ -17,10 +17,10 @@ done
 chmod +r *
 chmod +x *.py src/*
 
-#./src/install-python.sh
+./install-gtsam.sh
 
 # ROS installation and sourcing ".profile" to import ROS environment variables (ROS_DISTRO mainly)
-./src/install-ros-kinetic.sh
+./install-ros-melodic.sh
 . ~/.bashrc
 . ~/.profile
 
