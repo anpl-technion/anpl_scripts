@@ -50,35 +50,35 @@ if(user_decision("Would you like to install MATLAB?")):
 	print(bcolors.OKPURP + "Installing MATLAB..." + bcolors.ENDC)
 	install("matlab-gr")
 
-if(user_decision("Would you like to install CUDA?")):
+if(user_decision("Would you like to install CUDA?[y/n]")):
 	print(bcolors.OKPURP + "Installing CUDA..." + bcolors.ENDC)
 	install("cuda9.2")
 
-if(user_decision("Would you like to install OpenCV?")):
+if(user_decision("Would you like to install OpenCV?[y/n]")):
 	print(bcolors.OKPURP + "Installing OpenCV..." + bcolors.ENDC)
 	install("opencv3")
 
-if(user_decision("Would you like to install vlfeat?")):
+if(user_decision("Would you like to install vlfeat?[y/n]")):
 	print(bcolors.OKPURP + "Installing vlfeat..." + bcolors.ENDC)
 	install("vlfeat")
 
-if(user_decision("Would you like to install PCL?")):
+if(user_decision("Would you like to install PCL?[y/n]")):
 	print(bcolors.OKPURP + "Installing PCL..." + bcolors.ENDC)
 	install("libpcl-1.8")
 
-if(user_decision("Would you like to install CCD?")):
+if(user_decision("Would you like to install CCD?[y/n]")):
 	print(bcolors.OKPURP + "Installing CCD..." + bcolors.ENDC)
 	install("libccd")
 
-if(user_decision("Would you like to install FCL?")):
+if(user_decision("Would you like to install FCL?[y/n]")):
 	print(bcolors.OKPURP + "Installing FCL..." + bcolors.ENDC)
 	install("libfcl")
 
-if(user_decision("Would you like to install ORBSLAM 2?")):
+if(user_decision("Would you like to install ORBSLAM 2?[y/n]")):
 	print(bcolors.OKPURP + "Installing ORBSLAM 2..." + bcolors.ENDC)
 	install("orbslam2")
 
-if(user_decision("Would you like to install CCD?")):
+if(user_decision("Would you like to install CCD?[y/n]")):
 	print(bcolors.OKPURP + "Installing ZED..." + bcolors.ENDC)
 	install("zed-sdk")
 

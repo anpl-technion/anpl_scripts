@@ -9,7 +9,7 @@ LINK=https://github.com/danfis/libccd/archive/v$LIBCCD_VER.zip
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release"
 FROM_APT=true
 
-if [ $FROM_APT = true]; then
+if [ $FROM_APT = true ]; then
 	# sudo apt-get autoremove libccd-dev 
 	sudo apt-get install libccd-dev -y
 	exit

@@ -11,9 +11,9 @@ CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release -DOMPL_BU
 GIT_LINK=https://github.com/ompl/omplapp.git
 SUB_GIT_LINK=https://github.com/ompl/ompl.git
 FILE_LINK=https://bitbucket.org/ompl/ompl/downloads/ompl-$OMPL_VER-Source.zip
-FROM_APT=true
+FROM_APT=True
 
-if [ $FROM_APT = true]; then
+if [ $FROM_APT = True ]; then
     # sudo apt-get autoremove libompl-dev 
     sudo apt-get install libompl-dev -y
     exit

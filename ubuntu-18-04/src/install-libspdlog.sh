@@ -9,7 +9,7 @@ LINK=https://github.com/gabime/spdlog/archive/v$LIBSPDLOG_VER.zip
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release"
 FROM_APT=true
 
-if [ $FROM_APT = true]; then
+if [ $FROM_APT = true ]; then
 	# sudo apt-get autoremove libspdlog-dev
 	sudo apt-get install libspdlog-dev -y
 	exit
