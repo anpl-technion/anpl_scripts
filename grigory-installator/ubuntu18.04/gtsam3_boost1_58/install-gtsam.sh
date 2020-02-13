@@ -14,7 +14,7 @@ GIT_LINK="https://bitbucket.org/ANPL/gtsam-3.2.1-anpl/ -b fix/boost158gtsam3"
 # sudo apt-get install libboost-all-dev libtbb-dev -y
 
 
-sudo rm -rf $PROJECT_DIR/gtsam-*
+rm -rf $PROJECT_DIR/gtsam-*
 
 if [ "$FROM_GIT" = True ]; then
     cd $PROJECT_DIR
@@ -36,8 +36,8 @@ cd $PROJECT_DIR/$PROJECT_NAME
 
 mkdir build && cd build
 cmake $CMAKE_FLAGS ..
-make -j1
-sudo make install -j1
+make -j4
+make install -j4
 
 # Add path to global variable of path library's 
 echo "export LD_LIBRARY_PATH=/usr/ANPLprefix/lib:$LD_LIBRARY_PATH" >> ~/.bashrc

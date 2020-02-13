@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 #from http://wiki.ros.org/indigo/Installation/Ubuntu
 
