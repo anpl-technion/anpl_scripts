@@ -1,0 +1,23 @@
+
+Started: (changed -j7 to j1 - dualCPU)
+ 1. install-ros-melodic.sh
+ 2. install-gtsam4.sh
+ 3. install-ros-packages.sh (source bashrc not profile)
+ 4. setup-anpl-mrbsp.sh 
+
+
+Catkin belief: (remember catkin clean 'all')
+ 1. install-libspdlog.sh (apt=false, from git) - mrbsp_utils wanted it
+ 2. install-octomap.sh (apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]
+ 3. install-libccd.sh (AG need it - apt=false)
+ 4. install-libfcl.sh (AG need it - apt=false)
+ 5. install-ompl.sh   (AG need it, apt=true)
+	5.1 cd usr/share
+	5.2 sudo cp ompl/ompl-config.cmake ompl/FindOMPL.cmake
+	5.3 Comment in AG CMakeList.txt before building or after catkin clean:
+			#list(APPEND CMAKE_MODULE_PATH ${ANPL_PREFIX}/share/cmake) # if installed from apt (comment)
+			# set(OMPL_PREFIX ${ANPL_PREFIX}) 			   # if installed from apt (comment)
+			find_package(OMPL REQUIRED)
+ 6. install-diverse-short-path.sh (AG need it)
+ 7. install-csm.sh         (git=true)
+ 8. install-planar-icp.sh  

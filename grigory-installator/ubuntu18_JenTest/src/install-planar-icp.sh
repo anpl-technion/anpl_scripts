@@ -14,8 +14,8 @@ cd $FOLDER_NAME
 mkdir build && cd build
 PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$PREFIX/lib/pkgconfig/
 cmake $CMAKE_FLAGS ..
-make -j4
-sudo make install -j4
+make -j7
+sudo make install -j7
 
 sudo mkdir -p $PREFIX/include/$FOLDER_NAME
 cd $PROJECT_DIR/$FOLDER_NAME/cpp

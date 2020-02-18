@@ -16,11 +16,8 @@ FROM_APT=True
 if [ $FROM_APT = True ]; then
     # sudo apt-get autoremove libompl-dev 
     sudo apt-get install libompl-dev -y
-    cd /usr/share
-    sudo cp ompl/ompl-config.cmake ompl/FindOMPL.cmake
     exit
 fi
-
 
 #from: http://ompl.kavrakilab.org/download.html
 sudo rm -rf $PROJECT_DIR/$FOLDER_NAME
@@ -49,7 +46,7 @@ mv FindCCD.cmake FindFCL.cmake $PROJECT_DIR/$FOLDER_NAME/CMakeModules
 cd $PROJECT_DIR/$FOLDER_NAME
 mkdir build && cd build
 cmake $CMAKE_FLAGS ..
-make -j7       
-sudo make install -j7
+make -j4      
+sudo make install -j4
 
 
