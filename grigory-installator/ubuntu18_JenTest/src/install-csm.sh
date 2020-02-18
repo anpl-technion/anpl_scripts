@@ -9,6 +9,10 @@ LINK=https://github.com/AndreaCensi/csm/archive/$LIBCSM_VER.zip
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release"
 FROM_GIT=True
 
+if [ $ROS_DISTRO = "kinetic" ] || [ $ROS_DISTRO = "indigo" ] ; then
+    FROM_GIT=False
+fi
+
 sudo apt-get install libgsl-dev -y
 
 if [ "$FROM_GIT" = True ]; then
@@ -21,10 +25,10 @@ if [ "$FROM_GIT" = True ]; then
     cd $PROJECT_DIR/$FOLDER_NAME
     mkdir build && cd build
     cmake $CMAKE_FLAGS ..
-    make -j7       
-    sudo make install -j7
+    make -j4       
+    sudo make install -j4
 else
-    sudo apt-get install ros-$ROS_DISTRO-csm
+    sudo apt-get install ros-$ROS_DISTRO-csm    # supports indigo and kinetic
 fi
 
 

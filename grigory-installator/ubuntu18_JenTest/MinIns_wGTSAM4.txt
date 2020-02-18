@@ -20,4 +20,11 @@ Catkin belief: (remember catkin clean 'all')
 			find_package(OMPL REQUIRED)
  6. install-diverse-short-path.sh (AG need it)
  7. install-csm.sh         (git=true)
+	7.1 in /usr/ANPLprefix/include/json-c/bits.h comment out:
+			//#ifndef min
+			//#define min(a,b) ((a) < (b) ? (a) : (b))
+			//#endif
+			//#ifndef max
+			//#define max(a,b) ((a) > (b) ? (a) : (b))
+			//#endif
  8. install-planar-icp.sh  
