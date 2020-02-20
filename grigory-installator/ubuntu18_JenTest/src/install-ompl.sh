@@ -16,7 +16,6 @@ FROM_APT=True
 if [ $FROM_APT = True ]; then
     # sudo apt-get autoremove libompl-dev 
     sudo apt-get install libompl-dev -y
-
     cd usr/share
     sudo cp ompl/ompl-config.cmake ompl/FindOMPL.cmake
     exit
@@ -28,6 +27,7 @@ sudo rm -rf $PROJECT_DIR/$FOLDER_NAME
 if [ "$FROM_GIT" = True ]; then
     cd $PROJECT_DIR
     git clone $GIT_LINK $FOLDER_NAME
+    
     cd $FOLDER_NAME
     git clone $SUB_GIT_LINK $SUB_PROJECT_NAME
 else
