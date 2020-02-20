@@ -14,14 +14,13 @@ while true; do
     esac
 done
 
- install-ros-melodic.sh
- install-gtsam4.sh
- source ~/.bashrc
- sleep 2
- echo "ROS_DISTRO = " $ROS_DISTRO
- read 1
- install-ros-packages.sh 
- setup-anpl-mrbsp.sh
+install-ros-melodic.sh
+install-gtsam4.sh
+source ~/.bashrc
+sleep 2
+echo "ROS_DISTRO = " $ROS_DISTRO
+install-ros-packages.sh 
+setup-anpl-mrbsp.sh
 
 # carkin belief:
 install-libspdlog.sh #(apt=false, from git) - mrbsp_utils wanted it
@@ -30,7 +29,7 @@ install-libccd.sh 	#(AG need it - apt=false)
 install-libfcl.sh 	#(AG need it - apt=false)
 install-ompl.sh   	#(AG need it, apt=true)
 LINES_TO_BE_COMMENTED=('list(APPEND CMAKE_MODULE_PATH ${ANPL_PREFIX}/share/cmake)' 'set(OMPL_PREFIX ${ANPL_PREFIX})')
-PATH_AG_CMAKE="~/ANPL/infrastructure/mrbsp_ws/src/anpl_mrbsp/action_generator/CMakeList.txt"
+PATH_AG_CMAKE=~/ANPL/infrastructure/mrbsp_ws/src/anpl_mrbsp/action_generator/CMakeLists.txt
 for line in "${LINES_TO_BE_COMMENTED[@]}"
 do
 	sed -i "s|${line}|#${line}|" $PATH_AG_CMAKE
@@ -38,11 +37,13 @@ done
 
 install-diverse-short-path.sh 	#(AG need it)
 install-csm.sh 					#(git=true)
-LINES_TO_BE_COMMENTED=('#ifndef min', '#define min(a,b) ((a) < (b) ? (a) : (b))', '#endif', '#ifndef max', '#define max(a,b) ((a) > (b) ? (a) : (b))', '#endif')
-PATH_JSON_C_BITS="/usr/ANPLprefix/include/json-c/bits.h "
+LINES_TO_BE_COMMENTED=('#ifndef min' '#define min(a,b) ((a) < (b) ? (a) : (b))' '#endif' '#ifndef max' '#define max(a,b) ((a) > (b) ? (a) : (b))')
+PATH_JSON_C_BITS=/usr/ANPLprefix/include/json-c/bits.h
 for line in "${LINES_TO_BE_COMMENTED[@]}"
 do
-	sed -i "s|${line}|#${line}|" $PATH_AG_CMAKE
+	sudo sed -i "s|${line}|//${line}|" $PATH_JSON_C_BITS
 done
+#sudo echo "#endif" >> $PATH_JSON_C_BITS
+echo "#endif" | sudo tee -a $PATH_JSON_C_BITS
 
 install-planar-icp.sh  #(brasnch gtsam4)

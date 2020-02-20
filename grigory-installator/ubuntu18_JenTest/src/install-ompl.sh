@@ -16,7 +16,7 @@ FROM_APT=True
 if [ $FROM_APT = True ]; then
     # sudo apt-get autoremove libompl-dev 
     sudo apt-get install libompl-dev -y
-    cd usr/share
+    cd /usr/share
     sudo cp ompl/ompl-config.cmake ompl/FindOMPL.cmake
     exit
 fi
