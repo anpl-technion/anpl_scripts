@@ -41,3 +41,11 @@ Runing scenario dependencies:
  1. Need "anpl_inf" 
 	1.1 cd WS_PATH/src
 	1.2 git clone https://bitbucket.org/ANPL/anpl_ros_infrastructur anpl_inf
+ 2. RLException: Roslaunch got a 'No such file or directory' error while attempting to run:
+ 	2.1 sudo apt-get install xterm
+ 3. [Err] [REST.cc:205] Error in REST request
+	3.1 in ~/.ignition/fuel/config.yaml replace url line with 
+		  url: https://api.ignitionrobotics.org
+	3.2 if [ -f "~/.ignition/fuel/config.yaml" ]; then 
+		sed -i "s+https://api.ignitionfuel.org+https://api.ignitionrobotics.org+g" ~/.ignition/fuel/config.yaml
+	    fi

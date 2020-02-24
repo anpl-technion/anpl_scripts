@@ -14,6 +14,7 @@ sudo rm -rf $WS_PATH
 source ~/.bashrc
 mkdir -p $WS_PATH/src && cd $WS_PATH
 source /opt/ros/$ROS_DISTRO/setup.bash
+sudo rm -f .catkin_tools
 catkin init
 catkin build -j4 && wait $!
 
