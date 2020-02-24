@@ -5,10 +5,10 @@ PREFIX=/usr/ANPLprefix
 FOLDER_NAME=planar_icp
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release"
 
-#sudo rm -rf $PROJECT_DIR/$FOLDER_NAME
+sudo rm -rf $PROJECT_DIR/$FOLDER_NAME
 
-#cd $PROJECT_DIR
-#git clone https://bitbucket.org/ANPL/planar_icp $FOLDER_NAME
+cd $PROJECT_DIR
+git clone -b gtsam4 https://bitbucket.org/ANPL/planar_icp $FOLDER_NAME 
 cd $FOLDER_NAME
 
 mkdir build && cd build

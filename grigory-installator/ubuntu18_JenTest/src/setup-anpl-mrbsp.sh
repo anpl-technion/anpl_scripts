@@ -18,12 +18,19 @@ catkin init
 catkin build -j4 && wait $!
 
 cd $WS_SRC
+read -p "Which GTSAM version do you need?[3 or 4]" GTSAM_VER
+case $GTSAM_VER in
+        [3] ) BRANCH_NAME=master;;
+        [4] ) BRANCH_NAME=gtsam4;;
+        * ) echo "Please answer 3 or 4 and not $GTSAM_VER."
+	exit;;
+    esac
 
 if [ ! -d "$WS_SRC/pioneer_keyop" ]; then
   git clone https://bitbucket.org/ANPL/pioneer_keyop
 fi
 if [ ! -d "$WS_SRC/$PROJECT_NAME" ]; then
-  git clone https://bitbucket.org/ANPL/$PROJECT_NAME.git $WS_SRC/$PROJECT_NAME
+  git clone -b $BRANCH_NAME https://bitbucket.org/ANPL/$PROJECT_NAME.git $WS_SRC/$PROJECT_NAME
 fi
 
 

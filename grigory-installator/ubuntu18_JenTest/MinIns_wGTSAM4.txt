@@ -3,7 +3,7 @@ Started: (changed -j7 to j1 - dualCPU)
  1. install-ros-melodic.sh
  2. install-gtsam4.sh
  3. install-ros-packages.sh (source bashrc not profile)
- 4. setup-anpl-mrbsp.sh 
+ 4. setup-anpl-mrbsp.sh
 
 
 Catkin belief: (remember catkin clean 'all')
@@ -27,4 +27,4 @@ Catkin belief: (remember catkin clean 'all')
 			//#ifndef max
 			//#define max(a,b) ((a) > (b) ? (a) : (b))
 			//#endif
- 8. install-planar-icp.sh  
+ 8. install-planar-icp.sh  (branch gtsam4)
