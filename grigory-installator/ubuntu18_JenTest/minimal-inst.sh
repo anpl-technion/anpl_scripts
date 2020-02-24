@@ -26,6 +26,8 @@ echo "ROS_DISTRO = " $ROS_DISTRO
 bash install-ros-packages.sh 
 bash setup-anpl-mrbsp.sh
 
+source ~/.bashrc
+
 # carkin belief:
 bash install-libspdlog.sh #(apt=false, from git) - mrbsp_utils wanted it
 bash install-octomap.sh 	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]

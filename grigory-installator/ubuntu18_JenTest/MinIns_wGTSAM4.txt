@@ -49,3 +49,6 @@ Runing scenario dependencies:
 	3.2 if [ -f "~/.ignition/fuel/config.yaml" ]; then 
 		sed -i "s+https://api.ignitionfuel.org+https://api.ignitionrobotics.org+g" ~/.ignition/fuel/config.yaml
 	    fi
+ 4. error while loading shared libraries: libmetis.so: cannot open shared object file: No such file or directory
+	4.1 Link shared libraries from ANPLprefix to a system:
+		echo "export LD_LIBRARY_PATH=/usr/ANPLprefix/lib:$LD_LIBRARY_PATH" >> ~/.bashrc
