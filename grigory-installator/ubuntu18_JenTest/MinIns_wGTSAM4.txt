@@ -28,3 +28,16 @@ Catkin belief: (remember catkin clean 'all')
 			//#define max(a,b) ((a) > (b) ? (a) : (b))
 			//#endif
  8. install-planar-icp.sh  (branch gtsam4)
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	gtsam4 changes:
+	 - KeyList to KeyVector
+	 - Redefine vectors (based on gtsa4 wiki tips)
+	 - Cast of "int" matrix to be "double" if multiplying by "double" matrix
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+Runing scenario dependencies:
+ 1. Need "anpl_inf" 
+	1.1 cd WS_PATH/src
+	1.2 git clone https://bitbucket.org/ANPL/anpl_ros_infrastructur anpl_inf
