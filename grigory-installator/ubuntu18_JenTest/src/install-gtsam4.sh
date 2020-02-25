@@ -21,4 +21,7 @@ mkdir build && cd build
 cmake $CMAKE_FLAGS ..
 make -j4
 sudo make install -j4
+echo "export LD_LIBRARY_PATH=/usr/ANPLprefix/lib:$LD_LIBRARY_PATH" >> ~/.bashrc
+
+
 

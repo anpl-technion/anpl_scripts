@@ -17,6 +17,7 @@ cd src/
 echo "export PATH=$PATH:$(pwd)" >> ~/.bashrc
 source ~/.bashrc
 
+
 bash install-ros-melodic.sh
 bash install-gtsam4.sh
 source ~/.bashrc
@@ -24,6 +25,8 @@ sleep 2
 echo "ROS_DISTRO = " $ROS_DISTRO
 bash install-ros-packages.sh 
 bash setup-anpl-mrbsp.sh
+
+source ~/.bashrc
 
 # carkin belief:
 bash install-libspdlog.sh #(apt=false, from git) - mrbsp_utils wanted it
@@ -53,6 +56,12 @@ bash install-planar-icp.sh  #(brasnch gtsam4)
 sudo mkdir -p /usr/ANPLprefix/share/cmake
 cd cmake/
 sudo cp FindIt.cmake /usr/ANPLprefix/share/cmake/
+
+sudo apt-get install xterm
+
+if [ -f "~/.ignition/fuel/config.yaml" ]; then 
+	sed -i "s+https://api.ignitionfuel.org+https://api.ignitionrobotics.org+g" ~/.ignition/fuel/config.yaml
+fi
 
 echo -e "\033[0;36m ++++  End of installation ++++    \033[0m"
 
