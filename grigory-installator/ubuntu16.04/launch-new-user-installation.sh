@@ -1,4 +1,4 @@
-#!/bin/bash/
+#!/bin/bash
 
 echo "export PATH=\$PATH:.:$(pwd)/src" >> ~/.bashrc
 source ~/.bashrc

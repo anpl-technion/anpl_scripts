@@ -78,7 +78,7 @@ if(user_decision("Would you like to install ORBSLAM 2?")):
 	print(bcolors.OKPURP + "Installing ORBSLAM 2..." + bcolors.ENDC)
 	install("orbslam2")
 
-if(user_decision("Would you like to install CCD?")):
+if(user_decision("Would you like to install ZED?")):
 	print(bcolors.OKPURP + "Installing ZED..." + bcolors.ENDC)
 	install("zed-sdk")
 
@@ -89,7 +89,11 @@ print(bcolors.OKGREEN + "Setting up the MRBSP workspace..."+ bcolors.ENDC)
 os.system("bash ./src/setup-anpl-mrbsp.sh")
 install("mavros")
 install("rotors-simulation")
-install("viso2")
+
+if(user_decision("Would you like to install viso2?")):
+	print(bcolors.OKPURP + "Installing viso2..." + bcolors.ENDC)
+	install("viso2")
+
 install("rosaria")
 install("mocap-optitrack-ros-package")
 
@@ -101,7 +105,7 @@ os.system("git config --global credential.helper 'cache --timeout 1800'")
 
 print(bcolors.OKGREEN + "Installation of ANPL MRBSP and dependecies is finished!")
 print("Do you want to install programs we find usefull for work within our project?")
-ans = request_to_user("Do you want to install programms we find usefull for work within our project?", ["y", "n"])
+ans = request_to_user("Do you want to install programms we find usefull for work within our project? [GVim,lyx,smartgit,qgroundcontrol,BCN3D-Cura,sublime,filezila,clion]", ["y", "n"])
 if ans == 'y':
 	install("GVim")
 	install("lyx")
