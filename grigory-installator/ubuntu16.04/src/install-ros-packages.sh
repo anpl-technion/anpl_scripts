@@ -2,7 +2,14 @@
 #ROS_DISTRO="kinetic"
 
 sudo apt-get update
-. ~/.profile
+source ~/.bashrc
+
+if [ $ROS_DISTRO ="" ]; then
+	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"    
+ 	echo "'${0##*/}' FAILED, ROS_DISTRO is empty"
+	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	exit
+fi
 
 sudo apt-get install python-catkin-tools -y
 sudo apt-get install ros-$ROS_DISTRO-ecl -y

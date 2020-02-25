@@ -23,7 +23,7 @@ sudo rm -rf $WS_PATH
 mkdir -p $WS_PATH/src && cd $WS_PATH
 source /opt/ros/$ROS_DISTRO/setup.bash
 catkin init
-catkin build -j7 && wait $!
+catkin build && wait $!
 
 cd $WS_SRC
 
