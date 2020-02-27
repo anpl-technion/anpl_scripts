@@ -6,7 +6,7 @@ read -p "Choose which infrastructure you want:
 	2 - (mrbsp_ros[OLD]):    " NUM
 echo
 case $NUM in
-	[1]* ) PROJECT_NAME=anpl_mrbsp;;
+	[1]* ) PROJECT_NAME=anpl_mrbsp
 		echo -e "\033[0;42m Choosing Branch \033[0m"
 		read -p "Choose which branch you want:
          		1 - (master[Lidar-gtsam3])
@@ -17,8 +17,8 @@ case $NUM in
         		[2]* ) BRANCH=gtsam4;;
        			* ) echo "Please answer 1 or 2. Rerun setup-anpl-mrbsp.sh"
 			exit ;;
-		esac
-        [2]* ) PROJECT_NAME=mrbsp_ros;;
+		esac;;
+        [2]* ) PROJECT_NAME=mrbsp_ros
 		echo -e "\033[0;42m Choosing Branch \033[0m"
 		read -p "Choose which branch you want:
          		1 - (t-bsp-julia[Lidar])
@@ -29,7 +29,7 @@ case $NUM in
         		[2]* ) BRANCH=or-vi_project;;
        			* ) echo "Please answer 1 or 2. Rerun setup-anpl-mrbsp.sh"
 			exit ;;
-		esac
+		esac;;
         * ) echo "Please answer 1 or 2. Rerun sutup-anpl-mrbsp.sh"
 	exit ;;
 esac
@@ -58,8 +58,17 @@ cd $WS_SRC
 if [ ! -d "$WS_SRC/pioneer_keyop" ]; then
   git clone https://bitbucket.org/ANPL/pioneer_keyop
 fi
+TMP=0
 if [ ! -d "$WS_SRC/$PROJECT_NAME" ]; then
-  git clone -b BRANCH https://bitbucket.org/ANPL/$PROJECT_NAME.git $WS_SRC/$PROJECT_NAME
+  git clone -b $BRANCH https://bitbucket.org/ANPL/$PROJECT_NAME.git $WS_SRC/$PROJECT_NAME && TMP=1
+	if [ $TMP -eq 1 ]; then
+	echo "'${0##*/}' SUCCEED"
+else
+	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"    
+ 	echo "'${0##*/}' FAILED"
+	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	exit
+fi 
 fi
 
 
