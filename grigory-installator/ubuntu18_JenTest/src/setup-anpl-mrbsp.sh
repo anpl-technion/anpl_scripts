@@ -1,6 +1,42 @@
 #!/bin/bash
 
-PROJECT_NAME=anpl_mrbsp
+echo -e "\033[0;42m Choosing Infrastructure \033[0m"
+read -p "Choose which infrastructure you want: 
+	1 - (anpl_mrbsp[NEW])
+	2 - (mrbsp_ros[OLD]):    " NUM
+echo
+case $NUM in
+	[1]* ) PROJECT_NAME=anpl_mrbsp;;
+		echo -e "\033[0;42m Choosing Branch \033[0m"
+		read -p "Choose which branch you want:
+         		1 - (master[Lidar-gtsam3])
+		 	2 - (gtsam4[Lidar-gtsam4]):   " NUM
+		echo
+		case $NUM in
+			[1]* ) BRANCH=master;;
+        		[2]* ) BRANCH=gtsam4;;
+       			* ) echo "Please answer 1 or 2. Rerun setup-anpl-mrbsp.sh"
+			exit ;;
+		esac
+        [2]* ) PROJECT_NAME=mrbsp_ros;;
+		echo -e "\033[0;42m Choosing Branch \033[0m"
+		read -p "Choose which branch you want:
+         		1 - (t-bsp-julia[Lidar])
+		 	2 - (or-vi_project[ORB-vsion]):   " NUM
+		echo
+		case $NUM in
+			[1]* ) BRANCH=t-bsp-julia;;
+        		[2]* ) BRANCH=or-vi_project;;
+       			* ) echo "Please answer 1 or 2. Rerun setup-anpl-mrbsp.sh"
+			exit ;;
+		esac
+        * ) echo "Please answer 1 or 2. Rerun sutup-anpl-mrbsp.sh"
+	exit ;;
+esac
+
+
+
+
 WS_NAME=mrbsp_ws
 WS_PATH=~/ANPL/infrastructure/$WS_NAME
 WS_SRC=$WS_PATH/src
@@ -11,27 +47,19 @@ PREFIX=/usr/ANPLprefix
 # 2 Prerequisitesoos
 sudo rm -rf $WS_PATH
 
-source ~/.bashrc
+
 mkdir -p $WS_PATH/src && cd $WS_PATH
 source /opt/ros/$ROS_DISTRO/setup.bash
-sudo rm -f .catkin_tools
 catkin init
-catkin build -j4 && wait $!
+catkin build && wait $!
 
 cd $WS_SRC
-read -p "Which GTSAM version do you need?[3 or 4]" GTSAM_VER
-case $GTSAM_VER in
-        [3] ) BRANCH_NAME=master;;
-        [4] ) BRANCH_NAME=gtsam4;;
-        * ) echo "Please answer 3 or 4 and not $GTSAM_VER."
-	exit;;
-    esac
 
 if [ ! -d "$WS_SRC/pioneer_keyop" ]; then
   git clone https://bitbucket.org/ANPL/pioneer_keyop
 fi
 if [ ! -d "$WS_SRC/$PROJECT_NAME" ]; then
-  git clone -b $BRANCH_NAME https://bitbucket.org/ANPL/$PROJECT_NAME.git $WS_SRC/$PROJECT_NAME
+  git clone -b BRANCH https://bitbucket.org/ANPL/$PROJECT_NAME.git $WS_SRC/$PROJECT_NAME
 fi
 
 

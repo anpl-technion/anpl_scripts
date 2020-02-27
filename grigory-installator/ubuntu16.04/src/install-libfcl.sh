@@ -9,13 +9,24 @@ FILE_NAME=$FOLDER_NAME.zip
 LINK=https://github.com/flexible-collision-library/fcl/archive/$LIBFCL_VER.zip
 PROJECT_DIR=~/ANPL/code/3rdparty
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release -DFCL_BUILD_TESTS=OFF"
-FROM_APT=true
+FROM_APT=false # should be in false in order for 'FindIt.cmake' macro to find it
 
+TMP=0
 if [ $FROM_APT = true ]; then
 	# sudo apt-get autoremove libfcl-0.5-dev 
-	sudo apt-get install libfcl-0.5-dev -y
+	sudo apt-get install libfcl-0.5-dev -y && TMP=1
+	if [ $TMP -eq 1 ]; then
+		echo "'${0##*/}' SUCCEED"
+	else
+		echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"    
+ 		echo "'${0##*/}' FAILED"
+		echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+		exit
+	fi 
 	exit
 fi
+
+TMP=0
 sudo rm -rf $PROJECT_DIR/$FOLDER_NAME
 cd ~/Downloads
 wget -O $FILE_NAME $LINK
@@ -27,5 +38,5 @@ mv fcl-$LIBFCL_VER $FOLDER_NAME
 cd $FOLDER_NAME
 mkdir build && cd build
 cmake $CMAKE_FLAGS ..
-make -j7       
-sudo make install -j7
+make -j4       
+sudo make install -j4
