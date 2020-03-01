@@ -8,7 +8,7 @@ FOLDER_NAME_PANGOLIN=pangolin
 FOLDER_NAME_ORB_SLAM_2=orb-slam2
 LINK_PANGOLIN=https://github.com/stevenlovegrove/Pangolin
 LINK_ORB_SLAM_2=https://bitbucket.org/ANPL/orb-slam2.git
-MAKE_FLAGS=-j7
+MAKE_FLAGS=-j3
 
 #delete old orb-slam2 library
 sudo rm -rf $ANPL_PREFIX/$FOLDER_NAME_ORB_SLAM_2
@@ -39,4 +39,4 @@ mkdir build && cd build
 cmake $CMAKE_FLAGS ..
 make $MAKE_FLAGS
 cd .. && rm -rf build
-cd .. && sudo mv $FOLDER_NAME_ORB_SLAM_2 $ANPL_PREFIX
+#cd .. && sudo mv $FOLDER_NAME_ORB_SLAM_2 $ANPL_PREFIX

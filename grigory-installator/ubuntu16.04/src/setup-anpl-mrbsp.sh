@@ -15,7 +15,7 @@ case $NUM in
 		case $NUM in
 			[1]* ) BRANCH=master;;
         		[2]* ) BRANCH=gtsam4;;
-       			* ) echo "Please answer 1 or 2. Rerun setup-anpl-mrbsp.sh"
+       			* ) echo "Please answer 1 or 2. Rerun '${0##*/}'"
 			exit ;;
 		esac;;
         [2]* ) PROJECT_NAME=mrbsp_ros
@@ -27,10 +27,10 @@ case $NUM in
 		case $NUM in
 			[1]* ) BRANCH=t-bsp-julia;;
         		[2]* ) BRANCH=or-vi_project;;
-       			* ) echo "Please answer 1 or 2. Rerun setup-anpl-mrbsp.sh"
+       			* ) echo "Please answer 1 or 2. Rerun '${0##*/}'"
 			exit ;;
 		esac;;
-        * ) echo "Please answer 1 or 2. Rerun sutup-anpl-mrbsp.sh"
+        * ) echo "Please answer 1 or 2. Rerun '${0##*/}'"
 	exit ;;
 esac
 

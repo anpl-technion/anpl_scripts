@@ -66,13 +66,13 @@ if(user_decision("Would you like to install PCL?")):
 	print(bcolors.OKPURP + "Installing PCL..." + bcolors.ENDC)
 	install("libpcl-1.8")
 
-if(user_decision("Would you like to install CCD?")):
-	print(bcolors.OKPURP + "Installing CCD..." + bcolors.ENDC)
-	install("libccd")
+# if(user_decision("Would you like to install CCD?")): [AG needs it]
+print(bcolors.OKPURP + "Installing CCD..." + bcolors.ENDC)
+install("libccd")
 
-if(user_decision("Would you like to install FCL?")):
-	print(bcolors.OKPURP + "Installing FCL..." + bcolors.ENDC)
-	install("libfcl")
+# if(user_decision("Would you like to install FCL?")): [AG needs it]
+print(bcolors.OKPURP + "Installing FCL..." + bcolors.ENDC)
+install("libfcl")
 
 if(user_decision("Would you like to install ORBSLAM 2?")):
 	print(bcolors.OKPURP + "Installing ORBSLAM 2..." + bcolors.ENDC)

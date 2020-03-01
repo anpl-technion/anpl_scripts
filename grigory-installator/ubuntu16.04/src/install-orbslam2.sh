@@ -14,6 +14,7 @@ MAKE_FLAGS=-j7
 # install opencv 3
 # install-opencv3.sh
 
+cd src/
 bash install-orbslam2-pangolin.sh
 
 sudo bash install-orbslam2-build.sh
