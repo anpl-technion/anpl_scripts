@@ -9,6 +9,7 @@ from utills import *
 print(bcolors.OKGREEN + "Installing ANPL workspace..."+ bcolors.ENDC)
 os.system('bash ./src/setup-workspace.sh')
 install("cmake-FindIt")
+NULL = input("Waiting for a press") 
 
 #install modules
 print(bcolors.OKGREEN + "Installing essential modules..."+ bcolors.ENDC)
@@ -17,13 +18,15 @@ os.system("sudo apt-get install openssh-server -y")
 os.system("sudo apt install curl -y")
 os.system("sudo apt install cmake-qt-gui cmake -y")
 os.system("sudo apt install graphviz-dev -y")
+NULL = input("Waiting for a press")
+
 
 # ros packages (via apt-get)
 print(bcolors.OKGREEN + "Installing ROS and packages..." + bcolors.ENDC)
 install("ros-packages")
 install("octomap")
 install("turtlebot")
-
+NULL = input("Waiting for a press")
 
 # Now we have working directory, ROS and ROS packages installed, it's time to install all the 3rd party dependecies:
 print(bcolors.OKGREEN + "Installing 3rd party dependecies..." + bcolors.ENDC)
