@@ -26,5 +26,5 @@ case `grep -Fxq "# Show git branch name" ~/.bashrc >/dev/null; echo $?` in
     ;;
 esac
 
-exec bash
+
 

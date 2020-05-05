@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo "export PATH=\$PATH:.:$(pwd)/src" >> ~/.bashrc
+echo "
+export PATH=\$PATH:.:$(pwd)/src" >> ~/.bashrc
 source ~/.bashrc
 
 echo -e "\033[0;42mWelcome to ANPL's Multi-Robot Belief Space Planner open source installator!"
