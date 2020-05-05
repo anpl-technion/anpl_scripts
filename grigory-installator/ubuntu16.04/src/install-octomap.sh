@@ -7,7 +7,7 @@ if [ $ROS_DISTRO ="" ]; then
 	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"    
  	echo "'${0##*/}' FAILED, ROS_DISTRO is empty"
 	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-	input -p "Enter manually ROS_DISTRO (example 'kinetic') : " ROS_DISTRO
+	read -p "Enter manually ROS_DISTRO (example 'kinetic') : " ROS_DISTRO
 fi
 
 sudo apt-get install ros-$ROS_DISTRO-octomap* -y && wait $! && TMP=1
