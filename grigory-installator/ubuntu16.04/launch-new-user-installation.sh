@@ -20,7 +20,7 @@ chmod +x *.py src/*
 
 
 ./src/install-showgitbranch.sh
-./src/install-python.sh
+# ./src/install-python.sh
 
 # ROS installation and sourcing ".profile" to import ROS environment variables (ROS_DISTRO mainly)
 ./src/install-ros-kinetic.sh
