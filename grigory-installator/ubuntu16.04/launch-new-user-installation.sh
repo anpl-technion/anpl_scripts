@@ -25,7 +25,12 @@ chmod +x *.py src/*
 
 # ROS installation and sourcing ".profile" to import ROS environment variables (ROS_DISTRO mainly)
 ./src/install-ros-kinetic.sh
-. ~/.bashrc
-. ~/.profile
+
+if [ $ROS_DISTRO ="" ]; then
+	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"    
+ 	echo "Rerun, ROS_DISTRO is empty"
+	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	exec bash
+fi
 
 python3 main.py
