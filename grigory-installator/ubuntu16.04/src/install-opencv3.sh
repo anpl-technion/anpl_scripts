@@ -9,7 +9,7 @@ CMAKE_FLAGS="cmake -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=/usr/local 
 MAKE_FLAGS=-j8
 FROM_APT=true
 
-if [ $FROM_APT = true]; then
+if [ $FROM_APT = true ]; then
     # sudo apt-get autoremove ros-$ROS_DISTRO-opencv3 
     sudo apt-get install ros-$ROS_DISTRO-opencv3 -y
     exit
