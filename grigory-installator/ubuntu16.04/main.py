@@ -113,9 +113,13 @@ if ans == 'y':
 	install("GVim")
 	install("lyx")
 	install("smartgit")
-	install("qgroundcontrol")
-	install("BCN3D-Cura")
+	if(user_decision("Would you like to install qgroundcontrol?")):
+		print(bcolors.OKPURP + "Installing qgroundcontrol..." + bcolors.ENDC)
+		install("qgroundcontrol")
+	if(user_decision("Would you like to install BCN3D-Cura?")):
+		print(bcolors.OKPURP + "Installing BCN3D-Cura..." + bcolors.ENDC)
+		install("BCN3D-Cura")
 	install("sublime")
 	install("filezila")
-	print(bcolors.OKPURP + "Last step, please install CLion manually..." + bcolors.ENDC)
+	print(bcolors.OKPURP + "Last step, install CLion using your own account..." + bcolors.ENDC)
 	install("clion")
