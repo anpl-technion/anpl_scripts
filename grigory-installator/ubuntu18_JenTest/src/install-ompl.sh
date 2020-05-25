@@ -11,9 +11,21 @@ CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release -DOMPL_BU
 GIT_LINK=https://github.com/ompl/omplapp.git
 SUB_GIT_LINK=https://github.com/ompl/ompl.git
 FILE_LINK=https://bitbucket.org/ompl/ompl/downloads/ompl-$OMPL_VER-Source.zip
-FROM_APT=True
 
-if [ $FROM_APT = True ]; then
+# The scripts gets a single argument or none
+if [ "$#" -eq  "0" ]; then
+    FROM_APT=false
+else
+    if [ "$#" -eq  "1" ]; then
+    FROM_APT=$(echo $1 | sed "s/^--apt=\(.*\)$/\1/")
+    else
+        echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+        echo "'${0##*/}' Too many arguments provided. Please rerun script"   
+        exit 
+    fi
+fi
+
+if [ $FROM_APT = true ]; then
     # sudo apt-get autoremove libompl-dev 
     sudo apt-get install libompl-dev -y
     cd /usr/share
@@ -24,14 +36,13 @@ fi
 #from: http://ompl.kavrakilab.org/download.html
 sudo rm -rf $PROJECT_DIR/$FOLDER_NAME
 
-if [ "$FROM_GIT" = True ]; then
+if [ "$FROM_GIT" = true ]; then
     cd $PROJECT_DIR
     git clone $GIT_LINK $FOLDER_NAME
     
     cd $FOLDER_NAME
     git clone $SUB_GIT_LINK $SUB_PROJECT_NAME
 else
-
     cd ~/Downloads
     wget -O $FILE_NAME $FILE_LINK
     unzip $FILE_NAME -d $PROJECT_DIR
