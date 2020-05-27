@@ -41,7 +41,8 @@ sudo apt-get install ros-$ROS_DISTRO-rviz-imu-plugin -y
 sudo apt-get install ros-$ROS_DISTRO-image-geometry -y
 
 # Install ROS opencv3
-sudo apt-get install ros-$ROS_DISTRO-opencv3 -y
+# opencv3 build in ROS melodic.
+#sudo apt-get install ros-$ROS_DISTRO-opencv3-dev -y
 
 # Install ROS cv-bridge
 sudo apt-get install ros-$ROS_DISTRO-cv-bridge -y

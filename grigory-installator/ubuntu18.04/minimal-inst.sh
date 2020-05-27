@@ -10,56 +10,35 @@ while true; do
     esac
 done
 
-if ([ -z "$ROS_DISTRO" ] || [ -z "$(which git)" ]); then
-	echo -e "Some of the dependecies is not presented on computer. Please make sure you installed ROS and GIT and then relaunch the script. "
-	exit
+if [ -z "$ROS_DISTRO" ]; then 
+	bash install-ros-melodic.sh
+	echo -e "ROS melodic was just installed on your computer, please relaunch minimal-inst.sh "
+	exec bash
 fi
 
+: << "#.comment"
 echo -e "\033[0;42m Choosing Infrastructure \033[0m"
 read -p "Choose which infrastructure you want: 
-	1 - (anpl_mrbsp[NEW])
-	2 - (mrbsp_ros[OLD]):    " NUM
+	1 - (anpl_mrbsp[NEW])" NUM
 echo
 case $NUM in
 	[1]* ) PROJECT_NAME=anpl_mrbsp
 		echo -e "\033[0;42m Choosing Branch \033[0m"
 		read -p "Choose which branch you want:
-		1 - (master[Lidar-gtsam3])
-		2 - (gtsam4[Lidar-gtsam4]):   " NUM
+		1 - (gtsam4[Lidar-gtsam4]):   " NUM
 		echo
 		case $NUM in
-			[1]* ) BRANCH=master;;
-			[2]* ) BRANCH=gtsam4;;
-       			* ) echo "Please answer 1 or 2. Rerun setup-anpl-mrbsp.sh"
+			[1]* ) BRANCH=gtsam4;;
+       			* ) echo "Please choose correct option. Rerun minimal-inst.sh"
 			exit ;;
 		esac;;
-	[2]* ) PROJECT_NAME=mrbsp_ros
-		echo -e "\033[0;42m Choosing Branch \033[0m"
-		read -p "Choose which branch you want:
-		1 - (t-bsp-julia[Lidar])
-		2 - (or-vi_project[ORB-vsion]):   " NUM
-		echo
-		case $NUM in
-			[1]* ) BRANCH=t-bsp-julia;;
-        	[2]* ) BRANCH=or-vi_project;;
-       		* ) echo "Please answer 1 or 2. Rerun setup-anpl-mrbsp.sh"
-			exit ;;
-		esac;;
-        * ) echo "Please answer 1 or 2. Rerun sutup-anpl-mrbsp.sh"
+        * ) echo "Please choose correct option. Rerun minimal-inst.sh"
 	exit ;;
 esac
-
-
-cd src/
-echo "export PATH=$PATH:$(pwd)" >> ~/.bashrc
-source ~/.bashrc
-
+#.comment
 
 bash install-ros-melodic.sh
 bash install-gtsam4.sh
-sleep 1
-echo "ROS_DISTRO = " $ROS_DISTRO
-sleep 1
 bash install-ros-packages.sh 
 bash setup-anpl-mrbsp.sh --infrastructure=$PROJECT_NAME --branch=$BRANCH
 
