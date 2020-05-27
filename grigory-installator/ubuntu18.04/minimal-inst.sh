@@ -16,7 +16,6 @@ if [ -z "$ROS_DISTRO" ]; then
 	exec bash
 fi
 
-: << "#.comment"
 echo -e "\033[0;42m Choosing Infrastructure \033[0m"
 read -p "Choose which infrastructure you want: 
 	1 - (anpl_mrbsp[NEW])" NUM
@@ -35,7 +34,6 @@ case $NUM in
         * ) echo "Please choose correct option. Rerun minimal-inst.sh"
 	exit ;;
 esac
-#.comment
 
 bash install-ros-melodic.sh
 bash install-gtsam4.sh
