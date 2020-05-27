@@ -1,8 +1,9 @@
 #!/bin/bash
 #ROS_DISTRO="melodic"
-
+source ~/.bashrc
+sleep 1s
 sudo apt-get update
-. ~/.profile
+source ~/.bashrc
 
 sudo apt-get install python-catkin-tools -y
 sudo apt-get install ros-$ROS_DISTRO-ecl -y

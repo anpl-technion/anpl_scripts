@@ -7,10 +7,11 @@ PROJECT_NAME=gtsam-$GTSAM_VER
 FROM_GIT=True
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DGTSAM_BUILD_TESTS=OFF -DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF -DGTSAM_BUILD_UNSTABLE=OFF -DCMAKE_BUILD_TYPE=Release"
 LINK="https://research.cc.gatech.edu/borg/sites/edu.borg/files/downloads/gtsam-$GTSAM_VER.zip"
-#GIT_LINK="https://bitbucket.org/ANPL/gtsam-3.2.1-anpl/ -b fix/boost158gtsam3"
-GIT_LINK="https://bitbucket.org/gtborg/gtsam.git"
+GIT_LINK="https://bitbucket.org/ANPL/gtsam-3.2.1-anpl/ -b fix/boost158gtsam3"
 
 
+install-gcc5.sh
+install-boost1.58.sh
 #sudo apt-get install libboost-all-dev libtbb-dev -y
 sudo apt-get install libtbb-dev -y
 

@@ -9,28 +9,11 @@ FILE_NAME=$FOLDER_NAME.zip
 LINK=https://github.com/flexible-collision-library/fcl/archive/$LIBFCL_VER.zip
 PROJECT_DIR=~/ANPL/code/3rdparty
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release -DFCL_BUILD_TESTS=OFF"
-
-# The scripts gets a single argument or none
-if [ "$#" -eq  "0" ]; then
-    FROM_APT=true
-else
-    if [ "$#" -eq  "1" ]; then
-    FROM_APT=$(echo $1 | sed "s/^--apt=\(.*\)$/\1/")
-    else
-        echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-        echo "'${0##*/}' Too many arguments provided. Please rerun script"
-        exit 
-    fi
-fi
+FROM_APT=true
 
 if [ $FROM_APT = true ]; then
 	# sudo apt-get autoremove libfcl-0.5-dev 
-	UBUNTU_DISTR=$(cat /etc/*-release | grep 'DISTRIB_CODENAME' | cut -f2 -d=)
-	if [ $UBUNTU_DISTR = "xenail" ]; then 
-		sudo apt-get install libfcl-0.5-dev -y
-	elif [ $UBUNTU_DISTR = 'bionic' ]; then 
-		sudo apt-get install libfcl-dev
-	fi
+	sudo apt-get install libfcl-0.5-dev -y
 	exit
 fi
 sudo rm -rf $PROJECT_DIR/$FOLDER_NAME
@@ -44,5 +27,5 @@ mv fcl-$LIBFCL_VER $FOLDER_NAME
 cd $FOLDER_NAME
 mkdir build && cd build
 cmake $CMAKE_FLAGS ..
-make -j4       
-sudo make install -j4
+make -j7       
+sudo make install -j7

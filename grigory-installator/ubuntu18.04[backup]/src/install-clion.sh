@@ -5,6 +5,9 @@ CLION_VER=2018.2.4
 CLION_DIR=$ANPL_OPT/clion
 LINK=https://download-cf.jetbrains.com/cpp/CLion-$CLION_VER.tar.gz
 
+
+
+
 #remove old clion
 sudo rm -rf $CLION_DIR
 

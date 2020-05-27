@@ -23,7 +23,7 @@ case $yn in
 				sudo rm -rf /usr/ANPLprefix
 				echo "Uninstallation completed :) --->  Enjoy"
 				echo -e "\033[0;91m Do not forget to clean '~/.bashrc' file!!! \033[0m"
-				gedit ~/.bashrc
+				gedit ~./bashrc
 				echo
 echo "      ___           ___                         ___ "
 echo "     /  /\         /  /\          ___          /  /\\";
