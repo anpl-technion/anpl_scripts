@@ -11,7 +11,7 @@ while true; do
 done
 
 if [ -z "$ROS_DISTRO" ]; then 
-	bash install-ros-melodic.sh
+	bash src/install-ros-melodic.sh
 	echo -e "ROS melodic was just installed on your computer, please relaunch minimal-inst.sh "
 	exec bash
 fi
@@ -35,6 +35,7 @@ case $NUM in
 	exit ;;
 esac
 
+cd src
 bash install-ros-melodic.sh
 bash install-gtsam4.sh
 bash install-ros-packages.sh 
@@ -76,6 +77,8 @@ sudo apt-get install xterm -y
 if [ -f "~/.ignition/fuel/config.yaml" ]; then 
 	sed -i "s+https://api.ignitionfuel.org+https://api.ignitionrobotics.org+g" ~/.ignition/fuel/config.yaml
 fi
+
+bash install-find-cmakes.sh
 
 echo -e "\033[0;36m ++++  End of installation ++++    \033[0m"
 
