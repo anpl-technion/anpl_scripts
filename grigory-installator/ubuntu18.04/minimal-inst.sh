@@ -10,8 +10,10 @@ while true; do
     esac
 done
 
+
+
 if [ -z "$ROS_DISTRO" ]; then 
-	bash src/install-ros-melodic.sh
+	bash src/install-ros-melodic.sh & wait $!
 	echo -e "ROS melodic was just installed on your computer, please relaunch minimal-inst.sh "
 	exec bash
 fi
@@ -36,19 +38,21 @@ case $NUM in
 esac
 
 cd src
-bash install-ros-melodic.sh
-bash install-gtsam4.sh
-bash install-ros-packages.sh 
-bash setup-anpl-mrbsp.sh --infrastructure=$PROJECT_NAME --branch=$BRANCH
+bash install-ros-melodic.sh & wait $!
+bash install-gtsam4.sh & wait $!
+bash install-ros-packages.sh & wait $!
+bash setup-anpl-mrbsp.sh --infrastructure=$PROJECT_NAME --branch=$BRANCH & wait $!
 
 source ~/.bashrc
 
 # carkin belief:
-bash install-libspdlog.sh --apt=false #(apt=false, from git) - mrbsp_utils wanted it
-bash install-octomap.sh 	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]
-bash install-libccd.sh --apt=false #(AG need it - apt=false)
-bash install-libfcl.sh --apt=true #(AG need it - apt=true)
-bash install-ompl.sh   --apt=true #(AG need it, apt=true)
+bash install-libspdlog.sh --apt=false  & wait $! #(apt=false, from git) - mrbsp_utils wanted it
+bash install-octomap.sh & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]
+bash install-libccd.sh --apt=false  & wait $! #(AG need it - apt=false)
+bash install-libfcl.sh --apt=true & wait $! #(AG need it - apt=true)
+bash install-ompl.sh   --apt=true & wait $! #(AG need it, apt=true)
+bash install-rosaria.sh & wait $!
+bash install-find-cmakes.sh & wait $!
 
 LINES_TO_BE_COMMENTED=('list(APPEND CMAKE_MODULE_PATH ${ANPL_PREFIX}/share/cmake)' 'set(OMPL_PREFIX ${ANPL_PREFIX})')
 PATH_AG_CMAKE=~/ANPL/infrastructure/mrbsp_ws/src/anpl_mrbsp/action_generator/CMakeLists.txt
@@ -72,13 +76,16 @@ echo "#endif" | sudo tee -a $PATH_JSON_C_BITS
 bash install-planar-icp.sh --branch=$BRANCH #(branch gtsam4)
 sudo cp -r cmake /usr/ANPLprefix/share/
 
-sudo apt-get install xterm -y
+sudo apt-get install xterm -y & wait $!
 
 if [ -f "~/.ignition/fuel/config.yaml" ]; then 
 	sed -i "s+https://api.ignitionfuel.org+https://api.ignitionrobotics.org+g" ~/.ignition/fuel/config.yaml
 fi
 
-bash install-find-cmakes.sh
+
+cd ~/ANPL/infrastructure/mrbsp_ws/src/rosaria 
+sed -ie '/^#set(ROS_BUILD_TYPE RelWithDebInfo)/a add_compile_options(-std=c++11)' CMakeLists.txt
+catkin build rosaria
 
 echo -e "\033[0;36m ++++  End of installation ++++    \033[0m"
 
