@@ -53,6 +53,10 @@ else
 fi 
 fi
 
+while [ ! -d "$WS_SRC/anpl_inf" ]; do
+  git clone https://bitbucket.org/ANPL/anpl_ros_infrastructur anpl_inf
+done
+
 
 echo "source $WS_PATH/devel/setup.bash" >> ~/.bashrc
 source $WS_PATH/devel/setup.bash

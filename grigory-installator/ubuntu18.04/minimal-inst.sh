@@ -43,6 +43,7 @@ bash install-gtsam4.sh & wait $!
 bash install-ros-packages.sh & wait $!
 bash setup-anpl-mrbsp.sh --infrastructure=$PROJECT_NAME --branch=$BRANCH & wait $!
 
+
 source ~/.bashrc
 
 # carkin belief:
@@ -61,8 +62,8 @@ do
 	sed -i "s|${line}|#${line}|" $PATH_AG_CMAKE
 done
 
-bash install-diverse-short-path.sh 	#(AG need it)
-bash install-csm.sh --apt=false		#(git=true)
+bash install-diverse-short-path.sh & wait $!	#(AG need it)
+bash install-csm.sh --apt=false & wait $!	#(git=true)
 
 LINES_TO_BE_COMMENTED=('#ifndef min' '#define min(a,b) ((a) < (b) ? (a) : (b))' '#endif' '#ifndef max' '#define max(a,b) ((a) > (b) ? (a) : (b))')
 PATH_JSON_C_BITS=/usr/ANPLprefix/include/json-c/bits.h
