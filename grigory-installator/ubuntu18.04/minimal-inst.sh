@@ -10,7 +10,7 @@ while true; do
     esac
 done
 
-
+PATH=$PATH/:$(pwd)/src
 
 if [ -z "$ROS_DISTRO" ]; then 
 	bash src/install-ros-melodic.sh & wait $!
