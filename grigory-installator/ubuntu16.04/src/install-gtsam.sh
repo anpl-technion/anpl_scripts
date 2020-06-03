@@ -14,6 +14,7 @@ sudo apt-get install libboost-all-dev libtbb-dev -y
 install-gcc5.sh
 
 sudo rm -rf $PROJECT_DIR/gtsam-*
+mkdir -p $PROJECT_DIR
 
 if [ "$FROM_GIT" = True ]; then
     cd $PROJECT_DIR

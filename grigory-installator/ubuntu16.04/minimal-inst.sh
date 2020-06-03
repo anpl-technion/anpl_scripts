@@ -15,7 +15,8 @@ PATH=$PATH:$(pwd)/src
 if [ -z "$ROS_DISTRO" ]; then 
 	bash install-ros-kinetic.sh
 	echo -e "ROS kinetic was just installed on your computer, please relaunch minimal-inst.sh "
-	exec $(readlink -f $0)
+	chmod 777 "$(readlink -f $0)"	
+	set -i & source ~/.bashrc & exec $(readlink -f $0) 
 fi
 
 echo -e "\033[0;42m Choosing Infrastructure \033[0m"
@@ -55,18 +56,18 @@ cd src/
 echo "export PATH=$PATH:$(pwd)" >> ~/.bashrc
 source ~/.bashrc
 
-bash install-ros-kinetic.sh
+#bash install-ros-kinetic.sh
 bash install-gtsam.sh
 bash install-ros-packages.sh 
-bash setup-anpl-mrbsp.sh
+bash setup-anpl-mrbsp.sh --infrastructure=$PROJECT_NAME --branch=$BRANCH & wait $!
 
 source ~/.bashrc
 
 # catkin belief:
 bash install-libspdlog.sh --apt=false  & wait $! #(apt=false, from git) - mrbsp_utils wanted it
 bash install-octomap.sh   & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]
-bash install-libccd.sh --apt=false  & wait $!	#(AG need it - apt=false)
-bash install-libfcl.sh --apt=false  & wait $!	#(AG need it - apt=false)
+bash install-libccd.sh --apt=true  & wait $!	#(AG need it - apt=true)
+bash install-libfcl.sh --apt=true  & wait $!	#(AG need it - apt=true)
 bash install-ompl.sh --apt=true & wait $!  	#(AG need it, apt=true)
 
 bash install-diverse-short-path.sh & wait $!  	#(AG need it)
@@ -77,7 +78,7 @@ bash install-find-cmakes.sh & wait $!
 
 PLANAR_BRANCH=master	#
 bash install-planar-icp.sh --branch=$PLANAR_BRANCH & wait $! #(branch gtsam4)
-sudo apt-get install xterm -y
+sudo apt-get install xterm graphviz-dev -y
 sudo cp -r cmake /usr/ANPLprefix/share/
 
 : << "##.comment"
