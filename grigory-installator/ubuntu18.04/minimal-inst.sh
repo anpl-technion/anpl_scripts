@@ -10,12 +10,13 @@ while true; do
     esac
 done
 
-PATH=$PATH/:$(pwd)/src
+PATH=$PATH:$(pwd)/src
 
 if [ -z "$ROS_DISTRO" ]; then 
 	bash src/install-ros-melodic.sh & wait $!
 	echo -e "ROS melodic was just installed on your computer, please relaunch minimal-inst.sh "
-	exec bash
+	chmod 777 "$(readlink -f $0)"	
+	set -i & source ~/.bashrc & exec $(readlink -f $0) 
 fi
 
 echo -e "\033[0;42m Choosing Infrastructure \033[0m"
