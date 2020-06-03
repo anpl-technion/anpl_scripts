@@ -4,6 +4,22 @@ PROJECT_DIR=~/ANPL/code
 PREFIX=/usr/ANPLprefix
 FOLDER_NAME=planar_icp
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release"
+if [ "$#" -ne  "0" ]; then
+	for i in "$@"; do
+	case $i in
+	    -b=*|--branch=*)
+		    BRANCH="${i#*=}" && shift # past argument=value
+	    ;;
+	    *)
+		echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+		echo "'${0##*/}' ${i}: Unknown argument provided. Please rerun script"    
+		exit    
+		;;
+	esac
+	done
+else
+    BRANCH=master
+fi
 
 sudo rm -rf $PROJECT_DIR/$FOLDER_NAME
 

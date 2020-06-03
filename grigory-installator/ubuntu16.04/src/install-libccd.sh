@@ -7,7 +7,17 @@ FOLDER_NAME=libccd-$LIBCCD_VER
 FILE_NAME=$FOLDER_NAME.zip
 LINK=https://github.com/danfis/libccd/archive/v$LIBCCD_VER.zip
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release"
-FROM_APT=true
+if [ "$#" -eq  "0" ]; then
+    FROM_APT=true
+else
+    if [ "$#" -eq  "1" ]; then
+    	FROM_APT=$(echo $1 | sed "s/^--apt=\(.*\)$/\1/")
+    else
+        echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+        echo "'${0##*/}' Too many arguments provided. Please rerun script"    
+        exit  
+    fi
+fi
 
 if [ $FROM_APT = true]; then
 	# sudo apt-get autoremove libccd-dev 

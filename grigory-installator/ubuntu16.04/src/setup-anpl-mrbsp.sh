@@ -1,46 +1,30 @@
 #!/bin/bash
-
-echo -e "\033[0;42m Choosing Infrastructure \033[0m"
-read -p "Choose which infrastructure you want: 
-	1 - (anpl_mrbsp[NEW])
-	2 - (mrbsp_ros[OLD]):    " NUM
-echo
-case $NUM in
-	[1]* ) PROJECT_NAME=anpl_mrbsp
-		echo -e "\033[0;42m Choosing Branch \033[0m"
-		read -p "Choose which branch you want:
-         		1 - (master[Lidar-gtsam3])
-		 	2 - (gtsam4[Lidar-gtsam4]):   " NUM
-		echo
-		case $NUM in
-			[1]* ) BRANCH=master;;
-        		[2]* ) BRANCH=gtsam4;;
-       			* ) echo "Please answer 1 or 2. Rerun '${0##*/}'"
-			exit ;;
-		esac;;
-        [2]* ) PROJECT_NAME=mrbsp_ros
-		echo -e "\033[0;42m Choosing Branch \033[0m"
-		read -p "Choose which branch you want:
-         		1 - (t-bsp-julia[Lidar])
-		 	2 - (or-vi_project[ORB-vsion]):   " NUM
-		echo
-		case $NUM in
-			[1]* ) BRANCH=t-bsp-julia;;
-        		[2]* ) BRANCH=or-vi_project;;
-       			* ) echo "Please answer 1 or 2. Rerun '${0##*/}'"
-			exit ;;
-		esac;;
-        * ) echo "Please answer 1 or 2. Rerun '${0##*/}'"
-	exit ;;
-esac
-
-
-
-
 WS_NAME=mrbsp_ws
 WS_PATH=~/ANPL/infrastructure/$WS_NAME
 WS_SRC=$WS_PATH/src
 PREFIX=/usr/ANPLprefix
+if [ "$#" -ne  "2" ]; then
+	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	echo "'${0##*/}' Error: not all arguments provided. Please rerun script"    
+	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"   
+	exit 0 
+else
+	for i in "$@"; do
+	case $i in
+	    -b=*|--branch=*)
+		    BRANCH="${i#*=}" && shift # past argument=value
+	    ;;
+		-i=*|--infrastructure=*)
+		    PROJECT_NAME="${i#*=}" && shift # past argument=value
+		;;
+	    *)
+		echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+		echo "'${0##*/}' ${i}: Unknown argument provided. Please rerun script"    
+		exit 
+		;;
+	esac
+	done
+fi
 
 #from http://wiki.ros.org/catkin/Tutorials/create_a_workspace
 
@@ -58,17 +42,17 @@ cd $WS_SRC
 if [ ! -d "$WS_SRC/pioneer_keyop" ]; then
   git clone https://bitbucket.org/ANPL/pioneer_keyop
 fi
-TMP=0
+
 if [ ! -d "$WS_SRC/$PROJECT_NAME" ]; then
-  git clone -b $BRANCH https://bitbucket.org/ANPL/$PROJECT_NAME.git $WS_SRC/$PROJECT_NAME && TMP=1
-	if [ $TMP -eq 1 ]; then
-	echo "'${0##*/}' SUCCEED"
-else
-	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"    
- 	echo "'${0##*/}' FAILED"
-	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-	exit
+  git clone -b $BRANCH https://bitbucket.org/ANPL/$PROJECT_NAME.git $WS_SRC/$PROJECT_NAME 
 fi 
+
+if [ ! -d "$WS_SRC/anpl_inf" ]; then 
+  git clone https://bitbucket.org/ANPL/anpl_ros_infrastructur anpl_inf
+fi
+
+if [ ! -d "$WS_SRC/amr-ros-config" ]; then 
+  git clone https://github.com/MobileRobots/amr-ros-config
 fi
 
 

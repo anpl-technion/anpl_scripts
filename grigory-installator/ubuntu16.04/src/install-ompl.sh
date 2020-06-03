@@ -11,7 +11,17 @@ CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release -DOMPL_BU
 GIT_LINK=https://github.com/ompl/omplapp.git
 SUB_GIT_LINK=https://github.com/ompl/ompl.git
 FILE_LINK=https://bitbucket.org/ompl/ompl/downloads/ompl-$OMPL_VER-Source.zip
-FROM_APT=true
+if [ "$#" -eq  "0" ]; then
+    FROM_APT=true
+else
+    if [ "$#" -eq  "1" ]; then
+        FROM_APT=$(echo $1 | sed "s/^--apt=\(.*\)$/\1/")
+    else
+        echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+        echo "'${0##*/}' Too many arguments provided. Please rerun script"    
+        exit  
+    fi
+fi
 
 if [ $FROM_APT = true]; then
     # sudo apt-get autoremove libompl-dev 
