@@ -12,13 +12,6 @@ done
 
 PATH=$PATH:$(pwd)/src
 
-if [ -z "$ROS_DISTRO" ]; then 
-	bash src/install-ros-melodic.sh & wait $!
-	echo -e "ROS melodic was just installed on your computer, please relaunch minimal-inst.sh "
-	chmod 777 "$(readlink -f $0)"	
-	set -i & source ~/.bashrc & exec $(readlink -f $0) 
-fi
-
 echo -e "\033[0;42m Choosing Infrastructure \033[0m"
 read -p "Choose which infrastructure you want: 
 	1 - (anpl_mrbsp[NEW])" NUM
@@ -40,6 +33,11 @@ esac
 
 cd src
 bash install-ros-melodic.sh & wait $!
+cp ~/.bashrc ~/.bashrc_copy
+sudo tail -n +10 ~/.bashrc_copy | tee ~/.bashrc | sleep 1
+source ~/.bashrc 
+echo ROS=$ROS_DISTRO
+mv ~/.bashrc_copy ~/.bashrc
 bash install-gtsam4.sh & wait $!
 bash install-ros-packages.sh & wait $!
 bash setup-anpl-mrbsp.sh --infrastructure=$PROJECT_NAME --branch=$BRANCH & wait $!
