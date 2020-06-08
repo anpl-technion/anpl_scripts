@@ -44,29 +44,33 @@ case $NUM in
 	exit ;;
 esac
 
+source_bashrc(){
+	cp ~/.bashrc ~/.bashrc_copy
+	sudo tail -n +10 ~/.bashrc_copy | tee ~/.bashrc | sleep 1
+	source ~/.bashrc
+	echo ROS=$ROS_DISTRO
+	mv ~/.bashrc_copy ~/.bashrc
+}
 
+# Redirecting stderr to log file
+2> log.err
 cd src/
 echo "export PATH=$PATH:$(pwd)" >> ~/.bashrc
 
 bash install-ros-kinetic.sh
-cp ~/.bashrc ~/.bashrc_copy
-sudo tail -n +10 ~/.bashrc_copy | tee ~/.bashrc | sleep 1
-source ~/.bashrc 
-echo ROS=$ROS_DISTRO
-mv ~/.bashrc_copy ~/.bashrc
-
+source_bashrc
 bash install-gtsam.sh
 bash install-ros-packages.sh 
 bash setup-anpl-mrbsp.sh --infrastructure=$PROJECT_NAME --branch=$BRANCH & wait $!
 
-source ~/.bashrc
+source_bashrc
 
 # catkin belief:
 bash install-libspdlog.sh --apt=false  & wait $! #(apt=false, from git) - mrbsp_utils wanted it
 bash install-octomap.sh   & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]
 bash install-libccd.sh --apt=true  & wait $!	#(AG need it - apt=true)
 bash install-libfcl.sh --apt=true  & wait $!	#(AG need it - apt=true)
-bash install-ompl.sh --apt=true & wait $!  	#(AG need it, apt=true)
+bash install-ompl.sh --apt=false & wait $!  	#(AG need it, apt=false)
 
 bash install-diverse-short-path.sh & wait $!  	#(AG need it)
 bash install-csm.sh & wait $! 					#(git=true)
@@ -75,7 +79,7 @@ bash install-rosaria.sh & wait $!
 bash install-find-cmakes.sh & wait $!
 
 PLANAR_BRANCH=master	#
-bash install-planar-icp.sh --branch=$PLANAR_BRANCH & wait $! #(branch gtsam4)
+bash install-planar-icp.sh --branch=$PLANAR_BRANCH & wait $!
 sudo apt-get install xterm graphviz-dev -y
 sudo cp -r cmake /usr/ANPLprefix/share/
 

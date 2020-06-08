@@ -39,21 +39,21 @@ catkin build && wait $!
 
 cd $WS_SRC
 
-if [ ! -d "$WS_SRC/pioneer_keyop" ]; then
+while [ ! -d "$WS_SRC/pioneer_keyop" ]; do
   git clone https://bitbucket.org/ANPL/pioneer_keyop
-fi
+done
 
-if [ ! -d "$WS_SRC/$PROJECT_NAME" ]; then
+while [ ! -d "$WS_SRC/$PROJECT_NAME" ]; do
   git clone -b $BRANCH https://bitbucket.org/ANPL/$PROJECT_NAME.git $WS_SRC/$PROJECT_NAME 
-fi 
+done
 
-if [ ! -d "$WS_SRC/anpl_inf" ]; then 
+while [ ! -d "$WS_SRC/anpl_inf" ]; do
   git clone https://bitbucket.org/ANPL/anpl_ros_infrastructur anpl_inf
-fi
+done
 
-if [ ! -d "$WS_SRC/amr-ros-config" ]; then 
+while [ ! -d "$WS_SRC/amr-ros-config" ]; do 
   git clone https://github.com/MobileRobots/amr-ros-config
-fi
+done
 
 
 echo "source $WS_PATH/devel/setup.bash" >> ~/.bashrc
