@@ -56,6 +56,18 @@ mrbsp_ros_t-bsp-julia(){
 	sudo cp -r cmake /usr/ANPLprefix/share/
 }
 
+#=============================
+#	old_inf ORB-SLAM
+#=============================
+mrbsp_ros_or-vi_project(){
+	mrbsp_ros_t-bsp-julia() & wait $!
+	#install-vlfeat.sh
+	#install-libpcl-1.8.sh
+	#install-cuda9.2.sh
+	#install-orbslam2.sh
+	#install-zed-sdk.sh
+}
+
 
 #==================================
 #	Script starts here
