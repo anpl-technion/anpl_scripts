@@ -1,7 +1,7 @@
 #!/bin/bash
 
-for f in $(pwd)/../ubuntu18.04/archive/*; do 
-	if grep -q "graphviz" "$f"; then 
+for f in $(pwd)/src/*; do
+	if grep -q "mrbsp_ros" "$f"; then
 		echo $f 
 	fi 
 done 
