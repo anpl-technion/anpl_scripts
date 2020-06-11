@@ -60,7 +60,8 @@ mrbsp_ros_t-bsp-julia(){
 #	old_inf ORB-SLAM
 #=============================
 mrbsp_ros_or-vi_project(){
-	mrbsp_ros_t-bsp-julia() & wait $!
+	echo "It does not exsist"
+	#mrbsp_ros_t-bsp-julia() & wait $!
 	#install-vlfeat.sh
 	#install-libpcl-1.8.sh
 	#install-cuda9.2.sh
