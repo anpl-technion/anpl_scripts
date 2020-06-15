@@ -15,10 +15,10 @@ If you would like to remove the **entire** infrastructure, you could launch `uni
 
 ** Aware using this script!** 
 
-*The script **erases entire** '/usr/ANPLprefix' directory, so other users on your machine will be affected by the action!*    Example of recomended usage
+*The script **erases entire** '/usr/ANPLprefix' directory, so other users on your machine will be affected by the action!* Example of recomended usage
 
 ```bash
-cp /usr/ANPLprefix /usr/ANPLprefix[backup]
+sudo cp /usr/ANPLprefix /usr/ANPLprefix[backup]
 bash uninstaller-script.sh
 ```
 
