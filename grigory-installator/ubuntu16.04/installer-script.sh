@@ -60,13 +60,14 @@ mrbsp_ros_t-bsp-julia(){
 #	old_inf ORB-SLAM
 #=============================
 mrbsp_ros_or-vi_project(){
-	echo "It does not exsist"
-	#mrbsp_ros_t-bsp-julia() & wait $!
-	#install-vlfeat.sh
-	#install-libpcl-1.8.sh
-	#install-cuda9.2.sh
-	#install-orbslam2.sh
-	#install-zed-sdk.sh
+	# TODO: test
+	mrbsp_ros_t-bsp-julia & wait $!
+	bash install-vlfeat.sh & wait $!
+	bash install-libpcl-1.8.sh & wait $!
+	bash install-cuda9.2.sh & wait $!
+	bash install-orbslam2.sh & wait $!
+	bash install-zed-sdk.sh & wait $!
+	bash install-viso2.sh & wait $!
 }
 
 
@@ -119,7 +120,7 @@ PLANAR_BRANCH=master
 bash show-git-branch.sh
 cd src/
 echo "export PATH=$PATH:$(pwd)" >> ~/.bashrc
-
+git config --global credential.helper 'cache --timeout 3600'
 
 bash install-ros-kinetic.sh
 source_bashrc

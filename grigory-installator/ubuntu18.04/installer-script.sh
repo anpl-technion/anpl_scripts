@@ -42,6 +42,7 @@ PLANAR_BRANCH=gtsam4
 bash show-git-branch.sh
 cd src/
 echo "export PATH=$PATH:$(pwd)" >> ~/.bashrc
+git config --global credential.helper 'cache --timeout 3600'
 
 bash install-ros-melodic.sh & wait $!
 source_bashrc

@@ -19,7 +19,7 @@ sudo apt-get install libglew-dev -y
 
 
 # install C++ logging library
-sudo apt-get install libspdlog-dev
+#sudo apt-get install libspdlog-dev
 
 #delete old pangolin library
 sudo rm -rf $PROJECT_DIR/$FOLDER_NAME_PANGOLIN
