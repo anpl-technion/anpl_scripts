@@ -8,8 +8,8 @@ case `grep -Fxq "# Show git branch name" ~/.bashrc >/dev/null; echo $?` in
     echo Show git already exists
     ;;
   1)
-    cat showgitbranchname.txt >> ~/.bashrc
-    read -p "Added showgitbranchname in bashrc" NULL
+    cat src/showgitbranchname.txt >> ~/.bashrc
+    echo "Added showgitbranchname in bashrc" 
     source ~/.bashrc
     ;;
   *)

@@ -60,7 +60,7 @@ mrbsp_ros_t-bsp-julia(){
 #	old_inf ORB-SLAM
 #=============================
 mrbsp_ros_or-vi_project(){
-	mrbsp_ros_t-bsp-julia() & wait $!
+	mrbsp_ros_t-bsp-julia & wait $!
 	#install-vlfeat.sh
 	#install-libpcl-1.8.sh
 	#install-cuda9.2.sh
@@ -115,9 +115,10 @@ case $NUM in
 esac
 
 PLANAR_BRANCH=master
+bash show-git-branch.sh
 cd src/
 echo "export PATH=$PATH:$(pwd)" >> ~/.bashrc
-bash show-git-branch.sh
+
 
 bash install-ros-kinetic.sh
 source_bashrc
@@ -129,3 +130,4 @@ source_bashrc
 # Redirecting stderr to log file
 "$PROJECT_NAME"_"$BRANCH" 2> ../log.err
 echo -e "\033[0;36m ++++  End of installation ++++    \033[0m";
+cd ~/ANPL/infrastructure/mrbsp_ws & catkin build
