@@ -1,4 +1,11 @@
 #!/bin/bash
+source_bashrc(){
+	cp ~/.bashrc ~/.bashrc_copy
+	sudo tail -n +10 ~/.bashrc_copy | tee ~/.bashrc | sleep 1 #remove check for interactiveness
+	source ~/.bashrc
+	mv ~/.bashrc_copy ~/.bashrc
+}
+
 echo -e "\033[0;36mWelcome to ANPL's Multi-Robot Belief Space Planner open source installator!"
 echo -e "Before installation please check if you have account @BitBucket and have full access to ANPL repository. If you don't please contact Vadim to get an access.\033[0m"
 while true; do
@@ -31,19 +38,18 @@ case $NUM in
 	exit ;;
 esac
 
-cd src
+PLANAR_BRANCH=gtsam4
+bash show-git-branch.sh
+cd src/
+echo "export PATH=$PATH:$(pwd)" >> ~/.bashrc
+
 bash install-ros-melodic.sh & wait $!
-cp ~/.bashrc ~/.bashrc_copy
-sudo tail -n +10 ~/.bashrc_copy | tee ~/.bashrc | sleep 1
-source ~/.bashrc 
-echo ROS=$ROS_DISTRO
-mv ~/.bashrc_copy ~/.bashrc
+source_bashrc
 bash install-gtsam4.sh & wait $!
 bash install-ros-packages.sh & wait $!
 bash setup-anpl-mrbsp.sh --infrastructure=$PROJECT_NAME --branch=$BRANCH & wait $!
 
-
-source ~/.bashrc
+source_bashrc
 
 # carkin belief:
 bash install-libspdlog.sh --apt=false  & wait $! #(apt=false, from git) - mrbsp_utils wanted it
@@ -73,7 +79,7 @@ done
 #sudo echo "#endif" >> $PATH_JSON_C_BITS
 echo "#endif" | sudo tee -a $PATH_JSON_C_BITS
 
-bash install-planar-icp.sh --branch=$BRANCH #(branch gtsam4)
+bash install-planar-icp.sh --branch=$PLANAR_BRANCH #(branch gtsam4)
 sudo cp -r cmake /usr/ANPLprefix/share/
 
 sudo apt-get install xterm -y & wait $!
