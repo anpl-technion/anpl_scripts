@@ -18,10 +18,11 @@ sudo rosdep init
 rosdep update
 
 # 1.6 Environment setup
-echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
-source ~/.bashrc
+echo "
+source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 
 # 1.7 Getting rosinstall (python)
 sudo apt-get install -y python-rosinstall python-rosinstall-generator python-wstool build-essential 
+
 # 1.8 Relaunch bash for further usage
 source ~/.bashrc

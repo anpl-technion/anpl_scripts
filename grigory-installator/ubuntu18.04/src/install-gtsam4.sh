@@ -5,7 +5,7 @@ PROJECT_DIR=~/ANPL/code/3rdparty
 GTSAM_VER="4+"
 PROJECT_NAME=gtsam-$GTSAM_VER
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DGTSAM_BUILD_TESTS=OFF -DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF -DGTSAM_BUILD_UNSTABLE=OFF -DCMAKE_BUILD_TYPE=Release"
-GIT_LINK="https://bitbucket.org/gtborg/gtsam.git"
+GIT_LINK="--branch 4.0.2 https://github.com/borglab/gtsam.git"
 
 sudo apt-get install libboost-all-dev libtbb-dev -y
 sudo rm -rf $PROJECT_DIR/gtsam-*
