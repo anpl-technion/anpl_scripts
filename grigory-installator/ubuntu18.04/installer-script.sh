@@ -90,9 +90,22 @@ if [ -f "~/.ignition/fuel/config.yaml" ]; then
 fi
 
 
-cd ~/ANPL/infrastructure/mrbsp_ws/src/rosaria 
+cd ~/ANPL/infrastructure/mrbsp_ws/src/rosaria
 sed -ie '/^#set(ROS_BUILD_TYPE RelWithDebInfo)/a add_compile_options(-std=c++11)' CMakeLists.txt
-catkin build rosaria
+#catkin build rosaria
+
+# mapper compilation requiers about 5G RAM on each core
+# so we create additional swap space on disk.
+cd ~/ANPL/infrastructure/mrbsp_ws/
+sudo fallocate -l 10G /tmpswapfile
+sudo chmod 600 /tmpswapfile
+sudo mkswap /tmpswapfile
+sudo swapon /tmpswapfile
+# build
+catkin build -j3
+# and remove swap space
+sudo swapoff -v /tmpswapfile
+sudo rm /tmpswapfile
 
 echo -e "\033[0;36m ++++  End of installation ++++    \033[0m"
 
