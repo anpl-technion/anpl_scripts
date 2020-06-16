@@ -122,6 +122,16 @@ cd src/
 echo "export PATH=$PATH:$(pwd)" >> ~/.bashrc
 git config --global credential.helper 'cache --timeout 3600'
 
+if [ ""$PROJECT_NAME"_"$BRANCH"" = "mrbsp_ros_or-vi_project" ]; then
+	if [ ! -d '/usr/ANPLprefix-installation-backup' ]; then
+		sudo cp -r /usr/ANPLprefix /usr/ANPLprefix-installation-backup
+	fi
+
+	if [ ! -d '~/ANPL-installation-backup' ]; then
+		 cp -r ~/ANPL ~/ANPL-installation-backup
+	fi
+fi
+
 bash install-ros-kinetic.sh
 source_bashrc
 bash install-gtsam.sh
