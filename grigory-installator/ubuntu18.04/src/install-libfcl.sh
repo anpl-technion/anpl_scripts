@@ -29,7 +29,7 @@ if [ $FROM_APT = true ]; then
 	if [ $UBUNTU_DISTR = "xenail" ]; then 
 		sudo apt-get install libfcl-0.5-dev -y
 	elif [ $UBUNTU_DISTR = 'bionic' ]; then 
-		sudo apt-get install libfcl-dev
+		sudo apt-get install libfcl-dev -y
 	fi
 	exit
 fi

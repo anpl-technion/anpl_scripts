@@ -57,16 +57,18 @@ bash install-libspdlog.sh --apt=false  & wait $! #(apt=false, from git) - mrbsp_
 bash install-octomap.sh & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]
 bash install-libccd.sh --apt=false  & wait $! #(AG need it - apt=false)
 bash install-libfcl.sh --apt=true & wait $! #(AG need it - apt=true)
-bash install-ompl.sh   --apt=true & wait $! #(AG need it, apt=true)
+bash install-ompl.sh   --apt=false & wait $! #(AG need it, apt=false)
 bash install-rosaria.sh & wait $!
 bash install-find-cmakes.sh & wait $!
 
+: <<'comment'
 LINES_TO_BE_COMMENTED=('list(APPEND CMAKE_MODULE_PATH ${ANPL_PREFIX}/share/cmake)' 'set(OMPL_PREFIX ${ANPL_PREFIX})')
 PATH_AG_CMAKE=~/ANPL/infrastructure/mrbsp_ws/src/anpl_mrbsp/action_generator/CMakeLists.txt
 for line in "${LINES_TO_BE_COMMENTED[@]}"
 do
 	sed -i "s|${line}|#${line}|" $PATH_AG_CMAKE
 done
+comment
 
 bash install-diverse-short-path.sh & wait $!	#(AG need it)
 bash install-csm.sh --apt=false & wait $!	#(git=true)
@@ -88,7 +90,6 @@ sudo apt-get install xterm -y & wait $!
 if [ -f "~/.ignition/fuel/config.yaml" ]; then 
 	sed -i "s+https://api.ignitionfuel.org+https://api.ignitionrobotics.org+g" ~/.ignition/fuel/config.yaml
 fi
-
 
 cd ~/ANPL/infrastructure/mrbsp_ws/src/rosaria
 sed -ie '/^#set(ROS_BUILD_TYPE RelWithDebInfo)/a add_compile_options(-std=c++11)' CMakeLists.txt
