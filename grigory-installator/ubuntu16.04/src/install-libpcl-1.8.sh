@@ -7,7 +7,7 @@ LINK="https://github.com/PointCloudLibrary/pcl/archive/pcl-$PCL_VER.zip"
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=/usr/ -DCMAKE_CXX_FLAGS=-std=c++11 -DCMAKE_BUILD_TYPE=Release -DBUILD_GPU=ON -DCUDA_ARCH_BIN=3.0,3.5,3.7,5.0,6.0,7.0"
 FROM_APT=true
 
-if [ $FROM_APT = true]; then
+if [ $FROM_APT = true ]; then
 	# sudo apt-get autoremove libplc-dev
 	sudo apt-get install libpcl-dev -y
 	exit

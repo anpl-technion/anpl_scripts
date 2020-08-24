@@ -11,7 +11,7 @@ LINK=http://www.vlfeat.org/download/vlfeat-$VLFEAT_VER-bin.tar.gz
 INSTALL_DIR=$PROJECT_DIR/vlfeat-$VLFEAT_VER/toolbox
 FROM_APT=true
 
-if [ $FROM_APT = true]; then
+if [ $FROM_APT = true ]; then
 	# sudo apt-get autoremove libvlfeat-dev
 	sudo apt-get install libvlfeat-dev -y
 	exit

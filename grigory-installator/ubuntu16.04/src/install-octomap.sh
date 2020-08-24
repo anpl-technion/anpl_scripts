@@ -2,8 +2,7 @@
 
 source ~/.bashrc
 TMP=0
-
-if [ $ROS_DISTRO ="" ]; then
+if [[ $ROS_DISTRO = "" ]]; then
 	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"    
  	echo "'${0##*/}' FAILED, ROS_DISTRO is empty"
 	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"

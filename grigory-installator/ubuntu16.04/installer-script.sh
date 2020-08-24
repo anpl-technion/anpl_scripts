@@ -61,6 +61,24 @@ mrbsp_ros_t-bsp-julia(){
 #=============================
 mrbsp_ros_or-vi_project(){
 	# TODO: test
+	bash install-libspdlog.sh --apt=true & wait $! #(apt=true, from git) - mrbsp_utils wanted it
+	bash install-octomap.sh & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [su
+	bash install-libccd.sh --apt=false  & wait $!	#(AG need it - apt=true)
+	bash install-libfcl.sh --apt=true & wait $!	#(AG need it - apt=true)
+	bash install-ompl.sh --apt=false & wait $!  	#(AG need it, apt=false)
+
+	bash install-diverse-short-path.sh & wait $!  	#(AG need it)
+	bash install-csm.sh & wait $! 			#(git=true)
+
+	bash install-rosaria.sh & wait $!
+	bash install-mavros.sh & wait $!
+	bash install-rotors-simulation.sh & wait $!
+	bash install-find-cmakes.sh & wait $!
+
+	bash install-planar-icp.sh --branch=$PLANAR_BRANCH & wait $!
+	sudo apt-get install xterm graphviz-dev -y
+	sudo cp -r cmake /usr/ANPLprefix/share/
+
 	mrbsp_ros_t-bsp-julia & wait $!
 	bash install-vlfeat.sh & wait $!
 	bash install-libpcl-1.8.sh & wait $!
@@ -123,11 +141,11 @@ echo "export PATH=$PATH:$(pwd)" >> ~/.bashrc
 git config --global credential.helper 'cache --timeout 3600'
 
 if [ ""$PROJECT_NAME"_"$BRANCH"" = "mrbsp_ros_or-vi_project" ]; then
-	if [ ! -d '/usr/ANPLprefix-installation-backup' ]; then
+	if [ ! -d /usr/ANPLprefix-installation-backup ]; then
 		sudo cp -r /usr/ANPLprefix /usr/ANPLprefix-installation-backup
 	fi
 
-	if [ ! -d '~/ANPL-installation-backup' ]; then
+	if [ ! -d ~/ANPL-installation-backup ]; then
 		 cp -r ~/ANPL ~/ANPL-installation-backup
 	fi
 fi
