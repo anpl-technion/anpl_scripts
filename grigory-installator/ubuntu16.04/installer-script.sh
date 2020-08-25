@@ -64,7 +64,7 @@ mrbsp_ros_or-vi_project(){
 	bash install-libspdlog.sh --apt=true & wait $! #(apt=true, from git) - mrbsp_utils wanted it
 	bash install-octomap.sh & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [su
 	bash install-libccd.sh --apt=false  & wait $!	#(AG need it - apt=true)
-	bash install-libfcl.sh --apt=true & wait $!	#(AG need it - apt=true)
+	bash install-libfcl.sh --apt=false & wait $!	#(AG need it - apt=true)
 	bash install-ompl.sh --apt=false & wait $!  	#(AG need it, apt=false)
 
 	bash install-diverse-short-path.sh & wait $!  	#(AG need it)

@@ -1,5 +1,5 @@
 PREFIX=/usr/ANPLprefix
-FROM_GIT=False
+FROM_GIT=true
 OMPL_VER="1.4.2"
 PROJECT_DIR=~/ANPL/code/3rdparty
 PROJECT_NAME=ompl
@@ -8,8 +8,8 @@ FOLDER_NAME=$PROJECT_NAME-$OMPL_VER
 FILE_NAME=$FOLDER_NAME.zip
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release -DOMPL_BUILD_DEMOS=OFF -DOMPL_BUILD_PYBINDINGS=OFF -DOMPL_BUILD_PYTESTS=OFF -DOMPL_REGISTRATION=OFF -DOMPL_BUILD_TESTS=OFF"
 
-GIT_LINK=https://github.com/ompl/omplapp.git
-SUB_GIT_LINK=https://github.com/ompl/ompl.git
+GIT_LINK="https://github.com/ompl/omplapp.git -b 1.4.2"
+SUB_GIT_LINK="https://github.com/ompl/ompl.git -b 1.4.2"
 FILE_LINK=https://bitbucket.org/ompl/ompl/downloads/ompl-$OMPL_VER-Source.zip
 
 # The scripts gets a single argument or none
