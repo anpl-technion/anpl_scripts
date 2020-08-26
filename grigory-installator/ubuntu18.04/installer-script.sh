@@ -19,15 +19,13 @@ done
 
 PATH=$PATH:$(pwd)/src
 
-echo -e "\033[0;42m Choosing Infrastructure \033[0m"
-read -p "Choose which infrastructure you want: 
-	1 - (anpl_mrbsp[NEW])" NUM
+echo -e $'\033[0;42m Choosing Infrastructure \033[0m'
+read -p $'Choose which infrastructure you want: \n\t1. (anpl_mrbsp[NEW]): \n' NUM
 echo
 case $NUM in
 	[1]* ) PROJECT_NAME=anpl_mrbsp
 		echo -e "\033[0;42m Choosing Branch \033[0m"
-		read -p "Choose which branch you want:
-		1 - (gtsam4[Lidar-gtsam4]):   " NUM
+		read -p $'Choose which branch you want: \n\t1. (gtsam4[Lidar-gtsam4]): \n' NUM
 		echo
 		case $NUM in
 			[1]* ) BRANCH=gtsam4;;
@@ -57,7 +55,7 @@ bash install-libspdlog.sh --apt=false  & wait $! #(apt=false, from git) - mrbsp_
 bash install-octomap.sh & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]
 bash install-libccd.sh --apt=false  & wait $! #(AG need it - apt=false)
 bash install-libfcl.sh --apt=true & wait $! #(AG need it - apt=true)
-bash install-ompl.sh   --apt=false & wait $! #(AG need it, apt=false)
+bash install-ompl.sh   --apt=true & wait $! #(AG need it, apt=true)
 bash install-rosaria.sh & wait $!
 bash install-find-cmakes.sh & wait $!
 
