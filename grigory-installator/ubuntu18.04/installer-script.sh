@@ -85,7 +85,7 @@ echo "#endif" | sudo tee -a $PATH_JSON_C_BITS
 bash install-planar-icp.sh --branch=$PLANAR_BRANCH #(branch gtsam4)
 sudo cp -r cmake /usr/ANPLprefix/share/
 
-sudo apt-get install xterm -y & wait $!
+sudo apt-get install xterm graphiz-dev -y & wait $!
 
 if [ -f "~/.ignition/fuel/config.yaml" ]; then 
 	sed -i "s+https://api.ignitionfuel.org+https://api.ignitionrobotics.org+g" ~/.ignition/fuel/config.yaml
