@@ -3,24 +3,31 @@ WS_NAME=mrbsp_ws
 WS_PATH=~/ANPL/infrastructure/$WS_NAME
 WS_SRC=$WS_PATH/src
 PREFIX=/usr/ANPLprefix
+
+
+
+# Argument read.
+# Script gets 2 arguments strictly.
+# Mandatory arguments:
+#	-i=<inf name>, --infrastructure=<inf name>
+#	-b=<branch name>, --branch=<branch name>
+RED='\033[0;31m'
+NC='\033[0m' # No Color
 if [ "$#" -ne  "2" ]; then
-	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-	echo "'${0##*/}' Error: not all arguments provided. Please rerun script"    
-	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"   
+	echo -e "${RED}ERROR at '${0##*/}': ${NC}\nArguments are not provided. Please rerun script with 2 arguments: -i=<infrastructure name> -b=<branch name>"
 	exit 0 
 else
 	for i in "$@"; do
 	case $i in
+		-i=*|--infrastructure=*)
+			PROJECT_NAME="${i#*=}" && shift # past argument=value
+		;;
 	    -b=*|--branch=*)
 		    BRANCH="${i#*=}" && shift # past argument=value
 	    ;;
-		-i=*|--infrastructure=*)
-		    PROJECT_NAME="${i#*=}" && shift # past argument=value
-		;;
 	    *)
-		echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-		echo "'${0##*/}' ${i}: Unknown argument provided. Please rerun script"    
-		exit 
+			echo -e "${RED}ERROR at '${0##*/}': ${NC}\n${i}: Unknown argument provided. Please rerun script with 2 arguments: -i=<infrastructure name> -b=<branch name>"
+			exit
 		;;
 	esac
 	done
