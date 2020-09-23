@@ -16,7 +16,7 @@ Catkin belief: (remember catkin clean 'all')
 	5.2 sudo cp ompl/ompl-config.cmake ompl/FindOMPL.cmake
 	5.3 Comment in AG CMakeList.txt before building or after catkin clean:
 			#list(APPEND CMAKE_MODULE_PATH ${ANPL_PREFIX}/share/cmake) # if installed from apt (comment)
-			# set(OMPL_PREFIX ${ANPL_PREFIX}) 			   # if installed from apt (comment)
+			#set(OMPL_PREFIX ${ANPL_PREFIX}) 			   # if installed from apt (comment)
 			find_package(OMPL REQUIRED)
  6. install-diverse-short-path.sh (AG need it)
  7. install-csm.sh         (git=true)

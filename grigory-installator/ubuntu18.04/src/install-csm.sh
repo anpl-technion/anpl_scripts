@@ -8,27 +8,41 @@ FILE_NAME=$FOLDER_NAME.zip
 LINK=https://github.com/AndreaCensi/csm/archive/$LIBCSM_VER.zip
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release"
 
-# The scripts gets a single argument or none
+# Argument read.
+# Script gets single argument or none.
+#   --apt=<bool>    Set 'true' if you want to install the package from apt
+# If no argument provided default value is used (false)
+
+RED='\033[0;31m' # Red color text
+NC='\033[0m' # No Color
 if [ "$#" -eq  "0" ]; then
     FROM_APT=false
 else
     if [ "$#" -eq  "1" ]; then
-    FROM_APT=$(echo $1 | sed "s/^--apt=\(.*\)$/\1/")
+        #FROM_APT=$(echo $1 | sed "s/^--apt=\(.*\)$/\1/")
+        case $1 in
+            --apt=*)
+                FROM_APT="${1#*=}"
+                if [[ $FROM_APT != true && $FROM_APT != false ]]; then
+                    echo -e "${RED}ERROR at '${0##*/}': ${NC}\n$1: Unknown argument, BOOL expected. Please rerun script with 1 argument: --apt=<bool>"
+                    exit
+                fi
+            ;;
+            *)
+                echo -e "${RED}ERROR at '${0##*/}': ${NC}\n$1: Unknown argument provided. Please rerun script with 1 argument: --apt=<bool>"
+                exit
+            ;;
+        esac
     else
-        echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-        echo "'${0##*/}' Too many arguments provided. Please rerun script"           
-        exit 
+        echo "${RED}ERROR at '${0##*/}': ${NC}\n Too many arguments provided. Please rerun script with 1 argument: --apt=<bool>"
+        exit
     fi
-fi
-
-if [ $ROS_DISTRO = "kinetic" ] || [ $ROS_DISTRO = "indigo" ] ; then
-    FROM_GIT=false
 fi
 
 sudo apt-get install libgsl-dev -y
 
 if [ "$FROM_APT" = true ]; then
-    sudo apt-get install ros-$ROS_DISTRO-csm    # supports indigo and kinetic
+    sudo apt-get install ros-$ROS_DISTRO-csm    # supports kinetic and melodic
 else
     sudo rm -rf $PROJECT_DIR/$FOLDER_NAME    
     cd ~/Downloads
