@@ -98,13 +98,12 @@ anpl_mrbsp_quad-interactive(){
 
 	sudo apt-get install xterm graphiz-dev -y & wait $!
 
-	#SYSTEM_NAME=$(sudo lshw -short | grep -w system | tr -s ' ' | cut -d' '  -f 3-)
-	#if ! echo $SYSTEM_NAME | grep nvidia -q; then	
-	if [ $MACHINE_TYPE = pc ]; then
+
+	if ! uname -r | grep -q tegra; then
 		bash install-cuda9.2.sh & wait $!
 		bash install-zed-sdk.sh & wait $!
 	else
-		read -p "Please install Jetson and CUDA manually. Use Ariel's manuals on JIRA to find out versions you need.\n"
+		read -p "Please install JetPack and CUDA manually. Use Ariel's manuals on JIRA to find out versions you need.\n"
 	fi
 }
 
