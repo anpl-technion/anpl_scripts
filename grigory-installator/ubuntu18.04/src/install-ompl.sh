@@ -44,7 +44,7 @@ else
     fi
 fi
 
-if [ $FROM_APT = true ]; then
+if [ "$FROM_APT" = true ]; then
     # sudo apt-get autoremove libompl-dev 
     sudo apt-get install libompl-dev -y
     cd /usr/share/ompl

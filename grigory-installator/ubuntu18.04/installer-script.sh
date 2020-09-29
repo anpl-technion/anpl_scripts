@@ -23,18 +23,14 @@ anpl_mrbsp_gtsam4(){
 			case $yn in
 			[Yy]* )
 				bash install-ompl.sh --apt=true & wait $! #(AG need it, apt=true)
-				AG_CMAKE_LINES=('list(APPEND CMAKE_MODULE_PATH ${ANPL_PREFIX}/share/cmake)' \
-						'set(OMPL_PREFIX ${ANPL_PREFIX})')
-				AG_CMAKE_PATH=~/ANPL/infrastructure/mrbsp_ws/src/anpl_mrbsp/action_generator/CMakeLists.txt
-				for line in "${AG_CMAKE_LINES[@]}"; do
-					# comment lines in ag CMake 
-					sed -i "s|${line}|#${line}|" $AG_CMAKE_PATH
-				done
+				# 'set-ompl-from-apt.sh' modifies action generator CMake
+				bash set-ompl-from-apt.sh & wait $!
 				break
 			;;
 			[Nn]* )
 				bash install-ompl.sh --apt=false & wait $! 
-				read -p "To make OMPL 1.4.2 accecable to the infrastructure, please go to $AG_CMAKE_PATH right now and read lines 74-80 carefully" ENTR
+				AG_CMAKE_PATH=~/ANPL/infrastructure/mrbsp_ws/src/anpl_mrbsp/action_generator/CMakeLists.txt
+				read -p "To make OMPL 1.4.2 accecable to the infrastructure, please go to $AG_CMAKE_PATH right now and read lines 74-80 carefully\n" ENTR
 				break
 			;;
 			* ) echo "Please answer yes or no.";;
@@ -43,19 +39,23 @@ anpl_mrbsp_gtsam4(){
 
 	bash install-diverse-short-path.sh & wait $!	#(AG need it)
 	bash install-csm.sh --apt=false & wait $!	#(git=true)
-
-	bash install-rosaria.sh & wait $!
-	ROSARIA_CMAKE_PATH=~/ANPL/infrastructure/mrbsp_ws/src/rosaria/CMakeLists.txt
-	sed -ie '/^#set(ROS_BUILD_TYPE RelWithDebInfo)/a add_compile_options(-std=c++11)' $ROSARIA_CMAKE_PATH
-
+	bash install-planar-icp.sh --branch=$PLANAR_BRANCH #(branch gtsam4)
 	bash install-find-cmakes.sh & wait $!
+
+	if [[ "$ROBOTS" =~ "pioneer" ]]; then 
+		bash install-rosaria.sh & wait $!
+		ROSARIA_CMAKE_PATH=~/ANPL/infrastructure/mrbsp_ws/src/rosaria/CMakeLists.txt
+		sed -ie '/^#set(ROS_BUILD_TYPE RelWithDebInfo)/a add_compile_options(-std=c++11)' $ROSARIA_CMAKE_PATH
+	fi
+	if [[ "$ROBOTS" =~ "quad" ]]; then
+		bash install-mavros.sh & wait $!
+	fi
 
 	JSON_C_BITS_LINES_TO_BE_COMMENTED=('#ifndef min' \
 		'#define min(a,b) ((a) < (b) ? (a) : (b))' \
 		'#endif' \
 		'#ifndef max' \
-		'#define max(a,b) ((a) > (b) ? (a) : (b))'\
-		)
+		'#define max(a,b) ((a) > (b) ? (a) : (b))')
 	JSON_C_BITS_PATH=/usr/ANPLprefix/include/json-c/bits.h
 	for line in "${JSON_C_BITS_LINES_TO_BE_COMMENTED[@]}"
 	do
@@ -63,10 +63,47 @@ anpl_mrbsp_gtsam4(){
 	done
 	echo "#endif" | sudo tee -a $JSON_C_BITS_PATH
 
+	sudo apt-get install xterm graphiz-dev -y & wait $!
+}
+
+
+anpl_mrbsp_quad-interactive(){
+	# carkin belief:
+	bash install-libspdlog.sh --apt=false  & wait $! #(apt=false, from git) - mrbsp_utils wanted it
+	bash install-octomap.sh & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]
+	bash install-libccd.sh --apt=false  & wait $! #(AG need it - apt=false)
+	bash install-libfcl.sh --apt=true & wait $! #(AG need it - apt=true)
+	bash install-ompl.sh   --apt=true & wait $! #(AG need it, apt=true)
+	bash install-diverse-short-path.sh & wait $!	#(AG need it)
+	bash install-csm.sh --apt=false & wait $!	#(git=true)
 	bash install-planar-icp.sh --branch=$PLANAR_BRANCH #(branch gtsam4)
-	sudo cp -r cmake /usr/ANPLprefix/share/
+	#bash install-libpcl-1.8.sh & wait $!
+	bash install-find-cmakes.sh & wait $!
+
+	if [[ "$ROBOTS" =~ "quad" ]]; then
+		bash install-mavros.sh & wait $!
+	fi
+
+	JSON_C_BITS_LINES_TO_BE_COMMENTED=('#ifndef min' \
+		'#define min(a,b) ((a) < (b) ? (a) : (b))' \
+		'#endif' \
+		'#ifndef max' \
+		'#define max(a,b) ((a) > (b) ? (a) : (b))')
+	JSON_C_BITS_PATH=/usr/ANPLprefix/include/json-c/bits.h
+	for line in "${JSON_C_BITS_LINES_TO_BE_COMMENTED[@]}"
+	do
+		sudo sed -i "s|${line}|//${line}|" $JSON_C_BITS_PATH
+	done
+	echo "#endif" | sudo tee -a $JSON_C_BITS_PATH
 
 	sudo apt-get install xterm graphiz-dev -y & wait $!
+
+	if ! uname -r | grep -q tegra; then
+		bash install-cuda9.2.sh & wait $!
+		bash install-zed-sdk.sh & wait $!
+	else
+		read -p "Please install JetPack and CUDA manually. Use Ariel's manuals on JIRA to find out versions you need.\n"
+	fi
 }
 
 
@@ -89,16 +126,27 @@ read -p $'Choose which infrastructure you want: \n\t1. (anpl_mrbsp[NEW]): \n' NU
 echo
 case $NUM in
 	[1]* ) PROJECT_NAME=anpl_mrbsp
-		echo -e $"\033[0;42m Choosing Branch \033[0m"
-		read -p $'Choose which branch you want: \n\t1. gtsam4[Lidar-gtsam4] \n' NUM
+		echo -e "\033[0;42m Choosing Branch \033[0m"
+		read -p $'Choose which branch you want: \n\t1. gtsam4[Lidar-gtsam4] \n\t2. quad-interactive \n' NUM
 		echo
 		case $NUM in
 			[1]* ) BRANCH=gtsam4;;
+			[2]* ) BRANCH=quad-interactive;;
        		* ) echo "Please choose correct option. Rerun minimal-inst.sh"
 				exit ;;
 		esac;;
 	* ) echo "Please choose correct option. Rerun minimal-inst.sh"
 		exit ;;
+esac
+
+echo -e $'\033[0;42m Choosing installation option \033[0m'
+read -p $'What robots you going to use: \n\t1. Pioneer \n\t2. Quad \n\t3. Pioneer and Quad\n' NUM
+case $NUM in 
+	[1]* ) ROBOTS=pioneer;;
+	[2]* ) ROBOTS=quad;;
+	[3]* ) ROBOTS=pioneer+quad;;
+	* ) echo "Please choose correct option. Rerun minimal-inst.sh"
+	exit ;;
 esac
 
 bash show-git-branch.sh
