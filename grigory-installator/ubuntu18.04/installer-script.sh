@@ -128,19 +128,11 @@ echo
 case $NUM in
 	[1]* ) PROJECT_NAME=anpl_mrbsp
 		echo -e "\033[0;42m Choosing Branch \033[0m"
-		read -p $'Choose which branch you want: \n\t1. (gtsam4[Lidar-gtsam4]) \n\t2. (quad-interactive)" \n' NUM
+		read -p $'Choose which branch you want: \n\t1. gtsam4[Lidar-gtsam4] \n\t2. quad-interactive \n' NUM
 		echo
 		case $NUM in
 			[1]* ) BRANCH=gtsam4;;
-			[2]* ) BRANCH=quad-interactive
-				echo -e $'\033[0;42m Choosing installation option \033[0m'
-				read -p $'Choose PC or Jetson: \n 1. PC \n 2. Jetson: \n' NUM
-				case $NUM in 
-					[1]* ) MACHINE_TYPE=pc;;
-					[2]* ) MACHINE_TYPE=jetson;;
-					* ) echo "Please choose correct option. Rerun minimal-inst.sh"
-						exit ;;
-				esac;;
+			[2]* ) BRANCH=quad-interactive;;
        		* ) echo "Please choose correct option. Rerun minimal-inst.sh"
 				exit ;;
 		esac;;
@@ -149,14 +141,14 @@ case $NUM in
 esac
 
 echo -e $'\033[0;42m Choosing installation option \033[0m'
-read -p $'What robots you going to use: \n1.Pioneer \n\t2. Quad \n\t3. Pioneer and Quad\n' NUM
+read -p $'What robots you going to use: \n\t1. Pioneer \n\t2. Quad \n\t3. Pioneer and Quad\n' NUM
 case $NUM in 
 	[1]* ) ROBOTS=pioneer;;
 	[2]* ) ROBOTS=quad;;
 	[3]* ) ROBOTS=pioneer+quad;;
 	* ) echo "Please choose correct option. Rerun minimal-inst.sh"
 		exit ;;
-esac;;
+esac
 
 bash show-git-branch.sh
 git config --global credential.helper 'cache --timeout 3600'
