@@ -170,6 +170,7 @@ if [ -f "~/.ignition/fuel/config.yaml" ]; then
 	sed -i "s+https://api.ignitionfuel.org+https://api.ignitionrobotics.org+g" ~/.ignition/fuel/config.yaml
 fi
 
+########### Build ###########
 # mapper compilation requiers about 5G RAM on each core
 # so we create additional swap space on disk.
 sudo fallocate -l 8G /tmpswapfile
@@ -177,6 +178,7 @@ sudo chmod 600 /tmpswapfile
 sudo mkswap /tmpswapfile
 sudo swapon /tmpswapfile
 # build
+cd ~/ANPL/infrastructure/mrbsp_ws
 catkin build -j3
 # and remove swap space
 sudo swapoff -v /tmpswapfile
