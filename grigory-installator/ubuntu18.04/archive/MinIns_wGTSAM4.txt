@@ -1,0 +1,54 @@
+
+Started: (changed -j7 to j1 - dualCPU)
+ 1. install-ros-melodic.sh
+ 2. install-gtsam4.sh
+ 3. install-ros-packages.sh (source bashrc not profile)
+ 4. setup-anpl-mrbsp.sh
+
+
+Catkin belief: (remember catkin clean 'all')
+ 1. install-libspdlog.sh (apt=false, from git) - mrbsp_utils wanted it
+ 2. install-octomap.sh (apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]
+ 3. install-libccd.sh (AG need it - apt=false)
+ 4. install-libfcl.sh (AG need it - apt=false)
+ 5. install-ompl.sh   (AG need it, apt=true)
+	5.1 cd usr/share
+	5.2 sudo cp ompl/ompl-config.cmake ompl/FindOMPL.cmake
+	5.3 Comment in AG CMakeList.txt before building or after catkin clean:
+			#list(APPEND CMAKE_MODULE_PATH ${ANPL_PREFIX}/share/cmake) # if installed from apt (comment)
+			#set(OMPL_PREFIX ${ANPL_PREFIX}) 			   # if installed from apt (comment)
+			find_package(OMPL REQUIRED)
+ 6. install-diverse-short-path.sh (AG need it)
+ 7. install-csm.sh         (git=true)
+	7.1 in /usr/ANPLprefix/include/json-c/bits.h comment out:
+			//#ifndef min
+			//#define min(a,b) ((a) < (b) ? (a) : (b))
+			//#endif
+			//#ifndef max
+			//#define max(a,b) ((a) > (b) ? (a) : (b))
+			//#endif
+ 8. install-planar-icp.sh  (branch gtsam4)
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	gtsam4 changes:
+	 - KeyList to KeyVector
+	 - Redefine vectors (based on gtsa4 wiki tips)
+	 - Cast of "int" matrix to be "double" if multiplying by "double" matrix
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+Runing scenario dependencies:
+ 1. Need "anpl_inf" 
+	1.1 cd WS_PATH/src
+	1.2 git clone https://bitbucket.org/ANPL/anpl_ros_infrastructur anpl_inf
+ 2. RLException: Roslaunch got a 'No such file or directory' error while attempting to run:
+ 	2.1 sudo apt-get install xterm
+ 3. [Err] [REST.cc:205] Error in REST request
+	3.1 in ~/.ignition/fuel/config.yaml replace url line with 
+		  url: https://api.ignitionrobotics.org
+	3.2 if [ -f "~/.ignition/fuel/config.yaml" ]; then 
+		sed -i "s+https://api.ignitionfuel.org+https://api.ignitionrobotics.org+g" ~/.ignition/fuel/config.yaml
+	    fi
+ 4. error while loading shared libraries: libmetis.so: cannot open shared object file: No such file or directory
+	4.1 Link shared libraries from ANPLprefix to a system:
+		echo "export LD_LIBRARY_PATH=/usr/ANPLprefix/lib:$LD_LIBRARY_PATH" >> ~/.bashrc
