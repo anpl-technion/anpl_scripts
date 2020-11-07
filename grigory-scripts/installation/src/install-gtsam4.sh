@@ -2,17 +2,19 @@
 
 PREFIX=/usr/ANPLprefix
 PROJECT_DIR=~/ANPL/code/3rdparty
-GTSAM_VER="4+"
+GTSAM_VER="4.0.2"
 PROJECT_NAME=gtsam-$GTSAM_VER
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DGTSAM_BUILD_TESTS=OFF -DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF -DGTSAM_BUILD_UNSTABLE=OFF -DCMAKE_BUILD_TYPE=Release"
-GIT_LINK="--branch 4.0.2 https://github.com/borglab/gtsam.git"
+GIT_LINK="https://github.com/borglab/gtsam.git"
 
+echo "[INFO] Installing GTSAM make dependencies..."
 sudo apt-get install libboost-all-dev libtbb-dev -y
+echo "[INFO] Installing GTSAM 3.2.1 in progress..."
 sudo rm -rf $PROJECT_DIR/gtsam-*
 mkdir -p $PROJECT_DIR
 cd $PROJECT_DIR
 while [ ! -d "$PROJECT_DIR/$PROJECT_NAME" ]; do
-      git clone $GIT_LINK $PROJECT_NAME
+      git clone $GIT_LINK $PROJECT_NAME --branch $GTSAM_VER
 done
 cd $PROJECT_DIR/$PROJECT_NAME
 
@@ -22,6 +24,3 @@ cmake $CMAKE_FLAGS ..
 make -j4
 sudo make install -j4
 echo "export LD_LIBRARY_PATH=/usr/ANPLprefix/lib:$LD_LIBRARY_PATH" >> ~/.bashrc
-
-
-

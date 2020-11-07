@@ -203,7 +203,7 @@ while true; do
 done
 
 echo -e $'\033[0;42m Choosing Infrastructure \033[0m'
-read -p $'Choose which infrastructure you want: \n\t1. anpl_mrbsp[NEW]\n\t 2. mrbsp_ros[OLD]\n: ' NUM
+read -p $'Choose which infrastructure you want: \n\t1. anpl_mrbsp[NEW]\n\t2. mrbsp_ros[OLD]\n: ' NUM
 echo
 case $NUM in
 	[1]* ) PROJECT_NAME=anpl_mrbsp
@@ -222,7 +222,7 @@ case $NUM in
 		esac;;
 	[2]* ) PROJECT_NAME=mrbsp_ros
 		echo -e "\033[0;42m Choosing Branch \033[0m"
-		read -p $'Choose which branch you want: \n\t1. t-bsp-julia[Lidar]\n\t2. or-vi_project[ORB-vsion]: ' NUM
+		read -p $'Choose which branch you want: \n\t1. t-bsp-julia[Lidar]\n\t2. or-vi_project[VISION] \n: ' NUM
 		echo
 		GTSAM_VER=3		
 		case $NUM in
@@ -246,15 +246,15 @@ git config --global credential.helper 'cache --timeout 3600'
 cd src/
 echo "export PATH=$PATH:$(pwd)" >> ~/.bashrc
 
+bash install-gtsam${GTSAM_VER}.sh & wait $!
 case $UBUNTU_DISTRO in
-	16.04) install-ros-kinetic.sh;;
-	18.04) install-ros-melodic.sh;;
+	16.04) bash install-ros-kinetic.sh;;
+	18.04) bash install-ros-melodic.sh;;
 	*) read -p $'Installation script currently only available on Ubuntu 16.04 and Ubuntu 16.04. Installation cancelled.'
 		exit;;
 esac
 source_bashrc
 bash install-ros-packages.sh & wait $!
-bash install-gtsam${GTSAM_VER}.sh & wait $!
 bash setup-anpl-mrbsp.sh --infrastructure=$PROJECT_NAME --branch=$BRANCH & wait $!
 source_bashrc
 
