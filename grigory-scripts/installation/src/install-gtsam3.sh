@@ -26,22 +26,24 @@ UBUNTU_DISTRO=$(cat /etc/os-release | grep -i version_id | cut -d'"' -f2)
 sudo apt-get install g++ cmake -y
 sudo apt-get install python-dev libbz2-dev libtbb-dev -y
 echo "[INFO] Installing BOOST 1.58 in process..."
-if [ $UBUNTU_DISTRO != "16.04" ]; then
-	sudo mkdir -p $PREFIX
-	sudo rm -rf $PROJECT_DIR/$BOOST_FOLDER_NAME
-	cd ~/Downloads
-	wget -O $BOOST_FILE_NAME $BOOST_LINK
-	mkdir -p $PROJECT_DIR
-	unzip $BOOST_FILE_NAME -d $PROJECT_DIR
-	rm -f ~/Downloads/$BOOST_FILE_NAME
-	cd $PROJECT_DIR/$BOOST_FOLDER_NAME
+case $UBUNTU_DISTRO in
+	16.04 ) sudo apt-get install libboost-all-dev -y
+		;;
+	* ) 
+		sudo mkdir -p $PREFIX
+		sudo rm -rf $PROJECT_DIR/$BOOST_FOLDER_NAME
+		cd ~/Downloads
+		wget -O $BOOST_FILE_NAME $BOOST_LINK
+		mkdir -p $PROJECT_DIR
+		unzip $BOOST_FILE_NAME -d $PROJECT_DIR
+		rm -f ~/Downloads/$BOOST_FILE_NAME
+		cd $PROJECT_DIR/$BOOST_FOLDER_NAME
 
-	./bootstrap.sh $BOOTSTRAP_FLAGS
-	./b2 $B2_FLAGS
-	sudo ./b2 install -j8
-else
-	sudo apt-get install libboost-all-dev -y
-fi
+		./bootstrap.sh $BOOTSTRAP_FLAGS
+		./b2 $B2_FLAGS
+		sudo ./b2 install -j8 
+		;;
+esac
 
 echo "go to $PREFIX/include/boost/optional/optional.hpp and add #define BOOST_OPTIONAL_CONFIG_ALLOW_BINDING_TO_RVALUES to the headers"
 read -p "Press 'i' to insert it automatically: " INPUT
@@ -79,3 +81,7 @@ cmake $CMAKE_FLAGS ..
 make -j7
 sudo make install -j7
 
+case $UBUNTU_DISTRO in
+	16.04 ) ;;
+	*) sudo rm -fr $PREFIX/*boost*
+esac

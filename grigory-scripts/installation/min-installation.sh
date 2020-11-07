@@ -7,6 +7,20 @@ source_bashrc(){
 	source ~/.bashrc
 	mv ~/.bashrc_copy ~/.bashrc
 }
+json_bits(){
+	JSON_C_BITS_LINES_TO_BE_COMMENTED=('#ifndef min' \
+		'#define min(a,b) ((a) < (b) ? (a) : (b))' \
+		'#endif' \
+		'#ifndef max' \
+		'#define max(a,b) ((a) > (b) ? (a) : (b))')
+	JSON_C_BITS_PATH=/usr/ANPLprefix/include/json-c/bits.h
+	
+	for line in "${JSON_C_BITS_LINES_TO_BE_COMMENTED[@]}"
+	do
+		sudo sed -i "s|${line}|//${line}|" $JSON_C_BITS_PATH
+	done
+	echo "#endif" | sudo tee -a $JSON_C_BITS_PATH
+}
 
 
 ########### Installation routines ###########
@@ -37,6 +51,7 @@ anpl_mrbsp_gtsam4(){
 	    esac
 	done
 
+	json_bits
 	bash install-diverse-short-path.sh & wait $!	#(AG need it)
 	bash install-csm.sh --apt=false & wait $!	#(git=true)
 	bash install-planar-icp.sh --branch=$PLANAR_BRANCH #(branch gtsam4)
@@ -45,19 +60,6 @@ anpl_mrbsp_gtsam4(){
 	bash install-rosaria.sh & wait $!
 	ROSARIA_CMAKE_PATH=~/ANPL/infrastructure/mrbsp_ws/src/rosaria/CMakeLists.txt
 	sed -ie '/^#set(ROS_BUILD_TYPE RelWithDebInfo)/a add_compile_options(-std=c++11)' $ROSARIA_CMAKE_PATH
-
-
-	JSON_C_BITS_LINES_TO_BE_COMMENTED=('#ifndef min' \
-		'#define min(a,b) ((a) < (b) ? (a) : (b))' \
-		'#endif' \
-		'#ifndef max' \
-		'#define max(a,b) ((a) > (b) ? (a) : (b))')
-	JSON_C_BITS_PATH=/usr/ANPLprefix/include/json-c/bits.h
-	for line in "${JSON_C_BITS_LINES_TO_BE_COMMENTED[@]}"
-	do
-		sudo sed -i "s|${line}|//${line}|" $JSON_C_BITS_PATH
-	done
-	echo "#endif" | sudo tee -a $JSON_C_BITS_PATH
 
 	sudo apt-get install xterm graphiz-dev -y & wait $!
 }
@@ -70,23 +72,13 @@ anpl_mrbsp_quad-interactive(){
 	bash install-libccd.sh --apt=false  & wait $! #(AG need it - apt=false)
 	bash install-libfcl.sh --apt=true & wait $! #(AG need it - apt=true)
 	bash install-ompl.sh   --apt=true & wait $! #(AG need it, apt=true)
+
+	json_bits
 	bash install-diverse-short-path.sh & wait $!	#(AG need it)
 	bash install-csm.sh --apt=false & wait $!	#(git=true)
 	bash install-planar-icp.sh --branch=$PLANAR_BRANCH #(branch gtsam4)
 	#bash install-libpcl-1.8.sh & wait $!
 	bash install-find-cmakes.sh & wait $!
-
-	JSON_C_BITS_LINES_TO_BE_COMMENTED=('#ifndef min' \
-		'#define min(a,b) ((a) < (b) ? (a) : (b))' \
-		'#endif' \
-		'#ifndef max' \
-		'#define max(a,b) ((a) > (b) ? (a) : (b))')
-	JSON_C_BITS_PATH=/usr/ANPLprefix/include/json-c/bits.h
-	for line in "${JSON_C_BITS_LINES_TO_BE_COMMENTED[@]}"
-	do
-		sudo sed -i "s|${line}|//${line}|" $JSON_C_BITS_PATH
-	done
-	echo "#endif" | sudo tee -a $JSON_C_BITS_PATH
 
 	sudo apt-get install xterm graphiz-dev -y & wait $!
 
@@ -103,14 +95,13 @@ anpl_mrbsp_quad-interactive(){
 #=============================
 anpl_mrbsp_master(){
 	# catkin belief:
-	anpl_mrbsp_gtsam4
-	return [0]
 	bash install-libspdlog.sh --apt=false & wait $! #(apt=false, from git) - mrbsp_utils wanted it
 	bash install-octomap.sh   & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]
 	bash install-libccd.sh --apt=true & wait $!	#(AG need it - apt=true)
 	bash install-libfcl.sh --apt=true & wait $!	#(AG need it - apt=true)
 	bash install-ompl.sh --apt=false & wait $!  	#(AG need it, apt=false)
 
+	json_bits
 	bash install-diverse-short-path.sh & wait $!  	#(AG need it)
 	bash install-csm.sh & wait $! 					#(git=true)
 
@@ -136,6 +127,7 @@ mrbsp_ros_t-bsp-julia(){
 	bash install-libfcl.sh --apt=true & wait $!	#(AG need it - apt=true)
 	bash install-ompl.sh --apt=false & wait $!  	#(AG need it, apt=false)
 
+	json_bits
 	bash install-diverse-short-path.sh & wait $!  	#(AG need it)
 	bash install-csm.sh & wait $! 			#(git=true)
 
@@ -160,6 +152,7 @@ mrbsp_ros_or-vi_project(){
 	bash install-libfcl.sh --apt=false & wait $!	#(AG need it - apt=true)
 	bash install-ompl.sh --apt=false & wait $!  	#(AG need it, apt=false)
 
+	json_bits
 	bash install-diverse-short-path.sh & wait $!  	#(AG need it)
 	bash install-csm.sh & wait $! 			#(git=true)
 
