@@ -42,12 +42,13 @@ fi
 
 if [ $FROM_APT = true ]; then
 	# sudo apt-get autoremove libfcl-0.5-dev 
-	UBUNTU_DISTR=$(cat /etc/*-release | grep 'DISTRIB_CODENAME' | cut -f2 -d=)
-	if [ $UBUNTU_DISTR = "xenail" ]; then 
-		sudo apt-get install libfcl-0.5-dev -y
-	elif [ $UBUNTU_DISTR = 'bionic' ]; then 
-		sudo apt-get install libfcl-dev -y
-	fi
+	UBUNTU_DISTRO=$(cat /etc/os-release | grep -i version_id | cut -d'"' -f2)
+	case $UBUNTU_DISTRO in
+		16.04) sudo apt-get install libfcl-0.5-dev -y;;
+		18.04) sudo apt-get install libfcl-dev -y;;
+		*) read -p $'Installation script currently only available on Ubuntu 16.04 and Ubuntu 16.04. Installation cancelled.'
+			exit;;
+	esac
 	exit
 else
 	sudo rm -rf $PROJECT_DIR/$FOLDER_NAME
