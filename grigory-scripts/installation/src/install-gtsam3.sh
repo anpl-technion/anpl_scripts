@@ -15,7 +15,7 @@ B2_FLAGS="link=static,shared threading=multi cxxflags=-fPIC cflags=-fPIC --disab
 GTSAM_VER="3.2.1"
 GTSAM_FOLDER_NAME=gtsam-$GTSAM_VER
 FROM_GIT=True
-CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DGTSAM_BUILD_TESTS=OFF -DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF -DGTSAM_BUILD_UNSTABLE=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS="-static""
+CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DGTSAM_BUILD_TESTS=OFF -DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF -DGTSAM_BUILD_UNSTABLE=OFF -DCMAKE_BUILD_TYPE=Release "
 LINK="https://research.cc.gatech.edu/borg/sites/edu.borg/files/downloads/gtsam-$GTSAM_VER.zip"
 GIT_LINK="https://bitbucket.org/ANPL/gtsam-3.2.1-anpl/ -b fix/boost158gtsam3"
 
@@ -27,6 +27,7 @@ sudo apt-get install g++ cmake -y
 sudo apt-get install python-dev libbz2-dev libtbb-dev -y
 echo "[INFO] Installing BOOST 1.58 in process..."
 case $UBUNTU_DISTRO in
+	test ) echo "[INFO] skipping Boost..." ;;
 	16.04 ) sudo apt-get install libboost-all-dev -y
 		;;
 	* ) 
@@ -41,16 +42,15 @@ case $UBUNTU_DISTRO in
 
 		./bootstrap.sh $BOOTSTRAP_FLAGS
 		./b2 $B2_FLAGS
-		sudo ./b2 install -j8 
+		sudo ./b2 install -j8
+
+		echo "go to $PREFIX/include/boost/optional/optional.hpp and add #define BOOST_OPTIONAL_CONFIG_ALLOW_BINDING_TO_RVALUES to the headers"
+		sudo sed -i '18 a #define BOOST_OPTIONAL_CONFIG_ALLOW_BINDING_TO_RVALUES' $PREFIX/include/boost/optional/optional.hpp
+		CMAKE_FLAGS="${CMAKE_FLAGS} -DCMAKE_EXE_LINKER_FLAGS=\"-static\" "
+		echo $CMAKE_FLAGS
 		;;
 esac
 
-echo "go to $PREFIX/include/boost/optional/optional.hpp and add #define BOOST_OPTIONAL_CONFIG_ALLOW_BINDING_TO_RVALUES to the headers"
-read -p "Press 'i' to insert it automatically: " INPUT
-case $INPUT in
-	[Ii]* ) sudo sed --silent -i '18 a  #define BOOST_OPTIONAL_CONFIG_ALLOW_BINDING_TO_RVALUES' $PREFIX/include/boost/optional/optional.hpp ;;
-	* ) read -p "Another key was pressed, please add define manually";;
-esac
 
 #########################################################################
 # GTSAM installation
@@ -74,6 +74,12 @@ fi
 
 cd $PROJECT_DIR/$GTSAM_FOLDER_NAME
 
+# link GTSAM with Boost staticlly instead appeal shared objects
+case $UBUNTU_DISTRO in
+	16.04 ) ;;
+	* ) sed -i '91 a set(Boost_USE_STATIC_LIBS ON)' CMakeLists.txt ;;
+esac
+
 #from https://collab.cc.gatech.edu/borg/gtsam/#quickstart
 
 mkdir build && cd build
@@ -83,5 +89,5 @@ sudo make install -j7
 
 case $UBUNTU_DISTRO in
 	16.04 ) ;;
-	*) sudo rm -fr $PREFIX/*boost*
+	*) sudo rm -fr $PREFIX/include/*boost* $PREFIX/lib/*boost*
 esac

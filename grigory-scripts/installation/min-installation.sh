@@ -51,9 +51,10 @@ anpl_mrbsp_gtsam4(){
 	    esac
 	done
 
-	json_bits
 	bash install-diverse-short-path.sh & wait $!	#(AG need it)
 	bash install-csm.sh --apt=false & wait $!	#(git=true)
+
+	json_bits
 	bash install-planar-icp.sh --branch=$PLANAR_BRANCH #(branch gtsam4)
 	bash install-find-cmakes.sh & wait $!
 
@@ -73,9 +74,10 @@ anpl_mrbsp_quad-interactive(){
 	bash install-libfcl.sh --apt=true & wait $! #(AG need it - apt=true)
 	bash install-ompl.sh   --apt=true & wait $! #(AG need it, apt=true)
 
-	json_bits
 	bash install-diverse-short-path.sh & wait $!	#(AG need it)
 	bash install-csm.sh --apt=false & wait $!	#(git=true)
+
+	json_bits	
 	bash install-planar-icp.sh --branch=$PLANAR_BRANCH #(branch gtsam4)
 	#bash install-libpcl-1.8.sh & wait $!
 	bash install-find-cmakes.sh & wait $!
@@ -101,13 +103,13 @@ anpl_mrbsp_master(){
 	bash install-libfcl.sh --apt=true & wait $!	#(AG need it - apt=true)
 	bash install-ompl.sh --apt=false & wait $!  	#(AG need it, apt=false)
 
-	json_bits
 	bash install-diverse-short-path.sh & wait $!  	#(AG need it)
 	bash install-csm.sh & wait $! 					#(git=true)
 
 	bash install-rosaria.sh & wait $!
 	bash install-find-cmakes.sh & wait $!
-
+	
+	json_bits
 	bash install-planar-icp.sh --branch=$PLANAR_BRANCH & wait $!
 	sudo apt-get install xterm graphviz-dev -y
 	sudo cp -r cmake /usr/ANPLprefix/share/
@@ -127,12 +129,13 @@ mrbsp_ros_t-bsp-julia(){
 	bash install-libfcl.sh --apt=true & wait $!	#(AG need it - apt=true)
 	bash install-ompl.sh --apt=false & wait $!  	#(AG need it, apt=false)
 
-	json_bits
 	bash install-diverse-short-path.sh & wait $!  	#(AG need it)
 	bash install-csm.sh & wait $! 			#(git=true)
 
 	bash install-rosaria.sh & wait $!
 	bash install-mavros.sh & wait $!
+
+	json_bits
 	bash install-rotors-simulation.sh & wait $!
 	bash install-find-cmakes.sh & wait $!
 
@@ -152,12 +155,13 @@ mrbsp_ros_or-vi_project(){
 	bash install-libfcl.sh --apt=false & wait $!	#(AG need it - apt=true)
 	bash install-ompl.sh --apt=false & wait $!  	#(AG need it, apt=false)
 
-	json_bits
 	bash install-diverse-short-path.sh & wait $!  	#(AG need it)
 	bash install-csm.sh & wait $! 			#(git=true)
 
 	bash install-rosaria.sh & wait $!
 	bash install-mavros.sh & wait $!
+
+	json_bits
 	bash install-rotors-simulation.sh & wait $!
 	bash install-find-cmakes.sh & wait $!
 
