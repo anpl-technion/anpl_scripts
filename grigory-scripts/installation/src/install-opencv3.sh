@@ -7,11 +7,10 @@ OPEN_CV_LINK=https://github.com/opencv/opencv/archive/$OPENCV_VER.zip
 OPEN_CV_FILE_NAME=opencv-$OPENCV_VER.zip
 CMAKE_FLAGS="cmake -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=/usr/local -DWITH_CUDA=ON -DENABLE_FAST_MATH=1 -DCUDA_FAST_MATH=1 -DWITH_CUBLAS=1 -DWITH_GTK=ON -DWITH_TBB=ON -DBUILD_PYTHON_SUPPORT=ON -DWITH_LIBV4L=ON -DWITH_GSTREAMER=ON -DWITH_GSTREAMER_0_10=OFF -DWITH_QT=ON -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF"
 MAKE_FLAGS=-j8
-FROM_APT=true
+FROM_APT=false
 
 if [ $FROM_APT = true ]; then
-    # sudo apt-get autoremove ros-$ROS_DISTRO-opencv3 
-    sudo apt-get install ros-$ROS_DISTRO-opencv3 -y
+    sudo apt-get install libopencv-dev -y
     exit
 fi
 

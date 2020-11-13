@@ -10,6 +10,7 @@ FROM_APT=true
 if [ $FROM_APT = true ]; then
 	# sudo apt-get autoremove libplc-dev
 	sudo apt-get install libpcl-dev -y
+	sudo apt-get install ros-$ROS_DISTRO-pcl-conversions -y
 	exit
 fi
 

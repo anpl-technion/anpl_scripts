@@ -68,12 +68,11 @@ else
         mv $FOLDER_NAME-Source $FOLDER_NAME
     fi
 
-    ############ Not in use anymore ############
     #Hack that make omplapp find libccd and libfcl
-    #cd ~/Downloads
-    #wget https://raw.githubusercontent.com/dartsim/dart/master/cmake/FindCCD.cmake
-    #wget https://raw.githubusercontent.com/dartsim/dart/master/cmake/FindFCL.cmake
-    #mv FindCCD.cmake FindFCL.cmake $PROJECT_DIR/$FOLDER_NAME/CMakeModules
+    cd ~/Downloads
+    wget -L https://raw.githubusercontent.com/dartsim/dart/master/cmake/Findccd.cmake -O FindCCD.cmake
+    wget -L https://raw.githubusercontent.com/dartsim/dart/master/cmake/Findfcl.cmake -O FindFCL.cmake
+    mv FindCCD.cmake FindFCL.cmake $PROJECT_DIR/$FOLDER_NAME/CMakeModules 
 
     cd $PROJECT_DIR/$FOLDER_NAME
     mkdir build && cd build

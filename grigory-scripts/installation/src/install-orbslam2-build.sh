@@ -3,7 +3,7 @@
 
 PROJECT_DIR=~/ANPL/code/3rdparty
 ANPL_PREFIX=/usr/ANPLprefix
-CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$ANPL_PREFIX -DCMAKE_BUILD_TYPE=Release"
+CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$ANPL_PREFIX -DCMAKE_BUILD_TYPE=Release" #-DOpenCV_DIR=/opt/ros/kinetic/share/OpenCV-3.3.1-dev"
 FOLDER_NAME_PANGOLIN=pangolin
 FOLDER_NAME_ORB_SLAM_2=orb-slam2
 LINK_PANGOLIN=https://github.com/stevenlovegrove/Pangolin

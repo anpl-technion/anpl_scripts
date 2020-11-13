@@ -2,9 +2,9 @@
 
 FILE_NAME=cuda9.2.deb
 LINK=https://developer.nvidia.com/compute/cuda/9.2/Prod2/local_installers/cuda-repo-ubuntu1604-9-2-local_9.2.148-1_amd64
-FROM_APT=true
+FROM_APT=false
 
-if [ $FROM_APT = true]; then
+if [ $FROM_APT = true ]; then
 	# sudo apt-get autoremove cuda-9-2 
 	sudo apt-get install cuda-9-2 -y
 	exit

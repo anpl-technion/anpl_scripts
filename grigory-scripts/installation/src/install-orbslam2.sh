@@ -12,8 +12,8 @@ MAKE_FLAGS=-j7
 
 # Install ORB SLAM2 and it's dependencies
 # install opencv 3
-# install-opencv3.sh
+bash install-opencv3.sh
 
-bash src/install-orbslam2-pangolin.sh
+bash install-orbslam2-pangolin.sh
 
-sudo bash src/install-orbslam2-build.sh
+sudo bash install-orbslam2-build.sh
