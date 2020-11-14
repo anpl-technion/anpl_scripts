@@ -240,10 +240,13 @@ esac
 bash show-git-branch.sh
 git config --global credential.helper 'cache --timeout 3600'
 
-cd src/
 echo "export PATH=$PATH:$(pwd)" >> ~/.bashrc
-echo "export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/arm-linux-gnueabihf/pkgconfig"
+echo "export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/arm-linux-gnueabihf/pkgconfig" >> ~/.bashrc
 
+# Essential prefix folder; used for from-source dependencies
+sudo mkdir /usr/ANPLprefix/
+
+cd src/
 bash install-gtsam${GTSAM_VER}.sh & wait $!
 case $UBUNTU_DISTRO in
 	16.04) bash install-ros-kinetic.sh;;

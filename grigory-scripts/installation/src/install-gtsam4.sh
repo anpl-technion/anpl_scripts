@@ -8,8 +8,10 @@ CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DGTSAM_BUILD_TESTS=OFF -DGTSAM_BUIL
 GIT_LINK="https://github.com/borglab/gtsam.git"
 
 echo "[INFO] Installing GTSAM make dependencies..."
+sudo apt-get install g++ cmake -y
+sudo apt-get install python-dev libbz2-dev libtbb-dev -y
 sudo apt-get install libboost-all-dev libtbb-dev -y
-echo "[INFO] Installing GTSAM 3.2.1 in progress..."
+echo "[INFO] Installing GTSAM 4.0.2 in progress..."
 sudo rm -rf $PROJECT_DIR/gtsam-*
 mkdir -p $PROJECT_DIR
 cd $PROJECT_DIR
@@ -23,4 +25,4 @@ mkdir build && cd build
 cmake $CMAKE_FLAGS ..
 make -j4
 sudo make install -j4
-echo "export LD_LIBRARY_PATH=/usr/ANPLprefix/lib:$LD_LIBRARY_PATH" >> ~/.bashrc
+echo "export LD_LIBRARY_PATH=$PREFIX/lib:$LD_LIBRARY_PATH" >> ~/.bashrc
