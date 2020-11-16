@@ -30,26 +30,8 @@ anpl_mrbsp_gtsam4(){
 	bash install-octomap.sh & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it 
 	bash install-libccd.sh --apt=false  & wait $! #(AG need it - apt=false)
 	bash install-libfcl.sh --apt=true & wait $! #(AG need it - apt=true)
-
-	while true; do
-		echo "Please specify if you want to use a default version of OMPL. This option is recommended if you are NOT planning to work with custom version of OMPL. Otherwise, OMPL library version 1.4.2 will be installed inside ANPLprefix. If you further want to upgrade the version, please refer to 'install-ompl.sh' script."
-		read -p "Do you want to install default version of OMPL?(Recommended) [Y/n]" yn
-			case $yn in
-			[Yy]* )
-				bash install-ompl.sh --apt=true & wait $! #(AG need it, apt=true)
-				# 'set-ompl-from-apt.sh' modifies action generator CMake
-				bash set-ompl-from-apt.sh & wait $!
-				break
-			;;
-			[Nn]* )
-				bash install-ompl.sh --apt=false & wait $! 
-				AG_CMAKE_PATH=~/ANPL/infrastructure/mrbsp_ws/src/anpl_mrbsp/action_generator/CMakeLists.txt
-				read -p "To make OMPL 1.4.2 accecable to the infrastructure, please go to $AG_CMAKE_PATH right now and read lines 74-80 carefully\n" ENTR
-				break
-			;;
-			* ) echo "Please answer yes or no.";;
-	    esac
-	done
+	
+	bash install-ompl.sh --apt=false & wait $! #(AG need it, apt=false)
 
 	bash install-diverse-short-path.sh & wait $!	#(AG need it)
 	bash install-csm.sh --apt=false & wait $!	#(git=true)
@@ -74,7 +56,7 @@ anpl_mrbsp_quad-interactive(){
 	bash install-octomap.sh & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]
 	bash install-libccd.sh --apt=false  & wait $! #(AG need it - apt=false)
 	bash install-libfcl.sh --apt=true & wait $! #(AG need it - apt=true)
-	bash install-ompl.sh   --apt=true & wait $! #(AG need it, apt=true)
+	bash install-ompl.sh   --apt=false & wait $! #(AG need it, apt=false)
 
 	bash install-diverse-short-path.sh & wait $!	#(AG need it)
 	bash install-csm.sh --apt=false & wait $!	#(git=true)
