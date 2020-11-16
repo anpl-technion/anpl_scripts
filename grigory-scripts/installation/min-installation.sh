@@ -62,7 +62,9 @@ anpl_mrbsp_gtsam4(){
 	ROSARIA_CMAKE_PATH=~/ANPL/infrastructure/mrbsp_ws/src/rosaria/CMakeLists.txt
 	sed -ie '/^#set(ROS_BUILD_TYPE RelWithDebInfo)/a add_compile_options(-std=c++11)' $ROSARIA_CMAKE_PATH
 
-	sudo apt-get install xterm graphiz-dev -y & wait $!
+	sudo apt-get install xterm  -y
+	# Ubuntu 16 only
+	sudo apt-get install graphiz-dev -y
 }
 
 
