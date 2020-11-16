@@ -46,7 +46,7 @@ anpl_mrbsp_gtsam4(){
 
 	sudo apt-get install xterm  -y
 	# Ubuntu 16 only
-	sudo apt-get install graphiz-dev -y
+	sudo apt-get install graphviz-dev -y
 }
 
 
