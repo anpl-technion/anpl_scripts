@@ -24,7 +24,7 @@ UBUNTU_DISTRO=$(cat /etc/os-release | grep -i version_id | cut -d'"' -f2)
 #########################################################################
 # Boost installation
 sudo apt-get install g++ cmake -y
-sudo apt-get install python-dev libbz2-dev libtbb-dev -y
+sudo apt-get install python-dev libbz2-dev libtbb-dev libeigen3-dev -y
 echo "[INFO] Installing BOOST 1.58 in process..."
 case $UBUNTU_DISTRO in
 	test ) echo "[INFO] skipping Boost..." ;;
@@ -46,8 +46,6 @@ case $UBUNTU_DISTRO in
 
 		echo "go to $PREFIX/include/boost/optional/optional.hpp and add #define BOOST_OPTIONAL_CONFIG_ALLOW_BINDING_TO_RVALUES to the headers"
 		sudo sed -i '18 a #define BOOST_OPTIONAL_CONFIG_ALLOW_BINDING_TO_RVALUES' $PREFIX/include/boost/optional/optional.hpp
-		CMAKE_FLAGS="${CMAKE_FLAGS} -DCMAKE_EXE_LINKER_FLAGS=\"-static\" "
-		echo $CMAKE_FLAGS
 		;;
 esac
 
@@ -74,12 +72,6 @@ fi
 
 cd $PROJECT_DIR/$GTSAM_FOLDER_NAME
 
-# link GTSAM with Boost staticlly instead appeal shared objects
-case $UBUNTU_DISTRO in
-	16.04 ) ;;
-	* ) sed -i '91 a set(Boost_USE_STATIC_LIBS ON)' CMakeLists.txt ;;
-esac
-
 #from https://collab.cc.gatech.edu/borg/gtsam/#quickstart
 
 mkdir build && cd build
@@ -87,7 +79,3 @@ cmake $CMAKE_FLAGS ..
 make -j7
 sudo make install -j7
 
-case $UBUNTU_DISTRO in
-	16.04 ) ;;
-	*) sudo rm -fr $PREFIX/include/*boost* $PREFIX/lib/*boost*
-esac
