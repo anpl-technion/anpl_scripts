@@ -17,11 +17,9 @@ git clone $LINK $FOLDER_NAME
 sed -ie '/^#set(ROS_BUILD_TYPE RelWithDebInfo)/a add_compile_options(-std=c++11)' $FOLDER_NAME/CMakeLists.txt
 
 source $DEVEL
-sudo apt-get install libaria-dev -y
+rosdep update
+rosdep install rosaria -y
 
+sudo apt-get install libaria-dev -y
 cd $CATKIN_WS
 catkin build rosaria
-
-rosdep update
-echo $ROS_PACKAGE_PATH
-rosdep install rosaria -y

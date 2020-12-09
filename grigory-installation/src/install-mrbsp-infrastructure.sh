@@ -39,9 +39,8 @@ sudo rm -rf $WS_PATH
 
 source /opt/ros/$ROS_DISTRO/setup.bash
 mkdir -p $WS_PATH/src && cd $WS_PATH
-#catkin init
-#catkin build
-catkin_make 
+catkin init
+catkin build
 source devel/source.bash
 echo $ROS_PACKAGE_PATH
 

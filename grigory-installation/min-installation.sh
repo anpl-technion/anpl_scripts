@@ -309,9 +309,8 @@ source_bashrc
 #################### Robot nodes ####################
 if [[ $ROBOTS =~ "pioneer" ]]; then
 	bash install-pioneer-nodes.sh
-	source_bashrc
-	echo $ROS_PACKAGE_PATH
-	read -p 'Check-a-check'
+	bash install-rosaria.sh
+	# rosaria fix: run twice, dk why
 	bash install-rosaria.sh 
 	#ROSARIA_CMAKE_PATH=~/ANPL/infrastructure/mrbsp_ws/src/rosaria/CMakeLists.txt
 	#sed -ie '/^#set(ROS_BUILD_TYPE RelWithDebInfo)/a add_compile_options(-std=c++11)' $ROSARIA_CMAKE_PATH
