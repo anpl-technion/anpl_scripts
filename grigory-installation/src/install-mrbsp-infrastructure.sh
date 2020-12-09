@@ -41,18 +41,18 @@ source /opt/ros/$ROS_DISTRO/setup.bash
 mkdir -p $WS_PATH/src && cd $WS_PATH
 catkin init
 catkin build
-source devel/source.bash
+source devel/setup.bash
 echo $ROS_PACKAGE_PATH
 
 cd $WS_SRC
 
-if [ ! -d "$WS_SRC/$PROJECT_NAME" ]; then
+while [ ! -d "$WS_SRC/$PROJECT_NAME" ]; do
   git clone -b $BRANCH https://bitbucket.org/ANPL/$PROJECT_NAME.git $WS_SRC/$PROJECT_NAME 
-fi 
+done
 
-if [ ! -d "$WS_SRC/anpl_inf" ]; then 
+while [ ! -d "$WS_SRC/anpl_inf" ]; do 
   git clone https://bitbucket.org/ANPL/anpl_ros_infrastructur anpl_inf
-fi
+done
 
 echo "source $WS_PATH/devel/setup.bash" >> ~/.bashrc
 source $WS_PATH/devel/setup.bash

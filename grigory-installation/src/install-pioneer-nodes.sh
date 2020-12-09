@@ -40,13 +40,13 @@ fi
 
 cd $WS_SRC
 
-if [ ! -d "$WS_SRC/pioneer_keyop" ]; then
+while [ ! -d "$WS_SRC/pioneer_keyop" ]; do
   git clone https://bitbucket.org/ANPL/pioneer_keyop
-fi
+done
 
-if [ ! -d "$WS_SRC/amr-ros-config" ]; then 
+while [ ! -d "$WS_SRC/amr-ros-config" ]; do 
   git clone https://github.com/MobileRobots/amr-ros-config
-fi
+done
 
 if [ $PROJECT_NAME = mrbsp_ros ]; then
 	bash $SCRIPTS_DIR/install-rotors-simulation.sh
