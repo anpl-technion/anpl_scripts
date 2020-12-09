@@ -4,4 +4,4 @@
 PREFIX=/usr/ANPLprefix
 
 sudo mkdir -p $PREFIX/share
-sudo cp -rv cmake $PREFIX/share/cmake
+sudo cp -rv cmake $PREFIX/share/

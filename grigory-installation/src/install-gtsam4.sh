@@ -32,5 +32,5 @@ if [ $FROM_APT = false ]; then
 else
 	sudo add-apt-repository ppa:borglab/gtsam-develop
 	sudo apt update
-	sudo apt install libgtsam-dev -y
+	sudo apt install libgtsam-dev libgtsam-unstable-dev -y
 fi
