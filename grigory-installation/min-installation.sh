@@ -250,14 +250,15 @@ fi
 
 echo -e $'\033[0;42m Choosing installation option \033[0m'
 while true; do
-	read -p $'What robots you going to use: \n\t1. Pioneer \n\t2. Quad \n\t3. Pioneer and Quad\n: ' NUM
+	read -p $'What robots you going to use: \n\t1. Pioneer \n\t2. Quad \n\t3. Pioneer and Quad \n\t4. Simulator only\n: ' NUM
 	case $NUM in
 		[1] ) ROBOTS=pioneer;;
 		[2] ) ROBOTS=quad;;
 		[3] ) ROBOTS=pioneer+quad;;
+		[4] ) ROBOTS=simulator;
 	esac
 	case $NUM in
-		[123] ) break;;
+		[1234] ) break;;
 		* ) echo -e "\033[0;41m Please choose correct option.\033[0m";;
 	esac
 done
@@ -274,15 +275,20 @@ while true; do
 	esac
 done
 while true; do
-	read -p $'Which sensors you going to use: \n\t1. Desktop-Full Install: (Recommended) : ROS, rqt, rviz, robot-generic libraries, 2D/3D simulators \n\t2. Desktop Install: ROS, rqt, rviz, and robot-generic libraries\n: ' NUM
-	case $NUM in
-		[1] ) ROS_OPTION=desktop-full;;
-		[2] ) ROS_OPTION=desktop;;
-	esac
-	case $NUM in
-		[12] ) break;;
-		* ) echo -e "\033[0;41m Please choose correct option.\033[0m";;
-	esac
+	if [[ $ROBOTS =~ "simulator" ]]; then
+		ROS_OPTION=desktop-full
+		break
+	else
+		read -p $'Which sensors you going to use: \n\t1. Desktop-Full(Recommended) : ROS, rqt, rviz, robot-generic libraries, 2D/3D simulators \n\t2. Desktop: ROS, rqt, rviz, and robot-generic libraries\n: ' NUM
+		case $NUM in
+			[1] ) ROS_OPTION=desktop-full;;
+			[2] ) ROS_OPTION=desktop;;
+		esac
+		case $NUM in
+			[12] ) break;;
+			* ) echo -e "\033[0;41m Please choose correct option.\033[0m";;
+		esac
+	fi
 done
 
 ################### Setups and General Installations ####################
@@ -290,7 +296,8 @@ bash show-git-branch.sh
 git config --global credential.helper 'cache --timeout 3600'
 
 echo "export PATH=$PATH:$(pwd)" >> ~/.bashrc
-echo "export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/arm-linux-gnueabihf/pkgconfig" >> ~/.bashrc
+#echo "export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/arm-linux-gnueabihf/pkgconfig" >> ~/.bashrc
+echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/ANPLprefix/lib" >> ~/.bashrc
 
 # Essential prefix folder; used for from-source dependencies
 sudo mkdir /usr/ANPLprefix/
@@ -311,16 +318,17 @@ source_bashrc
 #################### Robot nodes ####################
 if [[ $ROBOTS =~ "pioneer" ]]; then
 	bash install-pioneer-nodes.sh
-	bash install-rosaria.sh
 	# rosaria fix: run twice, dk why
-	bash install-rosaria.sh 
+	#bash install-rosaria.sh
 	#ROSARIA_CMAKE_PATH=~/ANPL/infrastructure/mrbsp_ws/src/rosaria/CMakeLists.txt
-	#sed -ie '/^#set(ROS_BUILD_TYPE RelWithDebInfo)/a add_compile_options(-std=c++11)' $ROSARIA_CMAKE_PATH
+	#sed -ie '/^#set(ROS_BUILD_TYPE RelWithDebInfo)/a add_compile_options(-std=c++11)' $ROSARIA_CMAKE_PATH0
 fi
 if [[ $ROBOTS =~ "quad" ]]; then
 	bash install-mavros.sh & wait $!
 fi
-
+if [[ $ROBOTS =~ "simulator" ]]; then
+	bash install-simulator-nodes.sh
+fi
 #################### Sensors nodes ####################
 if [[ $SENSORS =~ "lidar" ]]; then
 	if uname -r | grep -q tegra; then
@@ -335,8 +343,9 @@ if [[ $SENSORS =~ "zed" ]]; then
 	if uname -r | grep -q tegra; then
 		echo $'Please install ZED-SDK 2.x.x manually: https://www.stereolabs.com/docs/installation/jetson/'
 		read -p "Press ENTR when you done..."
+	else
+		bash install-zed-sdk.sh & wait $!
 	fi
-	bash install-zed-sdk.sh & wait $!
 fi
 ########### Call for appropriate installation routine ###########
 ###### The routine could be consired as core installation #######
@@ -351,16 +360,16 @@ fi
 ########### Build ###########
 # mapper compilation requiers about 5G RAM on each core
 # so we create additional swap space on disk.
-sudo fallocate -l 8G /tmpswapfile
-sudo chmod 600 /tmpswapfile
-sudo mkswap /tmpswapfile
-sudo swapon /tmpswapfile
+#sudo fallocate -l 8G /tmpswapfile
+#sudo chmod 600 /tmpswapfile
+#sudo mkswap /tmpswapfile
+#sudo swapon /tmpswapfile
 # build
 cd ~/ANPL/infrastructure/mrbsp_ws
 catkin build -j3
 # and remove swap space
-sudo swapoff -v /tmpswapfile
-sudo rm /tmpswapfile
+#sudo swapoff -v /tmpswapfile
+#sudo rm /tmpswapfile
 
 echo -e "\033[0;36m ++++  End of installation ++++    \033[0m"
 

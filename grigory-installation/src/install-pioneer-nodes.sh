@@ -48,6 +48,4 @@ while [ ! -d "$WS_SRC/amr-ros-config" ]; do
   git clone https://github.com/MobileRobots/amr-ros-config
 done
 
-if [ $PROJECT_NAME = mrbsp_ros ]; then
-	bash $SCRIPTS_DIR/install-rotors-simulation.sh
-fi
+bash $SCRIPTS_DIR/install-rosaria.sh

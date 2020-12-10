@@ -7,14 +7,14 @@ BRANCH=release/$GTSAM_VER
 PROJECT_NAME=gtsam-$GTSAM_VER
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DGTSAM_BUILD_TESTS=OFF -DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF -DGTSAM_BUILD_UNSTABLE=OFF -DCMAKE_BUILD_TYPE=Release"
 GIT_LINK="https://github.com/borglab/gtsam.git"
-FROM_APT=true
+FROM_APT=false
 
 echo "[INFO] Installing GTSAM make dependencies..."
 sudo apt-get install g++ cmake -y
 sudo apt-get install python-dev libbz2-dev libtbb-dev -y
 sudo apt-get install libboost-all-dev libtbb-dev libeigen3-dev -y
 if [ $FROM_APT = false ]; then
-	echo "[INFO] Installing GTSAM 4.0.2 in progress..."
+	echo "[INFO] Installing GTSAM $GTSAM_VER in progress..."
 	sudo rm -rf $PROJECT_DIR/gtsam-*
 	mkdir -p $PROJECT_DIR
 	cd $PROJECT_DIR
