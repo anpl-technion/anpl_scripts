@@ -255,10 +255,21 @@ while true; do
 		[1] ) ROBOTS=pioneer;;
 		[2] ) ROBOTS=quad;;
 		[3] ) ROBOTS=pioneer+quad;;
-		[4] ) ROBOTS=simulator;
+		[4] ) ROBOTS=simulator;;
 	esac
 	case $NUM in
-		[1234] ) break;;
+		[123] )
+			while true; do
+				read -p $'Do you wish to install simulator and models? [Y/n]\n :' yn
+				case $yn in
+					[Yy] ) ROBOTS=$ROBOTS+simulator
+							break;;
+					[Nn] ) break;;
+					* ) echo "Please answer 'y' or 'n'";;
+				esac
+				done
+			break;;
+		[4] ) break;;
 		* ) echo -e "\033[0;41m Please choose correct option.\033[0m";;
 	esac
 done
@@ -278,17 +289,16 @@ while true; do
 	if [[ $ROBOTS =~ "simulator" ]]; then
 		ROS_OPTION=desktop-full
 		break
-	else
-		read -p $'Which sensors you going to use: \n\t1. Desktop-Full(Recommended) : ROS, rqt, rviz, robot-generic libraries, 2D/3D simulators \n\t2. Desktop: ROS, rqt, rviz, and robot-generic libraries\n: ' NUM
-		case $NUM in
-			[1] ) ROS_OPTION=desktop-full;;
-			[2] ) ROS_OPTION=desktop;;
-		esac
-		case $NUM in
-			[12] ) break;;
-			* ) echo -e "\033[0;41m Please choose correct option.\033[0m";;
-		esac
 	fi
+	read -p $'Which sensors you going to use: \n\t1. Desktop-Full(Recommended) : ROS, rqt, rviz, robot-generic libraries, 2D/3D simulators \n\t2. Desktop: ROS, rqt, rviz, and robot-generic libraries\n: ' NUM
+	case $NUM in
+		[1] ) ROS_OPTION=desktop-full;;
+		[2] ) ROS_OPTION=desktop;;
+	esac
+	case $NUM in
+		[12] ) break;;
+		* ) echo -e "\033[0;41m Please choose correct option.\033[0m";;
+	esac
 done
 
 ################### Setups and General Installations ####################
@@ -319,12 +329,12 @@ source_bashrc
 if [[ $ROBOTS =~ "pioneer" ]]; then
 	bash install-pioneer-nodes.sh
 	# rosaria fix: run twice, dk why
-	#bash install-rosaria.sh
+	bash install-rosaria.sh
 	#ROSARIA_CMAKE_PATH=~/ANPL/infrastructure/mrbsp_ws/src/rosaria/CMakeLists.txt
 	#sed -ie '/^#set(ROS_BUILD_TYPE RelWithDebInfo)/a add_compile_options(-std=c++11)' $ROSARIA_CMAKE_PATH0
 fi
 if [[ $ROBOTS =~ "quad" ]]; then
-	bash install-mavros.sh & wait $!
+	bash install-mavros.sh
 fi
 if [[ $ROBOTS =~ "simulator" ]]; then
 	bash install-simulator-nodes.sh
@@ -360,16 +370,43 @@ fi
 ########### Build ###########
 # mapper compilation requiers about 5G RAM on each core
 # so we create additional swap space on disk.
-#sudo fallocate -l 8G /tmpswapfile
-#sudo chmod 600 /tmpswapfile
-#sudo mkswap /tmpswapfile
-#sudo swapon /tmpswapfile
+while true; do
+	read -p $'We are about to build the infrastructure. Do you want to add swap space to your device? [Y/n]\n: ' yn
+	case $yn in
+		[Yy] )
+			SWAP=true
+			while true; do
+				read -p $'Type how many Gb you want to allocate? Be sure you have enough space on your hard drive.\n: ' SWAP_SIZE
+				if [[ -n ${SWAP_SIZE//[0-9]/} ]]; then
+					echo 'Please choose correct option.'
+				elif [ $SWAP_SIZE -lt 0 ]; then
+					echo 'Please choose correct option.'
+				else
+					break
+				fi
+			done
+			break
+			;;
+        [Nn] ) break;;
+        * ) echo "Please answer 'y' or 'n'";;
+    esac
+done
+
+if [ $SWAP ]; then
+	sudo fallocate -l 8G /tmpswapfile
+	sudo chmod 600 /tmpswapfile
+	sudo mkswap /tmpswapfile
+	sudo swapon /tmpswapfile
+fi
 # build
 cd ~/ANPL/infrastructure/mrbsp_ws
 catkin build -j3
+
 # and remove swap space
-#sudo swapoff -v /tmpswapfile
-#sudo rm /tmpswapfile
+if [ $SWAP ]; then
+	sudo swapoff -v /tmpswapfile
+	sudo rm /tmpswapfile
+fi
 
 echo -e "\033[0;36m ++++  End of installation ++++    \033[0m"
 
