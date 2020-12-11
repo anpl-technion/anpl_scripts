@@ -260,7 +260,7 @@ while true; do
 	case $NUM in
 		[123] )
 			while true; do
-				read -p $'Do you wish to install simulator and models? [Y/n]\n :' yn
+				read -p $'Do you wish to install simulator and models? [Y/n]\n: ' yn
 				case $yn in
 					[Yy] ) ROBOTS=$ROBOTS+simulator
 							break;;

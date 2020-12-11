@@ -7,7 +7,7 @@ BRANCH=release/$GTSAM_VER
 PROJECT_NAME=gtsam-$GTSAM_VER
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DGTSAM_BUILD_TESTS=OFF -DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF -DGTSAM_BUILD_UNSTABLE=OFF -DCMAKE_BUILD_TYPE=Release"
 GIT_LINK="https://github.com/borglab/gtsam.git"
-FROM_APT=false
+FROM_APT=true
 
 echo "[INFO] Installing GTSAM make dependencies..."
 sudo apt-get install g++ cmake -y
