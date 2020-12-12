@@ -3,7 +3,7 @@ WS_NAME=mrbsp_ws
 WS_PATH=~/ANPL/infrastructure/$WS_NAME
 WS_SRC=$WS_PATH/src
 PREFIX=/usr/ANPLprefix
-SCRIPTS_DIR=~/ANPL/scripts/grigory-scripts/installation/src
+SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 
 # Argument read.
