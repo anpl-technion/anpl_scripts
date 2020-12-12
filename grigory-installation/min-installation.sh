@@ -49,35 +49,6 @@ anpl_mrbsp_gtsam4(){
 	sudo apt-get install graphviz-dev -y
 }
 
-
-anpl_mrbsp_quad-interactive(){
-	# carkin belief:
-	bash install-libspdlog.sh --apt=false  & wait $! #(apt=false, from git) - mrbsp_utils wanted it
-	bash install-octomap.sh & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]
-	bash install-libccd.sh --apt=false  & wait $! #(AG need it - apt=false)
-	bash install-libfcl.sh --apt=true & wait $! #(AG need it - apt=true)
-	bash install-ompl.sh   --apt=false & wait $! #(AG need it, apt=false)
-
-	bash install-diverse-short-path.sh & wait $!	#(AG need it)
-	bash install-csm.sh --apt=false & wait $!	#(git=true)
-
-	bash install-find-cmakes.sh & wait $!
-
-	json_bits	
-	bash install-planar-icp.sh --branch=$PLANAR_BRANCH #(branch gtsam4)
-	#bash install-libpcl-1.8.sh & wait $!
-
-	sudo apt-get install xterm  -y
-	sudo apt-get install graphviz-dev -y
-
-	if ! uname -r | grep -q tegra; then
-		bash install-cuda9.2.sh & wait $!
-		bash install-zed-sdk.sh & wait $!
-	else
-		read -p "Please install JetPack and CUDA manually. Use Ariel's manuals on JIRA to find out versions you need.\n"
-	fi
-}
-
 #=============================
 #	new_inf GTSAM3 LiDAR
 #=============================
@@ -162,18 +133,12 @@ mrbsp_ros_or-vi_project(){
 
 	sudo apt-get install xterm  -y
 	sudo apt-get install graphviz-dev -y
-
-	bash install-vlfeat.sh & wait $!
-	bash install-libpcl-1.8.sh & wait $!
-	#bash install-cuda9.2.sh & wait $!
-	#bash install-zed-sdk.sh & wait $!
-	bash install-orbslam2.sh & wait $!
-	#bash install-viso2.sh & wait $!
 }
 
 
 ######################## Script starts here ########################
 UBUNTU_DISTRO=$(cat /etc/os-release | grep -i version_id | cut -d'"' -f2)
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 case $UBUNTU_DISTRO in
 	16.04) ;;
@@ -201,17 +166,15 @@ while true; do
 		[1] ) PROJECT_NAME=anpl_mrbsp
 			echo -e "\033[0;42m Choosing Branch \033[0m"
 			while true; do
-				read -p $'Choose which branch you want: \n\t1. master[Lidar-gtsam3]\n\t2. gtsam4[Lidar-gtsam4] \n\t3. quad-interactive[Lidar] \n: ' NUM
+				read -p $'Choose which branch you want: \n\t1. master[Lidar-gtsam3]\n\t2. gtsam4[Lidar-gtsam4]\n: ' NUM
 				case $NUM in
 					[1] ) BRANCH=master
 						GTSAM_VER=3;;
 					[2] ) BRANCH=gtsam4
 						GTSAM_VER=4;;
-					[3] ) BRANCH=quad-interactive
-						GTSAM_VER=4;;
 				esac
 				case $NUM in
-					[123] ) break;;
+					[12] ) break;;
 					* ) echo -e "\033[0;41m Please choose correct option.\033[0m";;
 				esac
 			done
@@ -224,7 +187,8 @@ while true; do
 				GTSAM_VER=3
 				case $NUM in
 					[1] ) BRANCH=t-bsp-julia;;
-					[2] ) BRANCH=or-vi_project;;
+					[2] ) BRANCH=or-vi_project
+						VISION=true;;
 				esac
 				case $NUM in
 					[12] ) break;;
@@ -305,13 +269,13 @@ done
 bash show-git-branch.sh
 git config --global credential.helper 'cache --timeout 3600'
 
-echo "export PATH=$PATH:$(pwd)" >> ~/.bashrc
+echo "export PATH=$PATH:$SCRIPT_DIR" >> ~/.bashrc
 #echo "export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/arm-linux-gnueabihf/pkgconfig" >> ~/.bashrc
 echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/ANPLprefix/lib" >> ~/.bashrc
 
 # Essential prefix folder; used for from-source dependencies
 sudo mkdir /usr/ANPLprefix/
-cd src/
+cd $SCRIPT_DIR/src/
 
 bash install-gtsam${GTSAM_VER}.sh & wait $!
 case $UBUNTU_DISTRO in
@@ -330,8 +294,6 @@ if [[ $ROBOTS =~ "pioneer" ]]; then
 	bash install-pioneer-nodes.sh
 	# rosaria fix: run twice, dk why
 	bash install-rosaria.sh
-	#ROSARIA_CMAKE_PATH=~/ANPL/infrastructure/mrbsp_ws/src/rosaria/CMakeLists.txt
-	#sed -ie '/^#set(ROS_BUILD_TYPE RelWithDebInfo)/a add_compile_options(-std=c++11)' $ROSARIA_CMAKE_PATH0
 fi
 if [[ $ROBOTS =~ "quad" ]]; then
 	bash install-mavros.sh
@@ -361,6 +323,15 @@ fi
 ###### The routine could be consired as core installation #######
 "$PROJECT_NAME"_"$BRANCH"
 
+if [ $VISION ]; then
+	bash install-vlfeat.sh & wait $!
+	#bash install-libpcl-1.8.sh & wait $!
+	#bash install-cuda9.2.sh & wait $!
+	#bash install-zed-sdk.sh & wait $!
+	bash install-orbslam2.sh & wait $!
+	#bash install-viso2.sh & wait $!
+
+fi
 
 ########### Gazebo's 'Error in REST request' fix ###########
 if [ -f "~/.ignition/fuel/config.yaml" ]; then 
