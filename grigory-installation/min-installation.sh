@@ -347,7 +347,7 @@ while true; do
 done
 
 if [ $SWAP ]; then
-	sudo fallocate -l 8G /tmpswapfile
+	sudo fallocate -l ${SWAP_SIZE}G /tmpswapfile
 	sudo chmod 600 /tmpswapfile
 	sudo mkswap /tmpswapfile
 	sudo swapon /tmpswapfile

@@ -41,7 +41,7 @@ done
 cd $ROTOR_DIR && git checkout ac77a8a && cd ..
 
 #delete rotors_hil_interface because we didn't figure out yet how to compile it.
-cd $CATKIN_WS/src/$ROTOR_DIR
+cd $WS_SRC/$ROTOR_DIR
 rm -rf rotors_hil_interface/
 
 echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:$HOME/ANPL/infrastructure/mrbsp_ws/src/anpl_inf/gazebo_models" >> ~/.bashrc
