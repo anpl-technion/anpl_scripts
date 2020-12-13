@@ -41,10 +41,6 @@ anpl_mrbsp_gtsam4(){
 	json_bits
 	bash install-planar-icp.sh --branch=$PLANAR_BRANCH #(branch gtsam4)
 
-	#bash install-rosaria.sh & wait $!
-	#ROSARIA_CMAKE_PATH=~/ANPL/infrastructure/mrbsp_ws/src/rosaria/CMakeLists.txt
-	#sed -ie '/^#set(ROS_BUILD_TYPE RelWithDebInfo)/a add_compile_options(-std=c++11)' $ROSARIA_CMAKE_PATH
-
 	sudo apt-get install xterm  -y
 	sudo apt-get install graphviz-dev -y
 }
@@ -63,18 +59,13 @@ anpl_mrbsp_master(){
 	bash install-diverse-short-path.sh & wait $!  	#(AG need it)
 	bash install-csm.sh & wait $! 					#(git=true)
 
-	#bash install-rosaria.sh & wait $!
 	bash install-find-cmakes.sh & wait $!
-	#sudo cp -r cmake /usr/ANPLprefix/share/
 
 	json_bits
 	bash install-planar-icp.sh --branch=$PLANAR_BRANCH & wait $!
 
 	sudo apt-get install xterm  -y
 	sudo apt-get install graphviz-dev -y
-
-	#cd ~/ANPL/infrastructure/mrbsp_ws/src/rosaria
-	#sed -ie '/^#set(ROS_BUILD_TYPE RelWithDebInfo)/a add_compile_options(-std=c++11)' CMakeLists.txt
 }
 
 #=============================
@@ -91,15 +82,12 @@ mrbsp_ros_t-bsp-julia(){
 	bash install-diverse-short-path.sh & wait $!  	#(AG need it)
 	bash install-csm.sh & wait $! 			#(git=true)
 
-	#bash install-rosaria.sh & wait $!
-	#bash install-mavros.sh & wait $!
-	#bash install-rotors-simulation.sh & wait $!
-
 	bash install-find-cmakes.sh & wait $!
-	#sudo cp -r cmake /usr/ANPLprefix/share/
 
 	json_bits
 	bash install-planar-icp.sh --branch=$PLANAR_BRANCH & wait $!
+
+	bash install-mavros.sh & wait $! # required by pixhawk_controller
 
 	sudo apt-get install xterm  -y
 	sudo apt-get install graphviz-dev -y
@@ -114,22 +102,17 @@ mrbsp_ros_or-vi_project(){
 	bash install-octomap.sh & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [su
 	bash install-libccd.sh --apt=true  & wait $!	#(AG need it - apt=true)
 	bash install-libfcl.sh --apt=true & wait $!	#(AG need it - apt=true)
-	#bash install-libccd.sh --apt=false  & wait $!	#(AG need it - apt=true)
-	#bash install-libfcl.sh --apt=false & wait $!	#(AG need it - apt=true)
 	bash install-ompl.sh --apt=false & wait $!  	#(AG need it, apt=false)
 
 	bash install-diverse-short-path.sh & wait $!  	#(AG need it)
 	bash install-csm.sh & wait $! 			#(git=true)
 
-	#bash install-rosaria.sh & wait $!
-	#bash install-mavros.sh & wait $!
-	#bash install-rotors-simulation.sh & wait $!
-
 	json_bits
 	bash install-find-cmakes.sh & wait $!
-	#sudo cp -r cmake /usr/ANPLprefix/share/
 
 	bash install-planar-icp.sh --branch=$PLANAR_BRANCH & wait $!
+
+	bash install-mavros.sh & wait $! # required by pixhawk_controller
 
 	sudo apt-get install xterm  -y
 	sudo apt-get install graphviz-dev -y
