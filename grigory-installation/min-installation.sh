@@ -1,26 +1,23 @@
 #!/bin/bash
 
+UBUNTU_DISTRO=$(cat /etc/os-release | grep -i version_id | cut -d'"' -f2)
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+VISION=false
+CUSTOM_CORE=false
+
+case $UBUNTU_DISTRO in
+	16.04) ;;
+	18.04) ;;
+	*) 	read -p $'Installation script currently only available on Ubuntu 16.04 and Ubuntu 16.04. Installation cancelled.'
+		exit;;
+esac
+
 ########### "source ~/.bashrc" command from non-interactive shell ###########
 source_bashrc(){
 	cp ~/.bashrc ~/.bashrc_copy
 	sudo tail -n +10 ~/.bashrc_copy | tee ~/.bashrc | sleep 1 #remove check for interactiveness
 	source ~/.bashrc
 	mv ~/.bashrc_copy ~/.bashrc
-}
-
-json_bits(){
-	JSON_C_BITS_LINES_TO_BE_COMMENTED=('#ifndef min' \
-		'#define min(a,b) ((a) < (b) ? (a) : (b))' \
-		'#endif' \
-		'#ifndef max' \
-		'#define max(a,b) ((a) > (b) ? (a) : (b))')
-	JSON_C_BITS_PATH=/usr/ANPLprefix/include/json-c/bits.h
-	
-	for line in "${JSON_C_BITS_LINES_TO_BE_COMMENTED[@]}"
-	do
-		sudo sed -i "s|${line}|//${line}|" $JSON_C_BITS_PATH
-	done
-	echo "#endif" | sudo tee -a $JSON_C_BITS_PATH
 }
 
 
@@ -38,7 +35,6 @@ anpl_mrbsp_gtsam4(){
 
 	bash install-find-cmakes.sh & wait $!
 
-	json_bits
 	bash install-planar-icp.sh --branch=$PLANAR_BRANCH #(branch gtsam4)
 
 	sudo apt-get install xterm  -y
@@ -61,7 +57,6 @@ anpl_mrbsp_master(){
 
 	bash install-find-cmakes.sh & wait $!
 
-	json_bits
 	bash install-planar-icp.sh --branch=$PLANAR_BRANCH & wait $!
 
 	sudo apt-get install xterm  -y
@@ -84,7 +79,6 @@ mrbsp_ros_t-bsp-julia(){
 
 	bash install-find-cmakes.sh & wait $!
 
-	json_bits
 	bash install-planar-icp.sh --branch=$PLANAR_BRANCH & wait $!
 
 	bash install-mavros.sh & wait $! # required by pixhawk_controller
@@ -107,7 +101,6 @@ mrbsp_ros_or-vi_project(){
 	bash install-diverse-short-path.sh & wait $!  	#(AG need it)
 	bash install-csm.sh & wait $! 			#(git=true)
 
-	json_bits
 	bash install-find-cmakes.sh & wait $!
 
 	bash install-planar-icp.sh --branch=$PLANAR_BRANCH & wait $!
@@ -120,8 +113,6 @@ mrbsp_ros_or-vi_project(){
 
 
 ######################## Script starts here ########################
-UBUNTU_DISTRO=$(cat /etc/os-release | grep -i version_id | cut -d'"' -f2)
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 case $UBUNTU_DISTRO in
 	16.04) ;;
@@ -129,7 +120,6 @@ case $UBUNTU_DISTRO in
 	*) 	read -p $'Installation script currently only available on Ubuntu 16.04 and Ubuntu 16.04. Installation cancelled.'
 		exit;;
 esac
-
 ############################ Inputs read ############################
 echo -e "\033[0;36mWelcome to ANPL's Multi-Robot Belief Space Planner open source project installator!"
 echo -e "Before installation please check if you have account @BitBucket and have full access to ANPL repository. If you don't please contact Vadim to get an access.\033[0m"
@@ -260,7 +250,6 @@ echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/ANPLprefix/lib" >> ~/.bashrc
 sudo mkdir /usr/ANPLprefix/
 cd $SCRIPT_DIR/src/
 
-bash install-gtsam${GTSAM_VER}.sh & wait $!
 case $UBUNTU_DISTRO in
 	16.04) bash install-ros-kinetic.sh $ROS_OPTION;;
 	18.04) bash install-ros-melodic.sh $ROS_OPTION;;
@@ -271,6 +260,7 @@ source_bashrc
 bash install-ros-packages.sh
 bash install-mrbsp-infrastructure.sh --infrastructure=$PROJECT_NAME --branch=$BRANCH
 source_bashrc
+bash install-gtsam${GTSAM_VER}.sh & wait $!
 
 #################### Robot nodes ####################
 if [[ $ROBOTS =~ "pioneer" ]]; then
@@ -284,6 +274,7 @@ fi
 if [[ $ROBOTS =~ "simulator" ]]; then
 	bash install-simulator-nodes.sh
 fi
+
 #################### Sensors nodes ####################
 if [[ $SENSORS =~ "lidar" ]]; then
 	if uname -r | grep -q tegra; then
@@ -302,9 +293,17 @@ if [[ $SENSORS =~ "zed" ]]; then
 		bash install-zed-sdk.sh & wait $!
 	fi
 fi
+
 ########### Call for appropriate installation routine ###########
 ###### The routine could be consired as core installation #######
-"$PROJECT_NAME"_"$BRANCH"
+case $CUSTOM_CORE; in
+	true)
+		# Put your custom core installation here
+		;;
+	*)
+		"$PROJECT_NAME"_"$BRANCH"
+		;;
+esac
 
 if [ $VISION ]; then
 	bash install-vlfeat.sh & wait $!
