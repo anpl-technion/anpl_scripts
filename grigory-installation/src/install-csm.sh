@@ -8,6 +8,12 @@ FILE_NAME=$FOLDER_NAME.zip
 LINK=https://github.com/AndreaCensi/csm/archive/$LIBCSM_VER.zip
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release"
 
+JSON_C_BITS_LINES_TO_BE_COMMENTED=('#ifndef min' \
+    '#define min(a,b) ((a) < (b) ? (a) : (b))' \
+    '#endif' \
+    '#ifndef max' \
+    '#define max(a,b) ((a) > (b) ? (a) : (b))')
+JSON_C_BITS_PATH=/usr/ANPLprefix/include/json-c/bits.h
 # Argument read.
 # Script gets single argument or none.
 #   --apt=<bool>    Set 'true' if you want to install the package from apt
@@ -55,6 +61,11 @@ else
     cmake $CMAKE_FLAGS ..
     make -j4       
     sudo make install -j4
+
+    for line in "${JSON_C_BITS_LINES_TO_BE_COMMENTED[@]}"; do
+        sudo sed -i "s|${line}|//${line}|" $JSON_C_BITS_PATH
+    done
+    echo "#endif" | sudo tee -a $JSON_C_BITS_PATH
 fi
 
 

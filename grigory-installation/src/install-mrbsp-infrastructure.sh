@@ -35,7 +35,9 @@ fi
 
 #from http://wiki.ros.org/catkin/Tutorials/create_a_workspace
 # 2 Prerequisitesoos
-sudo rm -rf $WS_PATH
+if [ -d "$WS_PATH" ]; then
+	mv $WS_PATH ${WS_PATH}.backup
+fi
 
 source /opt/ros/$ROS_DISTRO/setup.bash
 mkdir -p $WS_PATH/src && cd $WS_PATH
