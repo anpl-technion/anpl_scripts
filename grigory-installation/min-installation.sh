@@ -20,6 +20,38 @@ source_bashrc(){
 	mv ~/.bashrc_copy ~/.bashrc
 }
 
+################ multi choose read interface ################
+read_menu() {
+    options=("$@")
+    echo "Avaliable options:"
+    for i in ${!options[@]}; do
+        echo -e "${choices[i]:-}\t " $((i+1))"." "${options[i]}"
+    done
+}
+multi_option_read() {
+    options=("$@")
+    choices=()
+    echo "Check options (space separated; double check to uncheck; ENTER when done):"
+    prompt="Choose an options: "
+    while read_menu ${options[@]} && read -rp "$prompt" nums && [[ "$nums" ]]; do
+        while read num; do
+            [[ "$num" != *[![:digit:]]* ]] &&
+				(( num > 0 && num <= ${#options[@]} )) ||
+				{ echo "Invalid option: $num"; continue; }
+            ((num--));
+            [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="+"
+        done < <(echo $nums |sed "s/ /\n/g")
+    done
+    MULTI_ROBOT_READ_OUTPUT=$(
+        for i in ${!options[@]}; do
+            [[ "${choices[i]}" ]] && { echo -n "${options[i],,}+" ;}
+        done
+    )
+    [ ! -z "$MULTI_ROBOT_READ_OUTPUT" ] &&
+		{ MULTI_ROBOT_READ_OUTPUT=${MULTI_ROBOT_READ_OUTPUT::-1} ;}
+    declare -a MULTI_ROBOT_READ_OUTPUT
+}
+
 
 ########### Installation routines ###########
 anpl_mrbsp_gtsam4(){
@@ -134,12 +166,12 @@ done
 
 echo -e $'\033[0;42m Choosing Infrastructure \033[0m'
 while true; do
-	read -p $'Choose which infrastructure you want: \n\t1. anpl_mrbsp[NEW]\n\t2. mrbsp_ros[OLD]\n: ' NUM
+	read -p $'Choose which infrastructure you want: \n\t1. anpl_mrbsp[NEW]\n\t2. mrbsp_ros[OLD]\nChoose an option: ' NUM
 	case $NUM in
 		[1] ) PROJECT_NAME=anpl_mrbsp
 			echo -e "\033[0;42m Choosing Branch \033[0m"
 			while true; do
-				read -p $'Choose which branch you want: \n\t1. master[Lidar-gtsam3]\n\t2. gtsam4[Lidar-gtsam4]\n: ' NUM
+				read -p $'Choose which branch you want: \n\t1. master[Lidar-gtsam3]\n\t2. gtsam4[Lidar-gtsam4]\nChoose an option: ' NUM
 				case $NUM in
 					[1] ) BRANCH=master
 						GTSAM_VER=3;;
@@ -156,7 +188,7 @@ while true; do
 		[2] ) PROJECT_NAME=mrbsp_ros
 			echo -e "\033[0;42m Choosing Branch \033[0m"
 			while true; do
-				read -p $'Choose which branch you want: \n\t1. t-bsp-julia[Lidar]\n\t2. or-vi_project[VISION] \n: ' NUM
+				read -p $'Choose which branch you want: \n\t1. t-bsp-julia[Lidar]\n\t2. or-vi_project[VISION] \nChoose an option: ' NUM
 				GTSAM_VER=3
 				case $NUM in
 					[1] ) BRANCH=t-bsp-julia;;
@@ -187,39 +219,25 @@ fi
 
 echo -e $'\033[0;42m Choosing installation option \033[0m'
 while true; do
-	read -p $'What robots you going to use: \n\t1. Pioneer \n\t2. Quad \n\t3. Pioneer and Quad \n\t4. Simulator only\n: ' NUM
-	case $NUM in
-		[1] ) ROBOTS=pioneer;;
-		[2] ) ROBOTS=quad;;
-		[3] ) ROBOTS=pioneer+quad;;
-		[4] ) ROBOTS=simulator;;
-	esac
-	case $NUM in
-		[123] )
-			while true; do
-				read -p $'Do you wish to install simulator and models? [Y/n]\n: ' yn
-				case $yn in
-					[Yy] ) ROBOTS=$ROBOTS+simulator
-							break;;
-					[Nn] ) break;;
-					* ) echo "Please answer 'y' or 'n'";;
-				esac
-				done
-			break;;
-		[4] ) break;;
-		* ) echo -e "\033[0;41m Please choose correct option.\033[0m";;
+	echo 'What robots are you going to use?'
+	ROBOT_OPTIONS=( Pioneer Quad Simulator )
+	multi_option_read "${ROBOT_OPTIONS[@]}"
+	ROBOTS=${MULTI_ROBOT_READ_OUTPUT}
+
+	case $ROBOTS in
+		'') echo -e "\033[0;41m Please choose at least one option.\033[0m";;
+		*) break;;
 	esac
 done
 while true; do
-	read -p $'Which sensors you going to use: \n\t1. LiDAR [installed with ROS] \n\t2. ZED Camera \n\t3. Both LiDAR and ZED \n: ' NUM
-	case $NUM in
-		[1] ) SENSORS=lidar;;
-		[2] ) SENSORS=zed;;
-		[3] ) SENSORS=lidar+zed;;
-	esac
-	case $NUM in
-		[123] ) break;;
-		* ) echo -e "\033[0;41m Please choose correct option.\033[0m";;
+	echo 'What sensors are you going to use?'
+	SENSOR_OPTIONS=( LiDAR ZED )
+	multi_option_read "${SENSOR_OPTIONS[@]}"
+	SENSORS=${MULTI_ROBOT_READ_OUTPUT}
+
+	case $SENSORS in
+		'') echo -e "\033[0;41m Please choose at least one option.\033[0m";;
+		*) break;;
 	esac
 done
 while true; do
@@ -227,7 +245,7 @@ while true; do
 		ROS_OPTION=desktop-full
 		break
 	fi
-	read -p $'Which sensors you going to use: \n\t1. Desktop-Full(Recommended) : ROS, rqt, rviz, robot-generic libraries, 2D/3D simulators \n\t2. Desktop: ROS, rqt, rviz, and robot-generic libraries\n: ' NUM
+	read -p $'Which sensors you going to use: \n\t1. Desktop-Full(Recommended) : ROS, rqt, rviz, robot-generic libraries, 2D/3D simulators \n\t2. Desktop: ROS, rqt, rviz, and robot-generic libraries\nChoose an option: ' NUM
 	case $NUM in
 		[1] ) ROS_OPTION=desktop-full;;
 		[2] ) ROS_OPTION=desktop;;
@@ -278,7 +296,7 @@ fi
 #################### Sensors nodes ####################
 if [[ $SENSORS =~ "lidar" ]]; then
 	if uname -r | grep -q tegra; then
-		echo $'Please follow this guide to connect LiDAR on JETSON: \n https://docs.google.com/document/d/1Ld4tVww0eDBu5-UsM51ayD490puqnh13nm5DjGhK7js/edit'
+		echo $'Please follow this guide to connect LiDAR on JETSON: \nhttps://docs.google.com/document/d/1Ld4tVww0eDBu5-UsM51ayD490puqnh13nm5DjGhK7js/edit'
 		read -p "Press ENTR when you done..."
 	fi
 fi
@@ -331,9 +349,9 @@ while true; do
 			while true; do
 				read -p $'Type how many Gb you want to allocate? Be sure you have enough space on your hard drive.\n: ' SWAP_SIZE
 				if [[ -n ${SWAP_SIZE//[0-9]/} ]]; then
-					echo 'Please choose correct option.'
+					echo 'Please enter integer value.'
 				elif [ $SWAP_SIZE -lt 0 ]; then
-					echo 'Please choose correct option.'
+					echo 'Please provide positive integer.'
 				else
 					break
 				fi
