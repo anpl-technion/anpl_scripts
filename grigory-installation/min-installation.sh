@@ -52,10 +52,10 @@ multi_option_read() {
     declare -a MULTI_ROBOT_READ_OUTPUT
 }
 
-
-########### Installation routines ###########
-anpl_mrbsp_gtsam4(){
-	# carkin belief:
+#=============================
+#	ANPL_MRBSP core routine
+#=============================
+anpl_mrbsp_core(){
 	bash install-libspdlog.sh --apt=false  & wait $! #(apt=false, from git) - mrbsp_utils wanted it
 	bash install-octomap.sh & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it 
 	bash install-libccd.sh --apt=false  & wait $! #(AG need it - apt=false)
@@ -74,37 +74,14 @@ anpl_mrbsp_gtsam4(){
 }
 
 #=============================
-#	new_inf GTSAM3 LiDAR
+#	MRBSP_ROS core routine 
 #=============================
-anpl_mrbsp_master(){
-	# catkin belief:
-	bash install-libspdlog.sh --apt=false & wait $! #(apt=false, from git) - mrbsp_utils wanted it
-	bash install-octomap.sh   & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]
-	bash install-libccd.sh --apt=true & wait $!	#(AG need it - apt=true)
-	bash install-libfcl.sh --apt=true & wait $!	#(AG need it - apt=true)
-	bash install-ompl.sh --apt=false & wait $!  	#(AG need it, apt=false)
-
-	bash install-diverse-short-path.sh & wait $!  	#(AG need it)
-	bash install-csm.sh & wait $! 					#(git=true)
-
-	bash install-find-cmakes.sh & wait $!
-
-	bash install-planar-icp.sh --branch=$PLANAR_BRANCH & wait $!
-
-	sudo apt-get install xterm  -y
-	sudo apt-get install graphviz-dev -y
-}
-
-#=============================
-#	old_inf LiDAR
-#=============================
-mrbsp_ros_t-bsp-julia(){
-	# catkin belief:
+mrbsp_ros_core(){
 	bash install-libspdlog.sh --apt=true & wait $! #(apt=true, from git) - mrbsp_utils wanted it
 	bash install-octomap.sh & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]
 	bash install-libccd.sh --apt=true & wait $!	#(AG need it - apt=true)
 	bash install-libfcl.sh --apt=true & wait $!	#(AG need it - apt=true)
-	bash install-ompl.sh --apt=false & wait $!  	#(AG need it, apt=false)
+	bash install-ompl.sh --apt=false & wait $! 	#(AG need it, apt=false)
 
 	bash install-diverse-short-path.sh & wait $!  	#(AG need it)
 	bash install-csm.sh & wait $! 			#(git=true)
@@ -120,15 +97,15 @@ mrbsp_ros_t-bsp-julia(){
 }
 
 #=============================
-#	old_inf ORB-SLAM
+#	MRBSP_ROS universal core routine
 #=============================
-mrbsp_ros_or-vi_project(){
-	# TODO: test
+mrbsp_ros_universal_core(){
+	# Universal = (almost) evertything from-source
 	bash install-libspdlog.sh --apt=true & wait $! #(apt=true, from git) - mrbsp_utils wanted it
-	bash install-octomap.sh & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [su
-	bash install-libccd.sh --apt=true  & wait $!	#(AG need it - apt=true)
-	bash install-libfcl.sh --apt=true & wait $!	#(AG need it - apt=true)
-	bash install-ompl.sh --apt=false & wait $!  	#(AG need it, apt=false)
+	bash install-octomap.sh & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]
+	bash install-libccd.sh --apt=false & wait $!	#
+	bash install-libfcl.sh --apt=false & wait $!	
+	bash install-ompl.sh --apt=false & wait $! 	
 
 	bash install-diverse-short-path.sh & wait $!  	#(AG need it)
 	bash install-csm.sh & wait $! 			#(git=true)
@@ -146,12 +123,6 @@ mrbsp_ros_or-vi_project(){
 
 ######################## Script starts here ########################
 
-case $UBUNTU_DISTRO in
-	16.04) ;;
-	18.04) ;;
-	*) 	read -p $'Installation script currently only available on Ubuntu 16.04 and Ubuntu 16.04. Installation cancelled.'
-		exit;;
-esac
 ############################ Inputs read ############################
 echo -e "\033[0;36mWelcome to ANPL's Multi-Robot Belief Space Planner open source project installator!"
 echo -e "Before installation please check if you have account @BitBucket and have full access to ANPL repository. If you don't please contact Vadim to get an access.\033[0m"
@@ -316,10 +287,11 @@ fi
 ###### The routine could be consired as core installation #######
 case $CUSTOM_CORE; in
 	true)
-		# Put your custom core installation here
+		# Put your custom core installation here:
+		# "$PROJECT_NAME"_universal_core
 		;;
 	*)
-		"$PROJECT_NAME"_"$BRANCH"
+		"$PROJECT_NAME"_core
 		;;
 esac
 
