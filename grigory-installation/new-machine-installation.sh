@@ -56,19 +56,23 @@ multi_option_read() {
 #	ANPL_MRBSP core routine
 #=============================
 anpl_mrbsp_core(){
-	bash install-libspdlog.sh --apt=false  & wait $! #(apt=false, from git) - mrbsp_utils wanted it
-	bash install-octomap.sh & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it 
-	bash install-libccd.sh --apt=false  & wait $! #(AG need it - apt=false)
-	bash install-libfcl.sh --apt=true & wait $! #(AG need it - apt=true)
-	bash install-ompl.sh --apt=false & wait $! #(AG need it, apt=false)
+	# mrbsp_utils node
+	bash install-libspdlog.sh --apt=false & wait $!
+	bash install-octomap.sh & wait $!
 
-	bash install-diverse-short-path.sh & wait $!	#(AG need it)
-	bash install-csm.sh --apt=false & wait $!	#(git=true)
+	# Acrion Generator node & many others
+	bash install-libccd.sh --apt=false  & wait $!
+	bash install-libfcl.sh --apt=true & wait $!
+	bash install-ompl.sh --apt=false & wait $!
+	bash install-diverse-short-path.sh & wait $!
+	# Data Association node
+	bash install-csm.sh --apt=false & wait $!
 
 	bash install-find-cmakes.sh & wait $!
-
+	# Belief node
 	bash install-planar-icp.sh --branch=$PLANAR_BRANCH #(branch gtsam4)
 
+	# Planner node
 	sudo apt-get install xterm  -y
 	sudo apt-get install graphviz-dev -y
 }
@@ -77,21 +81,27 @@ anpl_mrbsp_core(){
 #	MRBSP_ROS core routine 
 #=============================
 mrbsp_ros_core(){
-	bash install-libspdlog.sh --apt=true & wait $! #(apt=true, from git) - mrbsp_utils wanted it
-	bash install-octomap.sh & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]
-	bash install-libccd.sh --apt=true & wait $!	#(AG need it - apt=true)
-	bash install-libfcl.sh --apt=true & wait $!	#(AG need it - apt=true)
-	bash install-ompl.sh --apt=false & wait $! 	#(AG need it, apt=false)
-
-	bash install-diverse-short-path.sh & wait $!  	#(AG need it)
-	bash install-csm.sh & wait $! 			#(git=true)
+	# mrbsp_utils node
+	bash install-libspdlog.sh --apt=true & wait $!
+	bash install-octomap.sh & wait $!
+	
+	# Acrion Generator node & many others
+	bash install-libccd.sh --apt=true & wait $!
+	bash install-libfcl.sh --apt=true & wait $!
+	bash install-ompl.sh --apt=false & wait $!
+	bash install-diverse-short-path.sh & wait $!
+	
+	# Data Association node
+	bash install-csm.sh & wait $!
 
 	bash install-find-cmakes.sh & wait $!
-
+	# Belief node
 	bash install-planar-icp.sh --branch=$PLANAR_BRANCH & wait $!
 
-	bash install-mavros.sh & wait $! # required by pixhawk_controller
+	# Pixhawk Controller node
+	bash install-mavros.sh & wait $!
 
+	# Planner node
 	sudo apt-get install xterm  -y
 	sudo apt-get install graphviz-dev -y
 }
@@ -99,23 +109,29 @@ mrbsp_ros_core(){
 #=============================
 #	MRBSP_ROS universal core routine
 #=============================
-mrbsp_ros_universal_core(){
-	# Universal = (almost) evertything from-source
-	bash install-libspdlog.sh --apt=true & wait $! #(apt=true, from git) - mrbsp_utils wanted it
-	bash install-octomap.sh & wait $!	#(apt ros-melodic-octomap) - mrbsp_msgs wanted it [sudo update and upgrade]
-	bash install-libccd.sh --apt=false & wait $!	#
-	bash install-libfcl.sh --apt=false & wait $!	
-	bash install-ompl.sh --apt=false & wait $! 	
+# 	Universal = (almost) evertything from-source
+universal_core(){
+	# mrbsp_utils node
+	bash install-libspdlog.sh --apt=true & wait $!
+	bash install-octomap.sh & wait $!
+	
+	# Acrion Generator node & many others
+	bash install-libccd.sh --apt=false & wait $!
+	bash install-libfcl.sh --apt=false & wait $!
+	bash install-ompl.sh --apt=false & wait $!
+	bash install-diverse-short-path.sh & wait $!
 
-	bash install-diverse-short-path.sh & wait $!  	#(AG need it)
-	bash install-csm.sh & wait $! 			#(git=true)
+	# Data Association node
+	bash install-csm.sh & wait $!
 
 	bash install-find-cmakes.sh & wait $!
-
+	# Belief node
 	bash install-planar-icp.sh --branch=$PLANAR_BRANCH & wait $!
 
-	bash install-mavros.sh & wait $! # required by pixhawk_controller
+	# Pixhawk Controller node
+	bash install-mavros.sh & wait $! 
 
+	# Planner node
 	sudo apt-get install xterm  -y
 	sudo apt-get install graphviz-dev -y
 }
@@ -288,7 +304,7 @@ fi
 case $CUSTOM_CORE; in
 	true)
 		# Put your custom core installation here:
-		# "$PROJECT_NAME"_universal_core
+		# universal_core
 		;;
 	*)
 		"$PROJECT_NAME"_core
