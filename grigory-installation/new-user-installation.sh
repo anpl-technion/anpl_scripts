@@ -160,7 +160,7 @@ if [[ $SENSORS =~ "zed" ]]; then
 		echo "Ask your Lab Engineer if version of cuda changed."
 		read -p "Press ENTR when you done..." 
 	fi
-	if [ ! -d "/usr/local/zed" ]
+	if [ ! -d "/usr/local/zed" ]; then
 		if uname -r | grep -q tegra; then
 			echo $'Please install ZED-SDK 2.x.x manually: https://www.stereolabs.com/docs/installation/jetson/'
 			read -p "Press ENTR when you done..."
