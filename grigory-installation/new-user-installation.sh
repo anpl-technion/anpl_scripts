@@ -92,7 +92,7 @@ done
 echo -e $'\033[0;42m Choosing installation option \033[0m'
 while true; do
 	echo 'What robots are you going to use?'
-	ROBOT_OPTIONS=( Pioneer Quad Simulator )
+	ROBOT_OPTIONS=( Pioneer Quad GazeeboSimulator )
 	multi_option_read "${ROBOT_OPTIONS[@]}"
 	ROBOTS=${MULTI_ROBOT_READ_OUTPUT}
 
@@ -113,6 +113,7 @@ while true; do
 	esac
 done
 
+exit
 ################### End of read inputs ###################
 bash show-git-branch.sh
 
