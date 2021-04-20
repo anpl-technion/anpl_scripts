@@ -301,7 +301,7 @@ fi
 
 ########### Call for appropriate installation routine ###########
 ###### The routine could be consired as core installation #######
-case $CUSTOM_CORE; in
+case $CUSTOM_CORE in
 	true)
 		# Put your custom core installation here:
 		# universal_core
@@ -369,6 +369,9 @@ if [ $SWAP ]; then
 	sudo swapoff -v /tmpswapfile
 	sudo rm /tmpswapfile
 fi
+
+echo "export EDITOR='gedit' #ROS text editor" >> ~/.bashrc
+source ~/.bashrc
 
 echo -e "\033[0;36m ++++  End of installation ++++    \033[0m"
 
