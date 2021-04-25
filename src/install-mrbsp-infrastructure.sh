@@ -4,7 +4,7 @@ WS_PATH=~/ANPL/infrastructure/$WS_NAME
 WS_SRC=$WS_PATH/src
 PREFIX=/usr/ANPLprefix
 
-
+echo "Catkin workspace is placed at $WS_PATH"
 
 # Argument read.
 # Script gets 2 arguments strictly.
@@ -49,11 +49,11 @@ echo $ROS_PACKAGE_PATH
 cd $WS_SRC
 
 while [ ! -d "$WS_SRC/$PROJECT_NAME" ]; do
-  git clone -b $BRANCH https://bitbucket.org/ANPL/$PROJECT_NAME.git $WS_SRC/$PROJECT_NAME 
+  git clone -b $BRANCH https://bitbucket.org/anpl-technion/$PROJECT_NAME.git $WS_SRC/$PROJECT_NAME 
 done
 
 while [ ! -d "$WS_SRC/anpl_inf" ]; do 
-  git clone https://bitbucket.org/ANPL/anpl_ros_infrastructur anpl_inf
+  git clone https://bitbucket.org/anpl-technion/anpl_ros_infrastructur anpl_inf
 done
 
 echo "source $WS_PATH/devel/setup.bash" >> ~/.bashrc

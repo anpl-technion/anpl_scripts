@@ -34,7 +34,7 @@ The `apps` subfolder contains installation scripts for tool that are not essenti
  
 ## Available Configurations
 Full documentation on configurations could be found on [wiki page](https://bitbucket.org/ANPL/anpl_scripts/wiki/Configurations.md).  
-The ANPL project is distributed in several configurations: **INF_VERSION - INF_BRANCH - GTSAM_VER**. 
+The ANPL project is distributed in several configurations: **INF_BRANCH - GTSAM_VER**. 
 
 * anpl_mrbsp - LiDAR branch - GTSAM3 
 
