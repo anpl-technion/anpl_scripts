@@ -11,7 +11,7 @@ cd $WS_SRC
 
 # Pioneer simulator addons
 while [ ! -d "$WS_SRC/pioneer_keyop" ]; do
-  git clone https://bitbucket.org/ANPL/pioneer_keyop & wait $!
+  git clone https://github.com/anpl-technion/pioneer_keyop & wait $!
 done
 
 while [ ! -d "$WS_SRC/amr-ros-config" ]; do 

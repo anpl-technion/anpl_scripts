@@ -41,7 +41,7 @@ fi
 cd $WS_SRC
 
 while [ ! -d "$WS_SRC/pioneer_keyop" ]; do
-  git clone https://bitbucket.org/ANPL/pioneer_keyop
+  git clone https://github.com/anpl-technion/pioneer_keyop
 done
 
 while [ ! -d "$WS_SRC/amr-ros-config" ]; do 

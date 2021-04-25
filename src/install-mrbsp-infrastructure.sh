@@ -49,11 +49,11 @@ echo $ROS_PACKAGE_PATH
 cd $WS_SRC
 
 while [ ! -d "$WS_SRC/$PROJECT_NAME" ]; do
-  git clone -b $BRANCH https://bitbucket.org/anpl-technion/$PROJECT_NAME.git $WS_SRC/$PROJECT_NAME 
+  git clone -b $BRANCH https://github.com/anpl-technion/$PROJECT_NAME.git $WS_SRC/$PROJECT_NAME 
 done
 
 while [ ! -d "$WS_SRC/anpl_inf" ]; do 
-  git clone https://bitbucket.org/anpl-technion/anpl_ros_infrastructur anpl_inf
+  git clone https://github.com/anpl-technion/anpl_ros_infrastructure anpl_inf
 done
 
 echo "source $WS_PATH/devel/setup.bash" >> ~/.bashrc
