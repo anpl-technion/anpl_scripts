@@ -217,13 +217,13 @@ while true; do
 done
 
 ################### Setups and General Installations ####################
-echo "Dependencies will be places at /usr/ANPLprefix by default. Press ENTER to agree or enter alternative path"
-read ANPL_PREFIX
-echo $ANPL_PREFIX
+#echo "Dependencies will be places at /usr/ANPLprefix by default. Press ENTER to agree or enter alternative path"
+#read ANPL_PREFIX
+#echo $ANPL_PREFIX
 
-if [ -z "$ANPL_PREFIX" ]; then
+#if [ -z "$ANPL_PREFIX" ]; then
 	ANPL_PREFIX=/usr/ANPLprefix
-fi
+#fi
 
 bash show-git-branch.sh
 git config --global credential.helper 'cache --timeout 3600'
@@ -231,9 +231,6 @@ git config --global credential.helper 'cache --timeout 3600'
 echo "export PATH=$PATH:$SCRIPT_DIR" >> ~/.bashrc
 #echo "export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/arm-linux-gnueabihf/pkgconfig" >> ~/.bashrc
 echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ANPL_PREFIX/lib" >> ~/.bashrc
-
-echo "====>>>>>"
-echo $LD_LIBRARY_PATH:$ANPL_PREFIX/lib
 
 # Essential prefix folder; used for from-source dependencies
 

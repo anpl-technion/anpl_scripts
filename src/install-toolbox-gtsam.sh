@@ -10,7 +10,7 @@ GTSAM_VER="3.2.1"
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DGTSAM_BUILD_TESTS=OFF -DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF -DGTSAM_BUILD_UNSTABLE=OFF -DCMAKE_BUILD_TYPE=Debug"
 CMAKE_FLAGS="$CMAKE_FLAGS -DGTSAM_INSTALL_MATLAB_TOOLBOX=ON -DMEX_COMMAND=/usr/local/MATLAB/$MATLAB_VER/bin/mex -DGTSAM_MEX_BUILD_STATIC_MODULE=ON" #-DBoost_USE_STATIC_LIBS=ON
 LINK="https://research.cc.gatech.edu/borg/sites/edu.borg/files/downloads/gtsam-$GTSAM_VER.zip"
-GIT_LINK="https://bitbucket.org/ANPL/gtsam-3.2.1-anpl/ -b fix/boost158gtsam3"
+GIT_LINK="https://github.com/anpl-technion/gtsam-3.2.1-anpl/ -b fix/boost158gtsam3"
 GIT_LINK_4="https://bitbucket.org/gtborg/gtsam/"
 GTSM_TOOLBOX_PROJECT_NAME=gtsam-toolbox-$GTSAM_VER
 TOOLBOX_FOLDER=$PREFIX/gtsam_toolboxDebug

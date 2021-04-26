@@ -4,4 +4,4 @@ PRJECT_DIR=~/ANPL/code
 
 cd $PRJECT_DIR
 
-git clone https://bitbucket.org/ANPL/cmakes
+git clone https://github.com/anpl-technion/cmakes

@@ -7,7 +7,7 @@ CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$ANPL_PREFIX -DCMAKE_BUILD_TYPE=Release" #-D
 FOLDER_NAME_PANGOLIN=pangolin
 FOLDER_NAME_ORB_SLAM_2=orb-slam2
 LINK_PANGOLIN=https://github.com/stevenlovegrove/Pangolin
-LINK_ORB_SLAM_2=https://bitbucket.org/ANPL/orb-slam2.git
+LINK_ORB_SLAM_2=https://github.com/raulmur/ORB_SLAM2.git
 MAKE_FLAGS=-j7
 
 #delete old orb-slam2 library

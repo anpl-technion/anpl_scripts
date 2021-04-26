@@ -34,7 +34,7 @@ bash arrange.sh
 source ~/.bashrc
 
 cd ~/$LAB_NAME
-git clone https://bitbucket.org/ANPL/anpl_scripts scripts
+git clone https://github.com/anpl-technion/anpl_scripts scripts
 
 
 

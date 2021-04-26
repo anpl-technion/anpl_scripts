@@ -6,7 +6,7 @@ PROJECT_NAME=diverse_short_paths
 MAKE_FLAGS="CXXFLAGS=-Wall CXXFLAGS+=-Wextra CXXFLAGS+=-std=c++0x CXXFLAGS+=-O3 CXXFLAGS+=-march=native LOCALINC=-I/usr/lib/x86_64-linux-gnu LOCALINC=-I/usr/lib/arm-linux-gnueabihf LOCALINC=-I/usr/ANPLprefix/include LOCALINC+=-Iinclude LOCALINC+=-I/usr/include/eigen3/ LOCALLIB=-L/usr/ANPLprefix/lib -j4"
 OBJ_REMOVE="Main.o"
 
-LINK=https://bitbucket.org/ANPL/diverse_short_paths
+LINK=https://github.com/anpl-technion/diverse_short_paths
 PROJECT_NAME=diverse_short_paths
 PROJECT_DIR=~/ANPL/code/3rdparty
 

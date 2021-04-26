@@ -7,7 +7,7 @@ CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$ANPL_PREFIX -DCMAKE_BUILD_TYPE=Release"
 FOLDER_NAME_PANGOLIN=pangolin
 FOLDER_NAME_ORB_SLAM_2=orb-slam2
 LINK_PANGOLIN=https://github.com/stevenlovegrove/Pangolin
-LINK_ORB_SLAM_2=https://bitbucket.org/ANPL/orb-slam2.git
+LINK_ORB_SLAM_2=https://github.com/anpl-technion/orb-slam2.git
 MAKE_FLAGS=-j7
 
 # Install ORB SLAM2 and it's dependencies

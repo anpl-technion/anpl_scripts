@@ -38,7 +38,7 @@ sudo rm -rf $PROJECT_DIR/$FOLDER_NAME
 
 cd $PROJECT_DIR
 TMP=0
-git clone -b $BRANCH https://bitbucket.org/ANPL/planar_icp $FOLDER_NAME && TMP=1
+git clone -b $BRANCH https://github.com/anpl-technion/planar_icp $FOLDER_NAME && TMP=1
 if [ $TMP -ne 1 ]; then  
  	echo -e "${RED}ERROR at '${0##*/}': ${NC}\ngit clone error. Check if provided branch name is correct. Please rerun script."
 	exit
