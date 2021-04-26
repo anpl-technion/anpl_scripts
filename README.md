@@ -21,11 +21,11 @@ However, it does not installs optional programs and tool like MATLAB, PyCharm or
 ***
 
 ## Installer overview
-Full documentation on [wiki page](https://bitbucket.org/ANPL/anpl_scripts/wiki/Installation-script.md).  
+Full documentation on [wiki page](https://github.com/anpl-technion/anpl_scripts/wiki/Installation-script.md).  
 Scripts inside the directory are mainly focused on installation of minimal dependency set for the infrustruture. If you run the script on a clean machine, when no dependencies are preinstalled, its recommended to run `new-machine-installation.sh`, otherwise run `new-user-installation` to not screw up others conputer users work. [**Remark**: Scripts are intended only for 16.04 and 18.04 Ubuntu distributions]  
 Directory organization: `new-machine-installation.sh` is the installation launcher. The script installs the infrastructure and invokes single-dependency installation scripts from `src` subfolder.  
 `new-user-installation.sh` only make packages accessible for a new user and installs infrastructure and robots+sensors specified by the user. 
-Script `new-machine-installation.sh` is self explanatory and also designate the way each dependency is installed. Further explainations are placed on [wiki](https://bitbucket.org/ANPL/anpl_scripts/wiki/Installation-script.md)
+Script `new-machine-installation.sh` is self explanatory and also designate the way each dependency is installed. Further explainations are placed on [wiki](https://github.com/anpl-technion/anpl_scripts/wiki/Installation-script.md)
 
 The `apps` subfolder contains installation scripts for tool that are not essential project dependecies. You could find installation of MATLAB, LyX and many others inside of this folder. 
 
@@ -33,7 +33,7 @@ The `apps` subfolder contains installation scripts for tool that are not essenti
 
  
 ## Available Configurations
-Full documentation on configurations could be found on [wiki page](https://bitbucket.org/ANPL/anpl_scripts/wiki/Configurations.md).  
+Full documentation on configurations could be found on [wiki page](https://github.com/anpl-technion/anpl_scripts/wiki/Configurations.md).  
 The ANPL project is distributed in several configurations: **INF_BRANCH - GTSAM_VER**. 
 
 * anpl_mrbsp - LiDAR branch - GTSAM3 

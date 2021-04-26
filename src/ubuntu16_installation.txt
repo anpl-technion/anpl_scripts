@@ -13,7 +13,7 @@ sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get install git -y
 mkdir -p $LAB_NAME && cd $LAB_NAME
-git clone https://bitbucket.org/ANPL/anpl_scripts scripts
+git clone https://github.com/anpl-technion/mrbsp_installation_scripts scripts
 cd $WORKING_FOLDER/$SYSTEM
 ./install-git.sh
 ./setup-ubuntu-env.sh
