@@ -4,7 +4,7 @@ PROJECT_DIR=~/ANPL/code
 PREFIX=/usr/ANPLprefix
 FOLDER_NAME=planar_icp
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release"
-
+COMMIT=4d45f6db480635682d53a1a5992f1ac8b0e94483
 
 # Argument read.
 # Script gets single argument or none.
@@ -38,12 +38,16 @@ sudo rm -rf $PROJECT_DIR/$FOLDER_NAME
 
 cd $PROJECT_DIR
 TMP=0
-git clone -b $BRANCH https://github.com/anpl-technion/planar_icp $FOLDER_NAME && TMP=1
+git clone -b $BRANCH https://bitbucket.org/ANPL/planar_icp $FOLDER_NAME && TMP=1
 if [ $TMP -ne 1 ]; then  
  	echo -e "${RED}ERROR at '${0##*/}': ${NC}\ngit clone error. Check if provided branch name is correct. Please rerun script."
 	exit
 fi
 cd $FOLDER_NAME
+
+if [ $BRANCH=gtsam4 ]; then
+	git checkout $COMMIT
+fi
 
 mkdir build && cd build
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$PREFIX/lib/pkgconfig/

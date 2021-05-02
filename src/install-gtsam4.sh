@@ -2,9 +2,10 @@
 
 PREFIX=/usr/ANPLprefix
 PROJECT_DIR=~/ANPL/code/3rdparty
-GTSAM_VER="4.1.0"
+GTSAM_VER="4.0.0"
 BRANCH=release/$GTSAM_VER
 PROJECT_NAME=gtsam-$GTSAM_VER
+COMMIT=52e8db60ddc9a34652de30ee05adc6ef6219f940
 CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=$PREFIX -DGTSAM_BUILD_TESTS=OFF -DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF -DGTSAM_BUILD_UNSTABLE=OFF -DCMAKE_BUILD_TYPE=Release -DGTSAM_BUILD_WITH_MARCH_NATIVE=OFF"
 GIT_LINK="https://github.com/borglab/gtsam.git"
 FROM_APT=false
@@ -21,7 +22,9 @@ if [ $FROM_APT = false ]; then
 	while [ ! -d "$PROJECT_DIR/$PROJECT_NAME" ]; do
       		git clone $GIT_LINK $PROJECT_NAME --branch $BRANCH
 	done
+
 	cd $PROJECT_DIR/$PROJECT_NAME
+	git checkout $COMMIT
 
 	#from https://collab.cc.gatech.edu/borg/gtsam/#quickstart
 	mkdir build && cd build
