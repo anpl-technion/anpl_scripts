@@ -151,11 +151,7 @@ while true; do
     esac
 done
 
-echo -e $'\033[0;42m Choosing Infrastructure \033[0m'
-while true; do
-	read -p $'Choose which infrastructure you want: \n\t1. anpl_mrbsp[NEW]\n\t2. mrbsp_ros[OLD]\nChoose an option: ' NUM
-	case $NUM in
-		[1] ) PROJECT_NAME=anpl_mrbsp
+PROJECT_NAME=anpl_mrbsp
 			echo -e "\033[0;42m Choosing Branch \033[0m"
 			while true; do
 				read -p $'Choose which branch you want: \n\t1. master[Lidar-gtsam3]\n\t2. gtsam4[Lidar-gtsam4]\nChoose an option: ' NUM
@@ -170,29 +166,6 @@ while true; do
 					* ) echo -e "\033[0;41m Please choose correct option.\033[0m";;
 				esac
 			done
-			break
-			;;
-		[2] ) PROJECT_NAME=mrbsp_ros
-			echo -e "\033[0;42m Choosing Branch \033[0m"
-			while true; do
-				read -p $'Choose which branch you want: \n\t1. t-bsp-julia[Lidar]\n\t2. or-vi_project[VISION] \nChoose an option: ' NUM
-				GTSAM_VER=3
-				case $NUM in
-					[1] ) BRANCH=t-bsp-julia;;
-					[2] ) BRANCH=or-vi_project
-						VISION=true;;
-				esac
-				case $NUM in
-					[12] ) break;;
-					* ) echo -e "\033[0;41m Please choose correct option.\033[0m";;
-				esac
-			done
-			break
-			;;
-		*) echo -e "\033[0;41m Please choose correct option.\033[0m"
-			;;
-	esac
-done
 
 case $GTSAM_VER in
 	[3] ) PLANAR_BRANCH=master;;
@@ -249,10 +222,11 @@ git config --global credential.helper 'cache --timeout 3600'
 
 echo "export PATH=$PATH:$SCRIPT_DIR" >> ~/.bashrc
 #echo "export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/arm-linux-gnueabihf/pkgconfig" >> ~/.bashrc
-echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/ANPLprefix/lib" >> ~/.bashrc
+echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ANPL_PREFIX/lib" >> ~/.bashrc
 
 # Essential prefix folder; used for from-source dependencies
-sudo mkdir /usr/ANPLprefix/
+
+sudo mkdir $ANPL_PREFIX
 cd $SCRIPT_DIR/src/
 
 case $UBUNTU_DISTRO in
